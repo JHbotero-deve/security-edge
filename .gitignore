@@ -1,0 +1,46 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno
+.env
+.env.local
+.env.production
+.env.development
+
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# Compilación
+dist/
+build/
+
+# Cobertura
+coverage/
+
+# Caché
+.cache/
+.vite/
+
+# Prisma
+backend/prisma/dev.db
+backend/prisma/dev.db-journal
+
+# Docker
+*.pid
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+
+# Temporales
+*.tmp
+*.temp
+*.swp
