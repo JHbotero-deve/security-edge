@@ -1,0 +1,60 @@
+export const HTTP_STATUS = {
+  OK: 200,
+  CREATED: 201,
+  ACCEPTED: 202,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  CONFLICT: 409,
+  UNPROCESSABLE_ENTITY: 422,
+  TOO_MANY_REQUESTS: 429,
+  INTERNAL_SERVER_ERROR: 500,
+  SERVICE_UNAVAILABLE: 503,
+};
+
+export const MESSAGES = {
+  SUCCESS: "Operation completed successfully",
+  CREATED: "Resource created successfully",
+  UPDATED: "Resource updated successfully",
+  DELETED: "Resource deleted successfully",
+  INVALID_CREDENTIALS: "Invalid email or password",
+  UNAUTHORIZED: "Unauthorized access",
+  FORBIDDEN: "Forbidden: insufficient permissions",
+  NOT_FOUND: "Resource not found",
+  CONFLICT: "Resource already exists",
+  SERVER_ERROR: "Internal server error",
+};
+
+export const ROLES = {
+  ADMIN: "ADMIN",
+  ANALYST: "ANALYST",
+  VIEWER: "VIEWER",
+};
+
+export const USER_STATUS = {
+  ACTIVE: "ACTIVE",
+  INACTIVE: "INACTIVE",
+  LOCKED: "LOCKED",
+  SUSPENDED: "SUSPENDED",
+};
+
+export const EVENT_TYPES = {
+  LOGIN_ATTEMPT: "LOGIN_ATTEMPT",
+  LOGIN_SUCCESS: "LOGIN_SUCCESS",
+  LOGIN_FAILED: "LOGIN_FAILED",
+  LOGOUT: "LOGOUT",
+  PASSWORD_CHANGE: "PASSWORD_CHANGE",
+  PERMISSION_DENIED: "PERMISSION_DENIED",
+  UNAUTHORIZED_ACCESS: "UNAUTHORIZED_ACCESS",
+  SUSPICIOUS_ACTIVITY: "SUSPICIOUS_ACTIVITY",
+  SYSTEM_ERROR: "SYSTEM_ERROR",
+  DATA_MODIFICATION: "DATA_MODIFICATION",
+};
+
+export const SEVERITY_LEVELS = {
+  LOW: "LOW",
+  MEDIUM: "MEDIUM",
+  HIGH: "HIGH",
+  CRITICAL: "CRITICAL",
+};
