@@ -1,0 +1,173 @@
+.
+├── backend
+│   ├── Dockerfile
+│   ├── .env
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── prisma
+│   │   ├── migrations
+│   │   ├── schema.prisma
+│   │   └── seed.js
+│   ├── src
+│   │   ├── config
+│   │   │   ├── cors.js
+│   │   │   ├── database.js
+│   │   │   ├── .env.example
+│   │   │   ├── env.js
+│   │   │   ├── helmet.js
+│   │   │   ├── jwt.js
+│   │   │   ├── logger.js
+│   │   │   ├── rateLimit.js
+│   │   │   └── swagger.js
+│   │   ├── constants
+│   │   │   └── http-status.js
+│   │   ├── controllers
+│   │   │   ├── AuditController.js
+│   │   │   ├── AuthController.js
+│   │   │   ├── DashboardController.js
+│   │   │   └── UserController.js
+│   │   ├── index.js
+│   │   ├── lib
+│   │   │   ├── prisma.js
+│   │   │   └── prisma.ts
+│   │   ├── middlewares
+│   │   │   ├── auth.middleware.js
+│   │   │   ├── error.middleware.js
+│   │   │   ├── logging.middleware.js
+│   │   │   └── rate-limit.middleware.js
+│   │   ├── models
+│   │   │   ├── AuditLog.js
+│   │   │   └── SystemEvent.js
+│   │   ├── modules
+│   │   │   ├── admin
+│   │   │   │   ├── admin.controller.js
+│   │   │   │   ├── admin.routes.js
+│   │   │   │   └── admin.services.js
+│   │   │   ├── alerts
+│   │   │   │   ├── alerts.controller.js
+│   │   │   │   ├── alerts.routes.js
+│   │   │   │   └── alerts.services.js
+│   │   │   ├── audit
+│   │   │   │   └── AuditRepository.js
+│   │   │   ├── auth
+│   │   │   │   ├── auth.controller.js
+│   │   │   │   ├── auth.routes.js
+│   │   │   │   └── auth.services.js
+│   │   │   ├── dashboard
+│   │   │   │   └── DashboardService.js
+│   │   │   ├── incidents
+│   │   │   │   ├── incidents.controller.js
+│   │   │   │   ├── incidents.routes.js
+│   │   │   │   └── incidents.services.js
+│   │   │   ├── monitoring
+│   │   │   │   ├── incidents.services.js
+│   │   │   │   ├── monitoring.routes.js
+│   │   │   │   └── monitoring.services.js
+│   │   │   ├── notifications
+│   │   │   │   ├── notifications.controller.js
+│   │   │   │   ├── notifications.routes.js
+│   │   │   │   └── notifications.services.js
+│   │   │   ├── permissions
+│   │   │   │   ├── permissions.controller.js
+│   │   │   │   ├── permissions.routes.js
+│   │   │   │   └── permissions.services.js
+│   │   │   ├── roles
+│   │   │   │   ├── roles.controller.js,
+│   │   │   │   ├── roles.routes.js
+│   │   │   │   └── roles.services.js
+│   │   │   ├── settings
+│   │   │   │   ├── settings.controller.js
+│   │   │   │   ├── settings.routes.js
+│   │   │   │   └── settings.services.js
+│   │   │   └── users
+│   │   │       ├── UserController.js
+│   │   │       ├── UserRepository.js
+│   │   │       ├── user.routes.js
+│   │   │       ├── UserService.js
+│   │   │       └── UserValidator.js
+│   │   ├── repositories
+│   │   │   ├── AuditRepository.js
+│   │   │   ├── baseRepository.ts
+│   │   │   ├── RoleRepository.js
+│   │   │   └── UserRepository.js
+│   │   ├── routes
+│   │   │   ├── audit.routes.js
+│   │   │   ├── auth.routes.js
+│   │   │   ├── dashboard.routes.js
+│   │   │   └── user.routes.js
+│   │   ├── schemas
+│   │   │   └── validation.schemas.js
+│   │   ├── services
+│   │   │   ├── AlertService.js
+│   │   │   ├── AuditService.js
+│   │   │   ├── AuthService.js
+│   │   │   └── DashboardService.js
+│   │   ├── shared
+│   │   │   ├── errors
+│   │   │   └── responses
+│   │   │       ├── errorResponse.js
+│   │   │       └── successResponse.js
+│   │   ├── test-db.ts
+│   │   ├── utils
+│   │   │   ├── crypto.js
+│   │   │   ├── date.js
+│   │   │   ├── errors.js
+│   │   │   ├── jwt.js
+│   │   │   ├── logger.js
+│   │   │   ├── password.js
+│   │   │   ├── response.js
+│   │   │   └── token.js
+│   │   └── validators
+│   │       ├── audit.validator.js
+│   │       ├── auth.validator.js
+│   │       └── user.validator.js
+│   └── uploads
+│       ├── documents
+│       ├── images
+│       └── temp
+├── backups
+├── CHANGELOG.md
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── database
+│   └── connection.py
+├── docker
+├── docker-compose.yml
+├── .dockerignore
+├── docs
+│   ├── UI_CATALOG.md
+│   └── ui-search
+│       ├── index.html
+│       ├── style.css
+│       ├── ui-index.json
+│       └── ui-search.js
+├── .editorconfig
+├── estructura.txt
+├── frontend
+├── .github
+│   └── workflows
+│       └── ci.yml
+├── .gitignore
+├── init
+│   └── 01-init.sql
+├── JB-proyecto-primary.md
+├── LICENSE
+├── logs
+├── package.json
+├── packages
+├── prisma.config.ts
+├── README.md
+├── scripts
+├── SECURITY.md
+├── src
+│   └── database
+│       └── connection.py
+├── tests
+├── tools
+│   ├── ui-indexer.config.json
+│   └── ui-indexer.js
+└── .vscode
+
+54 directories, 117 files
