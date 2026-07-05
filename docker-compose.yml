@@ -3,18 +3,14 @@ services:
     image: postgres:16
     container_name: security-edge-db
     restart: unless-stopped
-
     environment:
       POSTGRES_DB: security_edge
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-
     ports:
-      - "5432:5432"
-
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
     networks:
       - security-network
 
@@ -24,3 +20,5 @@ networks:
 
 volumes:
   postgres_data:
+  
+    
