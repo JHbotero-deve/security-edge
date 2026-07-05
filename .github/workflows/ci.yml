@@ -12,7 +12,8 @@ jobs:
     
     steps:
       - name: Checkout del código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
 
       - name: Levantar servicios (PostgreSQL)
         run: docker-compose up -d
@@ -22,7 +23,7 @@ jobs:
           echo "Esperando a que Postgres inicie..."
           # Un pequeño script para esperar a que el puerto 5432 acepte conexiones
           for i in {1..10}; do
-            if nc -z localhost 5432; then
+            if nc -z localhost 5433; then
               echo "Postgres listo!"
               break
             fi
@@ -35,4 +36,3 @@ jobs:
           # Ejemplo: npm install && npm test
           echo "Ejecutando pruebas..."
 
-          
