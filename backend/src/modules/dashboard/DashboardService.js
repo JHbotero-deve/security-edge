@@ -8,3 +8,4 @@ export class DashboardService {
     return { totalEvents: logs.length, recent: logs.slice(0, 5) };
   }
 }
+
