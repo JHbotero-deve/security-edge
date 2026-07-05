@@ -1,0 +1,11 @@
+{
+  "name": "security-edge-ui-tools",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build-ui-index": "node tools/ui-indexer.js"
+  },
+  "dependencies": {
+    "glob": "^10.3.3"
+  }
+}

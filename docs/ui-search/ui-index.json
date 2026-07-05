@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-07-05T00:00:00.000Z",
+  "results": [
+    {
+      "path": "example/src/components/LoginForm.jsx",
+      "tags": ["login","form","input","button"],
+      "snippets": [
+        { "line": 12, "text": "<form onSubmit={handleSubmit}>" },
+        { "line": 15, "text": "<input type=\"password\" name=\"password\"" }
+      ]
+    }
+  ]
+}

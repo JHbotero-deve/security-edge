@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>UI Search - Security Edge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>UI Search</h1>
+    <div class="controls">
+      <input id="q" placeholder="Search text or file path" />
+      <input id="tag" placeholder="Filter tag (e.g. login, button)" />
+      <button id="clear">Clear</button>
+    </div>
+    <div id="results"></div>
+    <footer>Run <code>npm run build-ui-index</code> to regenerate <code>ui-index.json</code>.</footer>
+  </div>
+  <script src="ui-search.js"></script>
+</body>
+</html>
