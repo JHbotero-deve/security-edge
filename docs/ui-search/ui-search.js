@@ -3,16 +3,16 @@
   const tagEl = document.getElementById('tag');
   const resultsEl = document.getElementById('results');
   const clearEl = document.getElementById('clear');
-
+  
   let index = null;
   function render(list) {
     resultsEl.innerHTML = '';
-    if (!list || !list.length) { resultsEl.innerHTML = '<p>No results</p>'; return; }
+    if (!list || !list.length) { resultsEl.innerHTML = '<p>Sin resultados</p>'; return; }
     const ul = document.createElement('ul');
     list.forEach(item => {
       const li = document.createElement('li');
       const path = document.createElement('div'); path.className='path'; path.textContent = item.path;
-      const tags = document.createElement('div'); tags.className='tags'; tags.textContent = 'Tags: ' + item.tags.join(', ');
+      const tags = document.createElement('div'); tags.className='tags'; tags.textContent = 'Etiquetas: ' + item.tags.join(', ');
       li.appendChild(path);
       li.appendChild(tags);
       if (item.snippets && item.snippets.length) {
@@ -24,7 +24,7 @@
     });
     resultsEl.appendChild(ul);
   }
-
+  
   function filter() {
     const q = qEl.value.trim().toLowerCase();
     const t = tagEl.value.trim().toLowerCase();
@@ -39,10 +39,10 @@
     });
     render(list);
   }
-
+  
   clearEl.addEventListener('click', ()=>{ qEl.value=''; tagEl.value=''; filter(); });
   qEl.addEventListener('input', filter);
   tagEl.addEventListener('input', filter);
-
-  fetch('ui-index.json').then(r=>r.json()).then(j=>{ index=j; render(index.results); }).catch(()=>{ resultsEl.innerHTML='<p>Index not found. Run <code>npm run build-ui-index</code> or add docs/ui-search/ui-index.json</p>'; });
+  
+  fetch('ui-index.json').then(r=>r.json()).then(j=>{ index=j; render(index.results); }).catch(()=>{ resultsEl.innerHTML='<p>Índice no encontrado. Ejecuta <code>npm run build-ui-index</code> o añade docs/ui-search/ui-index.json</p>'; });
 })();
