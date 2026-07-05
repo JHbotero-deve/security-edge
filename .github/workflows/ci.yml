@@ -14,25 +14,29 @@ jobs:
       - name: Checkout del código
         uses: actions/checkout@v4
 
+      - name: Instalar Docker Compose (si fuera necesario)
+        run: |
+          docker compose version
 
       - name: Levantar servicios (PostgreSQL)
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Esperar a que la base de datos esté lista
         run: |
-          echo "Esperando a que Postgres inicie..."
-          # Un pequeño script para esperar a que el puerto 5432 acepte conexiones
-          for i in {1..10}; do
-            if nc -z localhost 5433; then
-              echo "Postgres listo!"
-              break
+          echo "Esperando a que Postgres inicie en el puerto 5432..."
+          for i in {1..15}; do
+            if nc -z localhost 5432; then
+              echo "¡Postgres está listo!"
+              exit 0
             fi
+            echo "Intentando conectar... ($i/15)"
             sleep 3
           done
+          echo "Error: Postgres no inició a tiempo."
+          exit 1
 
       - name: Ejecutar pruebas
         run: |
-          # Aquí iría el comando para ejecutar tus tests
+          # Aquí reemplazarás este comando por el de tus pruebas reales
           # Ejemplo: npm install && npm test
-          echo "Ejecutando pruebas..."
-
+          echo "Ejecutando pruebas del proyecto..."
