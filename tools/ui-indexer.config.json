@@ -1,0 +1,12 @@
+{
+  "keywords": [
+    "login","inicio de sesión","signin","iniciar sesión","signup","registro","signup","auth","autenticación","authenticate","autenticar","authorization","autorización",
+    "button","botón","btn","submit","enviar","link","enlace","a href","modal","diálogo","dialog","dropdown","desplegable","select","seleccionar","option","opción","checkbox","casilla","radio",
+    "tooltip","tooltip","badge","insignia","icon","icono","avatar","card","tarjeta","pagination","paginación","breadcrumb","migas","toast","alert","alerta",
+    "table","tabla","datatable","thead","tbody","tr","td",
+    "route","ruta","router","path","form","formulario","input","input","password","contraseña","navbar","nav","menu","menuitem"
+  ],
+  "extensions": [".js",".jsx",".ts",".tsx",".html",".css",".scss",".md",".json"],
+  "ignore": ["node_modules/**","docs/ui-search/**",".git/**","dist/**"],
+  "maxSnippets": 5
+}
