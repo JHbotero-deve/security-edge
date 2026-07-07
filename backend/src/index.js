@@ -8,7 +8,7 @@ import { apiLimiter } from "./middlewares/rate-limit.middleware.js";
 import { requestLogger, requestMetadata } from "./middlewares/logging.middleware.js";
 import { notFoundHandler, errorHandler } from "./middlewares/error.middleware.js";
 import logger from "./utils/logger.js";
-import { HTTP_STATUS, MESSAGES } from "./constants/http-status.js";
+import { HTTP_STATUS } from "./constants/http-status.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -67,7 +67,7 @@ app.use(errorHandler);
 // Server Startup
 // ============================================
 app.listen(PORT, () => {
-  logger.info(`🚀 Security Edge server running", {
+  logger.info("Security Edge server running", {
     port: PORT,
     environment: NODE_ENV,
     timestamp: new Date(),

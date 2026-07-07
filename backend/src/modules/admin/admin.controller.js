@@ -1,4 +1,4 @@
-import * as service from "./admin.services.js";
+import * as service from "./admin.service.js";
 
 export const getDashboard = async (req, res, next) => {
   try {

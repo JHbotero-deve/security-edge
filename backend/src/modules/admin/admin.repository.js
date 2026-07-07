@@ -1,4 +1,4 @@
-import prisma from "../../config/database.js";
+import { prisma } from "../../lib/prisma.js";
 
 export async function getDashboardStatsRepository() {
   return await prisma.stats.findMany();

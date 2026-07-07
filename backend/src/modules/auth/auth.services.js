@@ -3,11 +3,14 @@ import jwt from "jsonwebtoken";
 import { prisma } from "../../lib/prisma.js";
 import {
   AuthenticationError,
-  ConflictError,
   NotFoundError,
 } from "../../utils/errors.js";
 import logger from "../../utils/logger.js";
-import { USER_STATUS, ROLES, EVENT_TYPES, SEVERITY_LEVELS } from "../../constants/http-status.js";
+import {
+  USER_STATUS,
+  EVENT_TYPES,
+  SEVERITY_LEVELS,
+} from "../../constants/http-status.js";
 
 /**
  * Login service
@@ -44,7 +47,12 @@ export async function loginService(email, password, ipAddress) {
 
     // Create JWT token
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role },
+      {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        status: user.status,
+      },
       process.env.JWT_SECRET,
       { expiresIn: process.env.JWT_EXPIRES_IN || "24h" }
     );
@@ -149,16 +157,5 @@ async function updateLoginAttempts(userId, isFailedAttempt) {
     }
   } catch (error) {
     logger.error("Update login attempts error", { error: error.message });
-  }
-}import { UserRepository } from "../../repositories/UserRepository";
-
-const userRepo = new UserRepository();
-
-export class AuthService {
-  async authenticate(email, password) {
-    const user = await userRepo.findByEmail(email); // Método que debes añadir en UserRepository
-    if (!user || user.password !== password)
-      throw new Error("Credenciales inválidas");
-    return { id: user.id, email: user.email };
   }
 }
