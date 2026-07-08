@@ -1,0 +1,515 @@
+{
+  "version": "1",
+  "workspaceId": "44ec43736ba8a6a3",
+  "workspaceName": "security-edge",
+  "enabled": true,
+  "updatedAt": "2026-07-08T03:51:08.159Z",
+  "detectedStack": {
+    "languages": [
+      "JavaScript/TypeScript"
+    ],
+    "frameworks": [],
+    "uiLibraries": [],
+    "orm": [],
+    "authLibraries": [],
+    "validationLibraries": [],
+    "paymentLibraries": [],
+    "testTools": [],
+    "scripts": {
+      "build-ui-index": "node tools/ui-indexer.js"
+    },
+    "importantDirs": [
+      "src"
+    ],
+    "sensitiveFiles": [
+      "backend/.env.example",
+      "backend/prisma/schema.prisma",
+      "backend/src/config/.env.example",
+      "backend/src/middlewares/auth.middleware.js",
+      "backend/src/modules/admin/admin.controller.js",
+      "backend/src/modules/admin/admin.repository.js",
+      "backend/src/modules/admin/admin.routes.js",
+      "backend/src/modules/admin/admin.service.js",
+      "backend/src/modules/admin/admin.validator.js",
+      "backend/src/modules/admin/index.js",
+      "backend/src/modules/auth/auth.controller.js",
+      "backend/src/modules/auth/auth.repository.js",
+      "backend/src/modules/auth/auth.routes.js",
+      "backend/src/modules/auth/auth.services.js",
+      "backend/src/modules/dashboard/DashboardService.js",
+      "backend/src/modules/permissions/permissions.controller.js",
+      "backend/src/modules/permissions/permissions.routes.js",
+      "backend/src/modules/permissions/permissions.services.js",
+      "backend/src/routes/auth.routes.js",
+      "backend/src/routes/dashboard.routes.js",
+      "backend/src/validators/auth.validator.js"
+    ]
+  },
+  "sections": {
+    "stack": [
+      {
+        "id": "8859f04e2bb8c191",
+        "text": "Project name: security-edge-ui-tools",
+        "kind": "fact",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "package.json"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      }
+    ],
+    "packageManager": [],
+    "architectureRules": [
+      {
+        "id": "8a67d1cb5ec34518",
+        "text": "Multi-service repo orchestrated via docker-compose.yml. Services: postgres.",
+        "kind": "fact",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "docker-compose.yml"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      }
+    ],
+    "codingConventions": [],
+    "sensitiveFiles": [
+      {
+        "id": "133eb4a3b6f19024",
+        "text": "Environment file: backend/.env.example",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/.env.example"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "78a3161dd18740c9",
+        "text": "DB schema: backend/prisma/schema.prisma",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/prisma/schema.prisma"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "5c55b45a2598a928",
+        "text": "Environment file: backend/src/config/.env.example",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/config/.env.example"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "b1abfffd5ab22294",
+        "text": "Auth code: backend/src/middlewares/auth.middleware.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/middlewares/auth.middleware.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "8bfe0a5e788fc1bf",
+        "text": "Admin area: backend/src/modules/admin/admin.controller.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/admin/admin.controller.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "32b29cf7fbc459e5",
+        "text": "Admin area: backend/src/modules/admin/admin.repository.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/admin/admin.repository.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "b4f5d90e44fa51d6",
+        "text": "Admin area: backend/src/modules/admin/admin.routes.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/admin/admin.routes.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "dcd9470bf755c488",
+        "text": "Admin area: backend/src/modules/admin/admin.service.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/admin/admin.service.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "89d0e413429bc9ab",
+        "text": "Admin area: backend/src/modules/admin/admin.validator.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/admin/admin.validator.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "7bd026cbbcb31211",
+        "text": "Admin area: backend/src/modules/admin/index.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/admin/index.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "a554e9e0f5c7af97",
+        "text": "Auth code: backend/src/modules/auth/auth.controller.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/auth/auth.controller.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "32529e3a2cdac8dd",
+        "text": "Auth code: backend/src/modules/auth/auth.repository.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/auth/auth.repository.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "be7dd69ea287c0f6",
+        "text": "Auth code: backend/src/modules/auth/auth.routes.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/auth/auth.routes.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "1584353fa5d8f7c7",
+        "text": "Auth code: backend/src/modules/auth/auth.services.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/auth/auth.services.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "cebee55a7584897f",
+        "text": "Dashboard area: backend/src/modules/dashboard/DashboardService.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/dashboard/DashboardService.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "39ab12de0809652b",
+        "text": "Permissions: backend/src/modules/permissions/permissions.controller.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/permissions/permissions.controller.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "5d2868dceb8519c9",
+        "text": "Permissions: backend/src/modules/permissions/permissions.routes.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/permissions/permissions.routes.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "eaa9c3f71dd8f164",
+        "text": "Permissions: backend/src/modules/permissions/permissions.services.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/modules/permissions/permissions.services.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "851990e90bb9efe5",
+        "text": "Auth code: backend/src/routes/auth.routes.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/routes/auth.routes.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "7f0d60c9edfa37e6",
+        "text": "Dashboard area: backend/src/routes/dashboard.routes.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/routes/dashboard.routes.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "35ee95acb04c5f4f",
+        "text": "Auth code: backend/src/validators/auth.validator.js",
+        "kind": "risk",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/src/validators/auth.validator.js"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      }
+    ],
+    "forbiddenActions": [
+      {
+        "id": "54488313662f5279",
+        "text": "Never log or commit values for env names: POSTGRES_PASSWORD, JWT_SECRET.",
+        "kind": "constraint",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      }
+    ],
+    "allowedCommands": [
+      {
+        "id": "8a541339e455ed31",
+        "text": "npm run build-ui-index -> node tools/ui-indexer.js",
+        "kind": "command",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "package.json"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      },
+      {
+        "id": "4b417e420154a30f",
+        "text": "npm run dev (in backend) -> node src/index.js",
+        "kind": "command",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/package.json"
+        },
+        "appliesTo": [
+          "backend"
+        ],
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      }
+    ],
+    "businessRules": [],
+    "integrationRules": [
+      {
+        "id": "028fcdf1303971b6",
+        "text": "Project ships with Docker. Verify Docker build before considering deploy ready.",
+        "kind": "constraint",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "backend/Dockerfile"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      }
+    ],
+    "testingExpectations": [],
+    "agentInstructions": [
+      {
+        "id": "5c4811e593fccc5a",
+        "text": "This repo orchestrates multiple services (postgres). Check the relevant service directory before editing.",
+        "kind": "constraint",
+        "source": "repo_detected",
+        "confidence": "confirmed",
+        "scope": "workspace",
+        "evidence": {
+          "file": "docker-compose.yml"
+        },
+        "lastVerifiedAt": "2026-07-08T03:51:08.158Z"
+      }
+    ],
+    "openQuestions": []
+  },
+  "packages": [
+    {
+      "path": "backend",
+      "name": "security-edge-backend",
+      "detectedStack": {
+        "languages": [
+          "JavaScript/TypeScript"
+        ],
+        "frameworks": [
+          "Express"
+        ],
+        "uiLibraries": [],
+        "orm": [
+          "Prisma"
+        ],
+        "authLibraries": [],
+        "validationLibraries": [
+          "Zod"
+        ],
+        "paymentLibraries": [],
+        "testTools": [],
+        "scripts": {
+          "test:db": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' src/test-db.ts",
+          "dev": "node src/index.js"
+        },
+        "importantDirs": [
+          "prisma",
+          "src"
+        ],
+        "sensitiveFiles": []
+      },
+      "items": [
+        {
+          "id": "backend:fact:Project name: security-edge-backend",
+          "text": "Project name: security-edge-backend",
+          "kind": "fact",
+          "source": "repo_detected",
+          "confidence": "confirmed",
+          "scope": "package",
+          "evidence": {
+            "file": "backend/package.json"
+          },
+          "appliesTo": [
+            "backend"
+          ],
+          "lastVerifiedAt": "2026-07-08T03:51:08.157Z"
+        },
+        {
+          "id": "backend:fact:Framework detected: Express.",
+          "text": "Framework detected: Express.",
+          "kind": "fact",
+          "source": "repo_detected",
+          "confidence": "confirmed",
+          "scope": "package",
+          "evidence": {
+            "file": "backend/package.json"
+          },
+          "appliesTo": [
+            "backend"
+          ],
+          "lastVerifiedAt": "2026-07-08T03:51:08.157Z"
+        },
+        {
+          "id": "backend:command:npm run test:db -> ts-node --compiler-op",
+          "text": "npm run test:db -> ts-node --compiler-options '{\"module\":\"CommonJS\"}' src/test-db.ts",
+          "kind": "command",
+          "source": "repo_detected",
+          "confidence": "confirmed",
+          "scope": "package",
+          "evidence": {
+            "file": "backend/package.json"
+          },
+          "appliesTo": [
+            "backend"
+          ],
+          "lastVerifiedAt": "2026-07-08T03:51:08.157Z"
+        },
+        {
+          "id": "backend:command:npm run dev -> node src/index.js",
+          "text": "npm run dev -> node src/index.js",
+          "kind": "command",
+          "source": "repo_detected",
+          "confidence": "confirmed",
+          "scope": "package",
+          "evidence": {
+            "file": "backend/package.json"
+          },
+          "appliesTo": [
+            "backend"
+          ],
+          "lastVerifiedAt": "2026-07-08T03:51:08.157Z"
+        },
+        {
+          "id": "backend:constraint:Project ships with Docker. Verify Docker",
+          "text": "Project ships with Docker. Verify Docker build before considering deploy ready.",
+          "kind": "constraint",
+          "source": "repo_detected",
+          "confidence": "confirmed",
+          "scope": "package",
+          "evidence": {
+            "file": "backend/Dockerfile"
+          },
+          "appliesTo": [
+            "backend"
+          ],
+          "lastVerifiedAt": "2026-07-08T03:51:08.157Z"
+        }
+      ]
+    }
+  ]
+}
