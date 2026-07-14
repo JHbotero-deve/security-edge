@@ -1,9 +1,15 @@
-import { prisma } from "../../lib/prisma.js";
+import { BaseRepository } from "../../repositories/baseRepository";
+import { prisma } from "../../lib/prisma";
 
-export async function findUserByEmailRepository(email) {
-  return await prisma.user.findUnique({ where: { email } });
-}
+export class AuthRepository extends BaseRepository {
+  constructor() {
+    super(prisma.user);
+  }
+}import { BaseRepository } from "../../repositories/baseRepository";
+import { prisma } from "../../lib/prisma";
 
-export async function createUserRepository(data) {
-  return await prisma.user.create({ data });
+export class AuthRepository extends BaseRepository {
+  constructor() {
+    super(prisma.user);
+  }
 }

@@ -1,9 +1,11 @@
-import { Router } from "express";
-import { getAll, getById } from "./alerts.controller.js";
+import { prisma } from "../../lib/prisma";
 
-const router = Router();
+export const findAllRepository = async () => {
+  return await prisma.alerts.findMany();
+};
 
-router.get("/", getAll);
-router.get("/:id", getById);
-
-export default router;
+export const findByIdRepository = async (id: string) => {
+  return await prisma.alerts.findUnique({
+    where: { id }
+  });
+};

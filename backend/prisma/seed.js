@@ -6,14 +6,11 @@ const prisma = new PrismaClient();
 
 async function main() {
   console.log("🌱 Starting database seed...");
-
-  // Clean existing data
   await prisma.auditLog.deleteMany();
   await prisma.securityEvent.deleteMany();
   await prisma.session.deleteMany();
   await prisma.user.deleteMany();
 
-  // Create admin user
   const adminPassword = await bcrypt.hash("Admin@12345", 10);
   const admin = await prisma.user.create({
     data: {
@@ -26,8 +23,6 @@ async function main() {
       emailVerified: true,
     },
   });
-
-  // Create analyst user
   const analystPassword = await bcrypt.hash("Analyst@12345", 10);
   const analyst = await prisma.user.create({
     data: {
@@ -40,8 +35,6 @@ async function main() {
       emailVerified: true,
     },
   });
-
-  // Create viewer user
   const viewerPassword = await bcrypt.hash("Viewer@12345", 10);
   const viewer = await prisma.user.create({
     data: {
@@ -54,8 +47,6 @@ async function main() {
       emailVerified: true,
     },
   });
-
-  // Create sample audit logs
   await prisma.auditLog.create({
     data: {
       userId: admin.id,
@@ -67,7 +58,6 @@ async function main() {
     },
   });
 
-  // Create sample security events
   await prisma.securityEvent.create({
     data: {
       userId: admin.id,

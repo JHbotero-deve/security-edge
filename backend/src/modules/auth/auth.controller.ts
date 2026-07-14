@@ -1,58 +1,29 @@
-import { z } from "zod";
-import { loginSchema, passwordChangeSchema } from "../../schemas/validation.schemas.js";
-import { loginService, getCurrentUserService } from "./auth.services.js";
-import logger from "../../utils/logger.js";
-import { successResponse } from "../../utils/response.js";
-import { HTTP_STATUS, MESSAGES } from "../../constants/http-status.js";
+import { Request, Response, NextFunction } from "express";
+import * as authService from "./auth.services.ts";
+import { loginSchema, registerSchema } from "./auth.validation.ts";
 
-/**
- * Login controller
- * POST /auth/login
- */
-export async function loginController(req, res, next) {
+export const register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const parsed = loginSchema.parse(req.body);
-    const result = await loginService(
-      parsed.email,
-      parsed.password,
-      req.metadata?.ip
-    );
-
-    return res.status(HTTP_STATUS.OK).json(successResponse(result, MESSAGES.SUCCESS));
+    const data = registerSchema.parse(req.body);
+    const result = await authService.registerService(data);
+    res.status(201).json({
+      success: true,
+      data: result
+    });
   } catch (error) {
     next(error);
   }
-}
+};
 
-/**
- * Get current user controller
- * GET /auth/me
- */
-export async function getCurrentUserController(req, res, next) {
+export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const user = await getCurrentUserService(req.user.id);
-    return res
-      .status(HTTP_STATUS.OK)
-      .json(successResponse(user, MESSAGES.SUCCESS));
+    const data = loginSchema.parse(req.body);
+    const result = await authService.loginService(data);
+    res.status(200).json({
+      success: true,
+      data: result
+    });
   } catch (error) {
     next(error);
   }
-}
-
-/**
- * Logout controller
- * POST /auth/logout
- */
-export async function logoutController(req, res, next) {
-  try {
-    logger.info("User logged out", { userId: req.user.id });
-    return res.status(HTTP_STATUS.OK).json(
-      successResponse(
-        { message: "Logged out successfully" },
-        MESSAGES.SUCCESS
-      )
-    );
-  } catch (error) {
-    next(error);
-  }
-}
+};

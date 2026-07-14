@@ -1,5 +1,5 @@
-import { BaseRepository } from "./baseRepository.ts";
-import { prisma } from "../lib/prisma";
+import { BaseRepository } from "./baseRepository.js";
+import { prisma } from "../lib/prisma.js";
 
 export class UserRepository extends BaseRepository {
   constructor() {

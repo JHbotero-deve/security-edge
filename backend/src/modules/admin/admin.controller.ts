@@ -1,26 +1,30 @@
-import * as service from "./admin.service.js";
+import { Request, Response, NextFunction } from "express";
+import * as services from "./admin.services.ts";
+import { auditLogFilterSchema, securityEventFilterSchema } from "./admin.validation.ts";
 
-export const getDashboard = async (req, res, next) => {
+export const getDashboard = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const data = await service.getDashboardStatsService();
+    const data = await services.getDashboardStatsService();
     res.status(200).json(data);
   } catch (error) {
     next(error);
   }
 };
 
-export const getAuditLogs = async (req, res, next) => {
+export const getAuditLogs = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const data = await service.getAuditLogsService(req.query);
+    const filters = auditLogFilterSchema.parse(req.query);
+    const data = await services.getAuditLogsService(filters);
     res.status(200).json(data);
   } catch (error) {
     next(error);
   }
 };
 
-export const getSecurityEvents = async (req, res, next) => {
+export const getSecurityEvents = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const data = await service.getSecurityEventsService(req.query);
+    const filters = securityEventFilterSchema.parse(req.query);
+    const data = await services.getSecurityEventsService(filters);
     res.status(200).json(data);
   } catch (error) {
     next(error);

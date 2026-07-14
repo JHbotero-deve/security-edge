@@ -1,10 +1,10 @@
 import { Router } from "express";
-import * as controller from "./admin.controller.js";
+import * as controllers from "./admin.controller.js";
 
 const router = Router();
 
-router.get("/dashboard", controller.getDashboard);
-router.get("/audit", controller.getAuditLogs);
-router.get("/events", controller.getSecurityEvents);
+router.get("/dashboard", controllers.getDashboard);
+router.get("/audit", controllers.getAuditLogs);
+router.get("/events", controllers.getSecurityEvents);
 
 export default router;

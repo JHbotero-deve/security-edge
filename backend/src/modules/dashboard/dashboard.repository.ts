@@ -1,8 +1,8 @@
 import { BaseRepository } from "../../repositories/baseRepository";
 import { prisma } from "../../lib/prisma";
 
-export class MonitoringRepository extends BaseRepository {
+export class DashboardRepository extends BaseRepository {
   constructor() {
-    super(prisma.systemMetric);
+    super(prisma.metrics);
   }
 }

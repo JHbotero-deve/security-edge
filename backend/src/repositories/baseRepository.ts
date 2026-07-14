@@ -1,4 +1,4 @@
-export class BaseRepository<T> {
+export class BaseRepository {
   constructor(protected model: any) {}
 
   async findAll() {

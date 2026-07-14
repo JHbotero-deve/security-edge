@@ -1,23 +1,9 @@
 import { Router } from "express";
-import {
-  loginController,
-  getCurrentUserController,
-  logoutController,
-} from "./auth.controller.js";
-import { jwtMiddleware, activeUserMiddleware } from "../../middlewares/auth.middleware.js";
-import { authLimiter } from "../../middlewares/rate-limit.middleware.js";
+import { register, login } from "./auth.controller";
 
 const router = Router();
 
-/**
- * Public routes
- */
-router.post("/login", authLimiter, loginController);
-
-/**
- * Protected routes
- */
-router.get("/me", jwtMiddleware, activeUserMiddleware, getCurrentUserController);
-router.post("/logout", jwtMiddleware, logoutController);
+router.post("/register", register);
+router.post("/login", login);
 
 export default router;

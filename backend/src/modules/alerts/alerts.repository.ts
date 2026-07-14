@@ -1,9 +1,11 @@
-import { prisma } from "../../lib/prisma.js";
+import { prisma } from "../../lib/prisma";
 
-export async function findAllRepository() {
+export const findAllRepository = async () => {
   return await prisma.alerts.findMany();
-}
+};
 
-export async function findByIdRepository(id) {
-  return await prisma.alerts.findUnique({ where: { id } });
-}
+export const findByIdRepository = async (id: string) => {
+  return await prisma.alerts.findUnique({
+    where: { id }
+  });
+};
