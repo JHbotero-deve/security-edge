@@ -1,13 +1,11 @@
 {
   "compilerOptions": {
-    /* Estructura del proyecto */
     "rootDir": "./src",
     "outDir": "./dist",
 
     /* Target y módulo */
     "target": "ES2020",
     "module": "commonjs",
-  /* "moduleResolution": "module", */
 
     /* Tipos y librerías */
     "types": ["node", "express"],
@@ -29,6 +27,6 @@
     "isolatedModules": true,
     "esModuleInterop": true
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,4 +1,4 @@
-import { BaseRepository } from "../../repositories/baseRepository";
+import { BaseRepository } from "../../repositories/base.repository";
 import { prisma } from "../../lib/prisma";
 
 export class MonitoringRepository extends BaseRepository {

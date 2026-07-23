@@ -4,12 +4,144 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")  
+  url      = env("DATABASE_URL")
 }
 
+// ==========================================
+// MÓDULO: users (usuarios)
+// ==========================================
 model Usuario {
   id        Int      @id @default(autoincrement())
   username  String   @unique
   email     String   @unique
   createdAt DateTime @default(now())
+
+  @@map("usuarios")
+}
+
+// ==========================================
+// MÓDULO: incidents
+// ==========================================
+model Incident {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  status      String   @default("OPEN")
+  severity    String   @default("LOW")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("incidents")
+}
+
+// ==========================================
+// MÓDULO: roles
+// ==========================================
+model Role {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+
+  @@map("roles")
+}
+
+// ==========================================
+// MÓDULO: permissions
+// ==========================================
+model Permission {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+
+  @@map("permissions")
+}
+
+// ==========================================
+// MÓDULO: monitoring
+// ==========================================
+model Monitoring {
+  id        Int      @id @default(autoincrement())
+  type      String   // e.g., "CPU", "MEMORY", "TRAFFIC"
+  value     String
+  status    String   // e.g., "OK", "WARN", "CRITICAL"
+  createdAt DateTime @default(now())
+
+  @@map("monitoring")
+}
+
+// ==========================================
+// MÓDULO: notifications
+// ==========================================
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}
+
+// ==========================================
+// MÓDULO: settings
+// ==========================================
+model Setting {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique // e.g., "THEME", "MAX_ATTEMPTS"
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
+
+// ==========================================
+// MÓDULO: admin (Configuraciones de administración)
+// ==========================================
+model AdminConfig {
+  id          Int      @id @default(autoincrement())
+  featureName String   @unique // e.g., "MAINTENANCE_MODE"
+  isEnabled   Boolean  @default(false)
+  updatedAt   DateTime @updatedAt
+
+  @@map("admin_configs")
+}
+
+// ==========================================
+// MÓDULO: alerts (Alertas críticas del sistema)
+// ==========================================
+model Alert {
+  id          Int      @id @default(autoincrement())
+  type        String   // e.g., "INTRUSION", "DDoS"
+  message     String
+  isResolved  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@map("alerts")
+}
+
+// ==========================================
+// MÓDULO: audit (Logs de Auditoría)
+// ==========================================
+model AuditLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  action    String   // e.g., "LOGIN_ATTEMPT", "DELETE_USER"
+  details   String
+  ipAddress String
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+// ==========================================
+// MÓDULO: dashboard & auth (Mapeos auxiliares persistentes)
+// ==========================================
+model DashboardMetric {
+  id        Int      @id @default(autoincrement())
+  metricKey String   @unique // e.g., "TOTAL_ATTACKS_BLOCKED"
+  count     Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@map("dashboard_metrics")
 }

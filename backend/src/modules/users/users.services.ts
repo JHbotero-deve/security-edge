@@ -1,22 +1,35 @@
-import { UserRepository } from "./users.repository";
-import logger from "../../utils/logger";
+import { user.repository } from "./users.repository";
 
-const userRepository = new UserRepository();
+export class UserService {
+  private repository: user.repository;
 
-export const getUsersService = async () => {
-  try {
-    return await userRepository.findMany();
-  } catch (error: any) {
-    logger.error("User Service - GetAll", { message: error.message });
-    throw error;
+  constructor() {
+    this.repository = new user.repository();
   }
-};
 
-export const getUserByIdService = async (id: string) => {
-  try {
-    return await userRepository.findById(id);
-  } catch (error: any) {
-    logger.error("User Service - FindById", { message: error.message, id });
-    throw error;
+  async getAllUsers() {
+    return await this.repository.findAll();
   }
-};
+
+  async getUserById(id: number) {
+    const user = await this.repository.findById(id);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    return user;
+  }
+
+  async createUser(data: { username: string; email: string }) {
+    return await this.repository.create(data);
+  }
+
+  async updateUser(id: number, data: { username?: string; email?: string }) {
+    await this.getUserById(id);
+    return await this.repository.update(id, data);
+  }
+
+  async deleteUser(id: number) {
+    await this.getUserById(id);
+    return await this.repository.delete(id);
+  }
+}

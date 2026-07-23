@@ -1,31 +1,35 @@
-import { IncidentRepository } from "./incidents.repository";
-import logger from "../../utils/logger";
+import { incidents.repository } from "./incidents.repository";
+export class IncidentService {
+  private repository: incidents.repository;
 
-const incidentRepository = new IncidentRepository();
-
-export const getIncidentsService = async () => {
-  try {
-    return await incidentRepository.findMany();
-  } catch (error: any) {
-    logger.error("Incident Service - GetAll", { message: error.message });
-    throw error;
+  constructor() {
+    this.repository = new incidents.repository();
   }
-};
 
-export const getIncidentByIdService = async (id: string) => {
-  try {
-    return await incidentRepository.findById(id);
-  } catch (error: any) {
-    logger.error("Incident Service - FindById", { message: error.message, id });
-    throw error;
+  async getAllIncidents() {
+    return await this.repository.findAll();
   }
-};
 
-export const createIncidentService = async (data: any) => {
-  try {
-    return await incidentRepository.create(data);
-  } catch (error: any) {
-    logger.error("Incident Service - Create", { message: error.message });
-    throw error;
+
+  async getIncidentById(id: number) {
+    const incident = await this.repository.findById(id);
+    if (!incident) {
+      throw new Error("Incident not found");
+    }
+    return incident;
   }
-};
+
+  async createIncident(data: { title: string; description: string; status?: string; severity?: string }) {
+    return await this.repository.create(data);
+  }
+
+  async updateIncident(id: number, data: { title?: string; description?: string; status?: string; severity?: string }) {
+    await this.getIncidentById(id);
+    return await this.repository.update(id, data);
+  }
+
+  async deleteIncident(id: number) {
+    await this.getIncidentById(id);
+    return await this.repository.delete(id);
+  }
+}

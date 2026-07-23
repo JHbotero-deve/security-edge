@@ -1,9 +1,6 @@
 import jwt from "jsonwebtoken";
 import logger from "../utils/logger.js";
 
-/**
- * Verify JWT token and attach user to request
- */
 export function jwtMiddleware(req, res, next) {
   try {
     const authHeader = req.headers["authorization"];
@@ -43,10 +40,6 @@ export function jwtMiddleware(req, res, next) {
     });
   }
 }
-
-/**
- * Verify user has specific role
- */
 export function roleMiddleware(requiredRoles = []) {
   return (req, res, next) => {
     if (!req.user) {
@@ -72,10 +65,6 @@ export function roleMiddleware(requiredRoles = []) {
     next();
   };
 }
-
-/**
- * Middleware to check if user account is active
- */
 export function activeUserMiddleware(req, res, next) {
   if (!req.user) {
     return res.status(401).json({

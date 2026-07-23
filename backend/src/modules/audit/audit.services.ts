@@ -1,7 +1,7 @@
-import { AuditRepository } from "./audit.repository.ts";
+import { audit.repository } from "./audit.repository.ts";
 import logger from "../../utils/logger";
 
-const auditRepository = new AuditRepository();
+const auditRepository = new audit.repository();
 
 export const getAuditLogsService = async (filters: any) => {
   try {

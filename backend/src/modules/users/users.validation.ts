@@ -1,10 +1,24 @@
 import { z } from "zod";
 
 export const createUserSchema = z.object({
-  name: z.string().min(2, "El nombre es obligatorio"),
-  email: z.string().email("Correo electrónico inválido"),
-  password: z.string().min(6, "La contraseña debe tener al menos 6 caracteres"),
-  role: z.string().optional(),
+  body: z.object({
+    username: z.string().min(3).max(50),
+    email: z.string().email(),
+  }),
 });
 
-export const updateUserSchema = createUserSchema.partial();
+export const updateUserSchema = z.object({
+  params: z.object({
+    id: z.string().transform((val) => parseInt(val, 10)),
+  }),
+  body: z.object({
+    username: z.string().min(3).max(50).optional(),
+    email: z.string().email().optional(),
+  }),
+});
+
+export const getUserByIdSchema = z.object({
+  params: z.object({
+    id: z.string().transform((val) => parseInt(val, 10)),
+  }),
+});
