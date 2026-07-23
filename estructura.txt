@@ -50,7 +50,7 @@
 │   │   │   │   ├── alerts.routes.js
 │   │   │   │   └── alerts.services.js
 │   │   │   ├── audit
-│   │   │   │   └── AuditRepository.js
+│   │   │   │   └── audit.repository.js
 │   │   │   ├── auth
 │   │   │   │   ├── auth.controller.js
 │   │   │   │   ├── auth.routes.js
@@ -83,15 +83,15 @@
 │   │   │   │   └── settings.services.js
 │   │   │   └── users
 │   │   │       ├── UserController.js
-│   │   │       ├── UserRepository.js
+│   │   │       ├── user.repository.js
 │   │   │       ├── user.routes.js
 │   │   │       ├── UserService.js
 │   │   │       └── UserValidator.js
 │   │   ├── repositories
-│   │   │   ├── AuditRepository.js
-│   │   │   ├── baseRepository.ts
-│   │   │   ├── RoleRepository.js
-│   │   │   └── UserRepository.js
+│   │   │   ├── audit.repository.js
+│   │   │   ├── base.repository.ts
+│   │   │   ├── role.repository.js
+│   │   │   └── user.repository.js
 │   │   ├── routes
 │   │   │   ├── audit.routes.js
 │   │   │   ├── auth.routes.js
