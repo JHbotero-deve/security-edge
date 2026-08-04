@@ -1,4 +1,0 @@
-
-POSTGRES_DB=security_edge
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
