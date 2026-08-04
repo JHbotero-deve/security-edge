@@ -1,10 +1,10 @@
-import { role.repository } from "./roles.repository";
+import { RoleRepository } from "./roles.repository";
 
 export class RoleService {
-  private repository: role.repository;
+  private repository: RoleRepository;
 
   constructor() {
-    this.repository = new role.repository();
+    this.repository = new RoleRepository();
   }
 
   async getAllRoles() {

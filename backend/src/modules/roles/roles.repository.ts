@@ -1,7 +1,7 @@
-import { BaseRepository } from "../../repositories/base.repository";
+import { BaseRepository } from "../../shared/base.repository";
 import { prisma } from "../../lib/prisma";
 
-export class role.repository extends BaseRepository {
+export class RoleRepository extends BaseRepository {
   constructor() {
     super(prisma.role);
   }

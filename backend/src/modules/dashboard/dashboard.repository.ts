@@ -1,4 +1,4 @@
-import { BaseRepository } from "../../repositories/base.repository";
+import { BaseRepository } from "../../shared/base.repository";
 import { prisma } from "../../lib/prisma";
 
 export class DashboardRepository extends BaseRepository {
