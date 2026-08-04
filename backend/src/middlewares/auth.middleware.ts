@@ -1,7 +1,8 @@
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import logger from "../utils/logger.js";
 
-export function jwtMiddleware(req, res, next) {
+export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
   try {
     const authHeader = req.headers["authorization"];
 
@@ -19,10 +20,10 @@ export function jwtMiddleware(req, res, next) {
     const token = authHeader.split(" ")[1];
 
     try {
-      const payload = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = payload;
+      const payload = jwt.verify(token, process.env.JWT_SECRET as string);
+      (req as any).user = payload;
       next();
-    } catch (error) {
+    } catch (error: any) {
       logger.warn("Invalid or expired token", {
         ip: req.ip,
         error: error.message,
@@ -32,7 +33,7 @@ export function jwtMiddleware(req, res, next) {
         error: "Invalid or expired token",
       });
     }
-  } catch (error) {
+  } catch (error: any) {
     logger.error("JWT middleware error", { error: error.message });
     return res.status(500).json({
       success: false,
@@ -40,19 +41,22 @@ export function jwtMiddleware(req, res, next) {
     });
   }
 }
-export function roleMiddleware(requiredRoles = []) {
-  return (req, res, next) => {
-    if (!req.user) {
+
+export function roleMiddleware(requiredRoles: string[] = []) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const user = (req as any).user;
+
+    if (!user) {
       return res.status(401).json({
         success: false,
         error: "User not authenticated",
       });
     }
 
-    if (!requiredRoles.includes(req.user.role)) {
+    if (!requiredRoles.includes(user.role)) {
       logger.warn("Unauthorized role access attempt", {
-        userId: req.user.id,
-        userRole: req.user.role,
+        userId: user.id,
+        userRole: user.role,
         requiredRoles,
       });
 
@@ -65,18 +69,21 @@ export function roleMiddleware(requiredRoles = []) {
     next();
   };
 }
-export function activeUserMiddleware(req, res, next) {
-  if (!req.user) {
+
+export function activeUserMiddleware(req: Request, res: Response, next: NextFunction) {
+  const user = (req as any).user;
+
+  if (!user) {
     return res.status(401).json({
       success: false,
       error: "User not authenticated",
     });
   }
 
-  if (req.user.status !== "ACTIVE") {
+  if (user.status !== "ACTIVE") {
     logger.warn("Inactive user access attempt", {
-      userId: req.user.id,
-      status: req.user.status,
+      userId: user.id,
+      status: user.status,
     });
 
     return res.status(403).json({

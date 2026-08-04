@@ -5,7 +5,8 @@
 
     /* Target y módulo */
     "target": "ES2020",
-    "module": "commonjs",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
 
     /* Tipos y librerías */
     "types": ["node", "express"],

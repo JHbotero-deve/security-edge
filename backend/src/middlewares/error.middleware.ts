@@ -1,9 +1,10 @@
+import { Request, Response, NextFunction } from "express";
 import logger from "../utils/logger.js";
 
 /**
  * 404 Not Found handler
  */
-export function notFoundHandler(req, res) {
+export function notFoundHandler(req: Request, res: Response) {
   logger.warn("Route not found", {
     method: req.method,
     path: req.path,
@@ -21,7 +22,7 @@ export function notFoundHandler(req, res) {
  * Global error handler middleware
  * Must be the last middleware registered
  */
-export function errorHandler(err, req, res, next) {
+export function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
   const status = err.statusCode || err.status || 500;
   const message = err.message || "Internal Server Error";
 
@@ -55,7 +56,7 @@ export function errorHandler(err, req, res, next) {
     return res.status(400).json({
       success: false,
       error: "Validation failed",
-      details: err.errors.map((e) => ({
+      details: err.errors.map((e: any) => ({
         path: e.path.join("."),
         message: e.message,
       })),

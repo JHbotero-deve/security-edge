@@ -1,4 +1,5 @@
 import rateLimit from "express-rate-limit";
+import { Request } from "express";
 
 /**
  * General API rate limiter
@@ -13,7 +14,7 @@ export const apiLimiter = rateLimit({
     success: false,
     error: "Too many requests from this IP, please try again later.",
   },
-  skip: (req) => process.env.NODE_ENV === "test",
+  skip: (req: Request) => process.env.NODE_ENV === "test",
 });
 
 /**
@@ -29,10 +30,10 @@ export const authLimiter = rateLimit({
     success: false,
     error: "Too many login attempts, please try again later.",
   },
-  skip: (req) => process.env.NODE_ENV === "test",
-  keyGenerator: (req) => {
+  skip: (req: Request) => process.env.NODE_ENV === "test",
+  keyGenerator: (req: Request) => {
     // Rate limit by IP and email combination
-    return `${req.ip}-${req.body?.email || "unknown"}`;
+    return `${req.ip}-${(req.body as any)?.email || "unknown"}`;
   },
 });
 
@@ -49,5 +50,5 @@ export const strictLimiter = rateLimit({
     success: false,
     error: "Too many requests for this sensitive operation.",
   },
-  skip: (req) => process.env.NODE_ENV === "test",
+  skip: (req: Request) => process.env.NODE_ENV === "test",
 });
