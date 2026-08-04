@@ -4,6 +4,14 @@ import cors from "cors";
 import helmet from "helmet";
 import authRoutes from "./modules/auth/auth.routes.js";
 import adminRoutes from "./modules/admin/admin.routes.js";
+import usersRoutes from "./modules/users/users.routes.js";
+import rolesRoutes from "./modules/roles/roles.routes.js";
+import permissionsRoutes from "./modules/permissions/permissions.routes.js";
+import auditRoutes from "./modules/audit/audit.routes.js";
+import dashboardRoutes from "./modules/dashboard/dashboard.routes.js";
+import incidentsRoutes from "./modules/incidents/incidents.routes.js";
+import notificationsRoutes from "./modules/notifications/notifications.routes.js";
+import settingsRoutes from "./modules/settings/settings.routes.js";
 import { apiLimiter } from "./middlewares/rate-limit.middleware.js";
 import { requestLogger, requestMetadata } from "./middlewares/logging.middleware.js";
 import { notFoundHandler, errorHandler } from "./middlewares/error.middleware.js";
@@ -56,6 +64,15 @@ if (process.env.ENABLE_HEALTH_CHECK === "true") {
 // ============================================
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/users", usersRoutes);
+app.use("/api/roles", rolesRoutes);
+app.use("/api/permissions", permissionsRoutes);
+app.use("/api/audit", auditRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/incidents", incidentsRoutes);
+app.use("/api/notifications", notificationsRoutes);
+app.use("/api/settings", settingsRoutes);
+// app.use("/api/monitoring", monitoringRoutes); // pendiente: monitoring.routes.ts no exporta un router válido (ver abajo)
 
 // ============================================
 // Error Handling
