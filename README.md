@@ -105,6 +105,29 @@ security-edge/
 
 ---
 
+# Módulos del Backend
+
+Cada módulo vive en `backend/src/modules/<nombre>/` con la estructura fija: `*.validation.ts`, `*.repository.ts`, `*.services.ts`, `*.controller.ts`, `*.routes.ts`, `index.ts`.
+
+| Módulo | Ruta base | Estado |
+|---|---|---|
+| auth | `/api/auth` | Registrado (login/registro pendientes de alinear con schema, ver CHANGELOG) |
+| admin | `/api/admin` | Registrado |
+| users | `/api/users` | Registrado |
+| roles | `/api/roles` | Registrado |
+| permissions | `/api/permissions` | Registrado |
+| audit | `/api/audit` | Registrado |
+| dashboard | `/api/dashboard` | Registrado |
+| incidents | `/api/incidents` | Registrado |
+| notifications | `/api/notifications` | Registrado |
+| settings | `/api/settings` | Registrado |
+| monitoring | — | Pendiente: archivos con contenido corrupto, ver CHANGELOG |
+| alerts | — | Pendiente de registrar en `index.ts` |
+
+Ver `CHANGELOG.md` para el detalle de inconsistencias conocidas antes de asumir que un módulo está 100% funcional.
+
+---
+
 # Estado del Proyecto
 
 Actualmente el proyecto se encuentra en desarrollo.
