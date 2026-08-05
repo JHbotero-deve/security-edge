@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import * as services from "./admin.services.ts";
-import { auditLogFilterSchema, securityEventFilterSchema } from "./admin.validation.ts";
+import * as services from "./admin.services.js";
+import { auditLogFilterSchema, securityEventFilterSchema } from "./admin.validation.js";
 
 export const getDashboard = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {

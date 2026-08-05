@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import * as authService from "./auth.services.ts";
-import { loginSchema, registerSchema } from "./auth.validation.ts";
+import * as authService from "./auth.services.js";
+import { loginSchema, registerSchema } from "./auth.validation.js";
 
 export const register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {

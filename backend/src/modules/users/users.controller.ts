@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { UserService } from "./users.services";
-import { createUserSchema, updateUserSchema, getUserByIdSchema } from "./users.validation";
+import { UserService } from "./users.services.js";
+import { createUserSchema, updateUserSchema, getUserByIdSchema } from "./users.validation.js";
 
 export class UserController {
   private service: UserService;

@@ -1,5 +1,5 @@
-import { AuthRepository } from "./auth.repository";
-import { AppError } from "../../utils/errors";
+import { AuthRepository } from "./auth.repository.js";
+import { AppError } from "../../utils/errors.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 

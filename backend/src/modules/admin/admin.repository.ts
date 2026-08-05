@@ -1,13 +1,13 @@
-import { prisma } from "../../lib/prisma";
+import { prisma } from "../../lib/prisma.js";
 
 export const getDashboardStatsRepository = async () => {
-  return await prisma.stats.findMany();
+  return await prisma.dashboardMetric.findMany();
 };
 
 export const getAuditLogsRepository = async (filters: Record<string, unknown>) => {
-  return await prisma.auditLogs.findMany({ where: filters });
+  return await prisma.auditLog.findMany({ where: filters });
 };
 
 export const getSecurityEventsRepository = async (filters: Record<string, unknown>) => {
-  return await prisma.securityEvents.findMany({ where: filters });
+  return await prisma.incident.findMany({ where: filters });
 };

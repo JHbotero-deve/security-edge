@@ -1,13 +1,21 @@
-import { MonitoringRepository } from "./monitoring.repository";
-import logger from "../../utils/logger";
+import { MonitoringRepository } from "./monitoring.repository.js";
 
-const monitoringRepository = new MonitoringRepository();
+export class MonitoringService {
+  private repository: MonitoringRepository;
 
-export const getSystemMetricsService = async (filters: any) => {
-  try {
-    return await monitoringRepository.findMany(filters);
-  } catch (error: any) {
-    logger.error("Monitoring Service - GetMetrics", { message: error.message });
-    throw error;
+  constructor() {
+    this.repository = new MonitoringRepository();
   }
-};
+
+  async getMetrics(filters: Record<string, unknown> = {}) {
+    return await this.repository.findMany(filters);
+  }
+
+  async getMetricById(id: number) {
+    const metric = await this.repository.findById(id);
+    if (!metric) {
+      throw new Error("Metric not found");
+    }
+    return metric;
+  }
+}

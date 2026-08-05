@@ -1,4 +1,4 @@
-export { default as settingRoutes } from "./settings.routes";
-export * from "./settings.repository";
-export * from "./settings.services";
-export * from "./settings.controller";
+export { default as settingRoutes } from "./settings.routes.js";
+export * from "./setting.repository.js";
+export * from "./settings.services.js";
+export * from "./settings.controller.js";

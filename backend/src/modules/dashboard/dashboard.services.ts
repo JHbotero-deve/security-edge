@@ -1,9 +1,9 @@
-import { DashboardRepository } from "./dashboard.repository";
-import logger from "../../utils/logger";
+import { DashboardRepository } from "./dashboard.repository.js";
+import logger from "../../utils/logger.js";
 
 const dashboardRepository = new DashboardRepository();
 
-export const getDashboardMetricsService = async (filters: any) => {
+export const getDashboardMetricsService = async (filters: Record<string, unknown> = {}) => {
   try {
     return await dashboardRepository.findMany(filters);
   } catch (error: any) {

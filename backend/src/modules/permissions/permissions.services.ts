@@ -1,4 +1,4 @@
-import { PermissionRepository } from "./permissions.repository";
+import { PermissionRepository } from "./permissions.repository.js";
 
 export class PermissionService {
   private repository: PermissionRepository;

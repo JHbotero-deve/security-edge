@@ -1,4 +1,4 @@
-export { default as notificationRoutes } from "./notifications.routes";
-export * from "./notifications.repository";
-export * from "./notifications.services";
-export * from "./notifications.controller";
+export { default as notificationRoutes } from "./notifications.routes.js";
+export * from "./notifications.repository.js";
+export * from "./notifications.services.js";
+export * from "./notifications.controller.js";

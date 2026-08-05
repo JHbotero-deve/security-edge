@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { IncidentService } from "./incidents.services";
-import { createIncidentSchema, updateIncidentSchema, getIncidentByIdSchema } from "./incidents.validation";
+import { IncidentService } from "./incidents.services.js";
+import { createIncidentSchema, updateIncidentSchema, getIncidentByIdSchema } from "./incidents.validation.js";
 
 export class IncidentController {
   private service: IncidentService;

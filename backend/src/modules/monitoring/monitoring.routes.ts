@@ -1,8 +1,10 @@
-import { BaseRepository } from "../../shared/base.repository";
-import { prisma } from "../../lib/prisma";
+import { Router } from "express";
+import { MonitoringController } from "./monitoring.controller.js";
 
-export class MonitoringRepository extends BaseRepository {
-  constructor() {
-    super(prisma.systemMetric);
-  }
-}
+const router = Router();
+const controller = new MonitoringController();
+
+router.get("/", controller.getAll);
+router.get("/:id", controller.getById);
+
+export default router;

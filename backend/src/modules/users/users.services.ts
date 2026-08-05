@@ -1,10 +1,10 @@
-import { user.repository } from "./users.repository";
+import { userRepository } from "./users.repository.js";
 
 export class UserService {
-  private repository: user.repository;
+  private repository: userRepository;
 
   constructor() {
-    this.repository = new user.repository();
+    this.repository = new userRepository();
   }
 
   async getAllUsers() {
@@ -23,7 +23,7 @@ export class UserService {
     return await this.repository.create(data);
   }
 
-  async updateUser(id: number, data: { username?: string; email?: string }) {
+  async updateUser(id: number, data: { username?: string | undefined; email?: string | undefined }) {
     await this.getUserById(id);
     return await this.repository.update(id, data);
   }

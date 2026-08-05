@@ -1,4 +1,4 @@
-import { NotificationRepository } from "./notifications.repository";
+import { NotificationRepository } from "./notifications.repository.js";
 
 export class NotificationService {
   private repository: NotificationRepository;
@@ -8,7 +8,7 @@ export class NotificationService {
   }
 
   async getNotificationsByUser(userId: number) {
-    return await this.repository.findByUserId(userId);
+    return await this.repository.findMany({ userId });
   }
 
   async sendNotification(data: { userId: number; title: string; message: string }) {

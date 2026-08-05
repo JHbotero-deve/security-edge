@@ -1,3 +1,3 @@
-export { default as authRoutes } from "./auth.routes";
-export * from "./auth.controller";
-export * from "./auth.service";
+export { default as authRoutes } from "./auth.routes.js";
+export * from "./auth.controller.js";
+export * from "./auth.services.js";

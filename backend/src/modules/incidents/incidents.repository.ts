@@ -1,13 +1,27 @@
-import { Router } from "express";
-import { IncidentController } from "./incidents.controller";
+import { BaseRepository } from "../../shared/base.repository.js";
+import { prisma } from "../../lib/prisma.js";
 
-const router = Router();
-const controller = new IncidentController();
+export class IncidentRepository extends BaseRepository {
+  constructor() {
+    super(prisma.incident);
+  }
 
-router.get("/", controller.getAll);
-router.get("/:id", controller.getById);
-router.post("/", controller.create);
-router.put("/:id", controller.update);
-router.delete("/:id", controller.delete);
+  async findById(id: number) {
+    return await this.model.findUnique({
+      where: { id },
+    });
+  }
 
-export default router;
+  async update(id: number, data: Record<string, unknown>) {
+    return await this.model.update({
+      where: { id },
+      data,
+    });
+  }
+
+  async delete(id: number) {
+    return await this.model.delete({
+      where: { id },
+    });
+  }
+}

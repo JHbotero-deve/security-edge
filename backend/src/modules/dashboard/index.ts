@@ -1,3 +1,3 @@
-export { default as dashboardRoutes } from "./dashboard.routes";
-export * from "./dashboard.controller";
-export * from "./dashboard.services";
+export { default as dashboardRoutes } from "./dashboard.routes.js";
+export * from "./dashboard.controller.js";
+export * from "./dashboard.services.js";

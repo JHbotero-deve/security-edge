@@ -1,4 +1,4 @@
-import { RoleRepository } from "./roles.repository";
+import { RoleRepository } from "./roles.repository.js";
 
 export class RoleService {
   private repository: RoleRepository;

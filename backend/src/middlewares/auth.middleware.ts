@@ -17,7 +17,7 @@ export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
       });
     }
 
-    const token = authHeader.split(" ")[1];
+    const token = authHeader.split(" ")[1] as string;
 
     try {
       const payload = jwt.verify(token, process.env.JWT_SECRET as string);

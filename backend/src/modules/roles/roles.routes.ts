@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { RoleController } from "./roles.controller";
+import { RoleController } from "./roles.controller.js";
 
 const router = Router();
 const controller = new RoleController();

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { SettingService } from "./settings.services";
-import { createSettingSchema, updateSettingSchema, getSettingByKeySchema } from "./settings.validation";
+import { SettingService } from "./settings.services.js";
+import { createSettingSchema, updateSettingSchema, getSettingByKeySchema } from "./settings.validation.js";
 
 export class SettingController {
   private service: SettingService;

@@ -1,15 +1,15 @@
-import { incidents.repository } from "./incidents.repository";
+import { IncidentRepository } from "./incidents.repository.js";
+
 export class IncidentService {
-  private repository: incidents.repository;
+  private repository: IncidentRepository;
 
   constructor() {
-    this.repository = new incidents.repository();
+    this.repository = new IncidentRepository();
   }
 
   async getAllIncidents() {
     return await this.repository.findAll();
   }
-
 
   async getIncidentById(id: number) {
     const incident = await this.repository.findById(id);
@@ -19,11 +19,11 @@ export class IncidentService {
     return incident;
   }
 
-  async createIncident(data: { title: string; description: string; status?: string; severity?: string }) {
+  async createIncident(data: { title: string; description: string; status?: string | undefined; severity?: string | undefined }) {
     return await this.repository.create(data);
   }
 
-  async updateIncident(id: number, data: { title?: string; description?: string; status?: string; severity?: string }) {
+  async updateIncident(id: number, data: { title?: string | undefined; description?: string | undefined; status?: string | undefined; severity?: string | undefined }) {
     await this.getIncidentById(id);
     return await this.repository.update(id, data);
   }

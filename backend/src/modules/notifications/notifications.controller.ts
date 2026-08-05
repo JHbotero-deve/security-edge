@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { NotificationService } from "./notifications.services";
-import { createNotificationSchema, getNotificationByIdSchema, updateNotificationStatusSchema } from "./notifications.validation";
+import { NotificationService } from "./notifications.services.js";
+import { createNotificationSchema, getNotificationByIdSchema, updateNotificationStatusSchema } from "./notifications.validation.js";
 
 export class NotificationController {
   private service: NotificationService;

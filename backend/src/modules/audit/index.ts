@@ -1,3 +1,3 @@
-export { default as auditRoutes } from "./audit.routes";
-export * from "./audit.controller";
-export * from "./audit.services";
+export { default as auditRoutes } from "./audit.routes.js";
+export * from "./audit.controller.js";
+export * from "./audit.services.js";

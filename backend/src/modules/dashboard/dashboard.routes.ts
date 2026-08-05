@@ -1,6 +1,5 @@
-
 import { Router } from "express";
-import { getDashboardMetrics } from "./dashboard.controller";
+import { getDashboardMetrics } from "./dashboard.controller.js";
 
 const router = Router();
 

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import * as alertService from "./alerts.services";
-import { alertIdSchema } from "./alerts.validation.ts";
+import * as alertService from "./alerts.services.js";
+import { alertIdSchema } from "./alerts.validation.js";
 
 export const getAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
@@ -16,8 +16,8 @@ export const getAll = async (req: Request, res: Response, next: NextFunction): P
 
 export const getById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { id } = alertIdSchema.parse(req.params);
-    const data = await alertService.getAlertByIdService(id);
+    const { params } = alertIdSchema.parse({ params: req.params });
+    const data = await alertService.getAlertByIdService(params.id);
     res.status(200).json({
       success: true,
       data

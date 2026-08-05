@@ -1,9 +1,9 @@
-import { audit.repository } from "./audit.repository.ts";
-import logger from "../../utils/logger";
+import { AuditRepository } from "./audit.repository.js";
+import logger from "../../utils/logger.js";
 
-const auditRepository = new audit.repository();
+const auditRepository = new AuditRepository();
 
-export const getAuditLogsService = async (filters: any) => {
+export const getAuditLogsService = async (filters: Record<string, unknown> = {}) => {
   try {
     return await auditRepository.findMany(filters);
   } catch (error: any) {

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { RoleService } from "./roles.services";
-import { createRoleSchema, updateRoleSchema, getRoleByIdSchema } from "./roles.validation";
+import { RoleService } from "./roles.services.js";
+import { createRoleSchema, updateRoleSchema, getRoleByIdSchema } from "./roles.validation.js";
 
 export class RoleController {
   private service: RoleService;

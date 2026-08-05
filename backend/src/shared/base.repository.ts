@@ -1,4 +1,4 @@
-export class BaseRepository<T> {
+export class BaseRepository<T = any> {
   protected model: any;
 
   constructor(model: any) {
@@ -7,6 +7,10 @@ export class BaseRepository<T> {
 
   async findAll(): Promise<T[]> {
     return this.model.findMany();
+  }
+
+  async findMany(where: Record<string, any> = {}): Promise<T[]> {
+    return this.model.findMany({ where });
   }
 
   async findOne(where: Record<string, any>): Promise<T | null> {

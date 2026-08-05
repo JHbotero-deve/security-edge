@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import * as dashboardservices from "./dashboard.services.ts";
-import { dashboardFilterSchema } from "./dashboard.validation.ts";
+import * as dashboardservices from "./dashboard.services.js";
+import { dashboardFilterSchema } from "./dashboard.validation.js";
 
 export const getDashboardMetrics = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {

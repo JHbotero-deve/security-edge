@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { PermissionService } from "./permissions.services";
-import { createPermissionSchema, updatePermissionSchema, getPermissionByIdSchema } from "./permissions.validation";
+import { PermissionService } from "./permissions.services.js";
+import { createPermissionSchema, updatePermissionSchema, getPermissionByIdSchema } from "./permissions.validation.js";
 
 export class PermissionController {
   private service: PermissionService;

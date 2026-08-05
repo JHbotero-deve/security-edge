@@ -1,5 +1,5 @@
-import { findAllRepository, findByIdRepository } from "./alerts.repository";
-import logger from "../../utils/logger";
+import { findAllRepository, findByIdRepository } from "./alerts.repository.js";
+import logger from "../../utils/logger.js";
 
 export const getAllAlertsService = async () => {
   try {
@@ -10,7 +10,7 @@ export const getAllAlertsService = async () => {
   }
 };
 
-export const getAlertByIdService = async (id: string) => {
+export const getAlertByIdService = async (id: number) => {
   try {
     return await findByIdRepository(id);
   } catch (error: any) {

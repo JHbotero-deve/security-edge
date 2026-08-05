@@ -1,4 +1,4 @@
-import { SettingRepository } from "../settings/setting.repository";
+import { SettingRepository } from "./setting.repository.js";
 
 export class SettingService {
   private repository: SettingRepository;
@@ -12,7 +12,7 @@ export class SettingService {
   }
 
   async getSettingByKey(key: string) {
-    const setting = await this.repository.findByKey(key);
+    const setting = await this.repository.findOne({ key });
     if (!setting) {
       throw new Error("Setting key not found");
     }
@@ -20,7 +20,7 @@ export class SettingService {
   }
 
   async createSetting(data: { key: string; value: string }) {
-    const existing = await this.repository.findByKey(data.key);
+    const existing = await this.repository.findOne({ key: data.key });
     if (existing) {
       throw new Error("Setting key already exists");
     }

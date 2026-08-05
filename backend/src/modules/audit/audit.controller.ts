@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import * as auditService from "./audit.services.ts";
-import { auditLogFilterSchema } from "./audit.validation.ts";
+import * as auditService from "./audit.services.js";
+import { auditLogFilterSchema } from "./audit.validation.js";
 
 export const getAuditLogs = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {

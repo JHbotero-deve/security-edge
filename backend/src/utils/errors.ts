@@ -2,7 +2,9 @@
  * Custom error class for API responses
  */
 export class AppError extends Error {
-  constructor(message, statusCode = 500) {
+  statusCode: number;
+
+  constructor(message: string, statusCode = 500) {
     super(message);
     this.statusCode = statusCode;
     this.name = "AppError";
@@ -14,7 +16,9 @@ export class AppError extends Error {
  * Validation error
  */
 export class ValidationError extends AppError {
-  constructor(message = "Validation failed", details = []) {
+  details: unknown[];
+
+  constructor(message = "Validation failed", details: unknown[] = []) {
     super(message, 400);
     this.name = "ValidationError";
     this.details = details;
