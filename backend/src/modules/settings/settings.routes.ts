@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { SettingController } from "./settings.controller.js";
+import { SettingsController } from "./settings.controller.js";
 
 const router = Router();
-const controller = new SettingController();
+const controller = new SettingsController();
 
 router.get("/", controller.getAll);
-router.get("/key/:key", controller.getByKey);
+router.get("/:key", controller.getByKey);
 router.post("/", controller.create);
 router.put("/:id", controller.update);
 

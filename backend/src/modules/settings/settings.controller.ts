@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
-import { SettingService } from "./settings.services.js";
+import { SettingsService } from "./settings.services.js";
 import { createSettingSchema, updateSettingSchema, getSettingByKeySchema } from "./settings.validation.js";
 
-export class SettingController {
-  private service: SettingService;
+export class SettingsController {
+  private service: SettingsService;
 
   constructor() {
-    this.service = new SettingService();
+    this.service = new SettingsService();
   }
 
   getAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {

@@ -1,13 +1,17 @@
 import { AuditRepository } from "./audit.repository.js";
-import logger from "../../utils/logger.js";
 
-const auditRepository = new AuditRepository();
+export class AuditService {
+  private repository: AuditRepository;
 
-export const getAuditLogsService = async (filters: Record<string, unknown> = {}) => {
-  try {
-    return await auditRepository.findMany(filters);
-  } catch (error: any) {
-    logger.error("Audit Service - GetAuditLogs", { message: error.message });
-    throw error;
+  constructor() {
+    this.repository = new AuditRepository();
   }
-};
+
+  async getAuditLogs(filters: Record<string, unknown> = {}) {
+    return await this.repository.findMany(filters);
+  }
+
+  async createAuditLog(data: any) {
+    return await this.repository.create(data);
+  }
+}

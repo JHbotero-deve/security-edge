@@ -1,0 +1,287 @@
+From 0441a588834713251745ac7c64071e4e0c215c78 Mon Sep 17 00:00:00 2001
+From: Jorge Botero <jhbotero.dev@example.com>
+Date: Tue, 4 Aug 2026 04:51:56 +0000
+Subject: [PATCH 3/5] =?UTF-8?q?fix:=20reescribir=20BaseRepository=20y=20co?=
+ =?UTF-8?q?rregir=20errores=20de=20compilaci=C3=B3n?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+BaseRepository (repositories/base.repository.ts) estaba implementado
+sobre pg.Pool con constructor (pool, table), pero todos los módulos
+lo extendían pasando un modelo de Prisma: super(prisma.usuario). No
+compilaba en ningún módulo que lo usara.
+
+- Se reescribe como clase genérica sobre Prisma (findAll, findOne,
+  findById, create, update, delete), acorde a como ya lo llamaban
+  los services.
+- Se mueve de repositories/ a shared/, porque repositories/ como
+  carpeta global es justo lo que prohíbe la arquitectura definida
+  para el proyecto.
+- Se actualizan los 10 imports que apuntaban a la ruta anterior.
+
+Correcciones puntuales que dependían de este cambio:
+
+- auth.repository.ts: super(prisma.user) -> super(prisma.usuario)
+  (el modelo en schema.prisma es Usuario, no User).
+- roles.repository.ts / roles.services.ts: clase con nombre
+  inválido `role.repository` (un punto no es válido en un nombre de
+  clase) renombrada a RoleRepository en ambos archivos.
+- auth.services.ts: import de AppError apuntaba a utils/appError,
+  archivo inexistente. AppError vive en utils/errors.
+---
+ backend/src/modules/audit/audit.repository.ts |  2 +-
+ backend/src/modules/auth/auth.repository.ts   |  4 +-
+ backend/src/modules/auth/auth.services.ts     |  2 +-
+ .../modules/dashboard/dashboard.repository.ts |  2 +-
+ .../monitoring/monitoring.repository.ts       |  2 +-
+ .../modules/monitoring/monitoring.routes.ts   |  2 +-
+ .../notifications/notifications.repository.ts |  2 +-
+ .../permissions/permissions.repository.ts     |  2 +-
+ backend/src/modules/roles/roles.repository.ts |  4 +-
+ backend/src/modules/roles/roles.services.ts   |  6 +--
+ .../modules/settings/setting.repository.ts    |  2 +-
+ backend/src/modules/users/users.repository.ts |  2 +-
+ backend/src/repositories/base.repository.ts   | 52 -------------------
+ backend/src/shared/base.repository.ts         | 31 +++++++++++
+ 14 files changed, 47 insertions(+), 68 deletions(-)
+ delete mode 100644 backend/src/repositories/base.repository.ts
+ create mode 100644 backend/src/shared/base.repository.ts
+
+diff --git a/backend/src/modules/audit/audit.repository.ts b/backend/src/modules/audit/audit.repository.ts
+index 5dbdbb2..d7df8ea 100644
+--- a/backend/src/modules/audit/audit.repository.ts
++++ b/backend/src/modules/audit/audit.repository.ts
+@@ -1,4 +1,4 @@
+-import { BaseRepository } from "../../repositories/base.repository";
++import { BaseRepository } from "../../shared/base.repository";
+ import { prisma } from "../../lib/prisma";
+ 
+ export class audit.repository extends BaseRepository {
+diff --git a/backend/src/modules/auth/auth.repository.ts b/backend/src/modules/auth/auth.repository.ts
+index a880407..8305d24 100644
+--- a/backend/src/modules/auth/auth.repository.ts
++++ b/backend/src/modules/auth/auth.repository.ts
+@@ -1,8 +1,8 @@
+-import { BaseRepository } from "../../repositories/base.repository";
++import { BaseRepository } from "../../shared/base.repository";
+ import { prisma } from "../../lib/prisma";
+ 
+ export class AuthRepository extends BaseRepository {
+   constructor() {
+-    super(prisma.user);
++    super(prisma.usuario);
+   }
+ };
+\ No newline at end of file
+diff --git a/backend/src/modules/auth/auth.services.ts b/backend/src/modules/auth/auth.services.ts
+index 13de2dd..7c2c43a 100644
+--- a/backend/src/modules/auth/auth.services.ts
++++ b/backend/src/modules/auth/auth.services.ts
+@@ -1,5 +1,5 @@
+ import { AuthRepository } from "./auth.repository";
+-import { AppError } from "../../utils/appError";
++import { AppError } from "../../utils/errors";
+ import bcrypt from "bcrypt";
+ import jwt from "jsonwebtoken";
+ 
+diff --git a/backend/src/modules/dashboard/dashboard.repository.ts b/backend/src/modules/dashboard/dashboard.repository.ts
+index 3f78cb2..c2c46d8 100644
+--- a/backend/src/modules/dashboard/dashboard.repository.ts
++++ b/backend/src/modules/dashboard/dashboard.repository.ts
+@@ -1,4 +1,4 @@
+-import { BaseRepository } from "../../repositories/base.repository";
++import { BaseRepository } from "../../shared/base.repository";
+ import { prisma } from "../../lib/prisma";
+ 
+ export class DashboardRepository extends BaseRepository {
+diff --git a/backend/src/modules/monitoring/monitoring.repository.ts b/backend/src/modules/monitoring/monitoring.repository.ts
+index 44e6c0f..49aed5a 100644
+--- a/backend/src/modules/monitoring/monitoring.repository.ts
++++ b/backend/src/modules/monitoring/monitoring.repository.ts
+@@ -1,4 +1,4 @@
+-import { BaseRepository } from "../../repositories/base.repository";
++import { BaseRepository } from "../../shared/base.repository";
+ import { prisma } from "../../lib/prisma";
+ 
+ export class MonitoringRepository extends BaseRepository {
+diff --git a/backend/src/modules/monitoring/monitoring.routes.ts b/backend/src/modules/monitoring/monitoring.routes.ts
+index 44e6c0f..49aed5a 100644
+--- a/backend/src/modules/monitoring/monitoring.routes.ts
++++ b/backend/src/modules/monitoring/monitoring.routes.ts
+@@ -1,4 +1,4 @@
+-import { BaseRepository } from "../../repositories/base.repository";
++import { BaseRepository } from "../../shared/base.repository";
+ import { prisma } from "../../lib/prisma";
+ 
+ export class MonitoringRepository extends BaseRepository {
+diff --git a/backend/src/modules/notifications/notifications.repository.ts b/backend/src/modules/notifications/notifications.repository.ts
+index 9c1c706..6c89826 100644
+--- a/backend/src/modules/notifications/notifications.repository.ts
++++ b/backend/src/modules/notifications/notifications.repository.ts
+@@ -1,4 +1,4 @@
+-import { BaseRepository } from "../../repositories/base.repository";
++import { BaseRepository } from "../../shared/base.repository";
+ import { prisma } from "../../lib/prisma";
+ 
+ export class NotificationRepository extends BaseRepository {
+diff --git a/backend/src/modules/permissions/permissions.repository.ts b/backend/src/modules/permissions/permissions.repository.ts
+index c641b76..1b973da 100644
+--- a/backend/src/modules/permissions/permissions.repository.ts
++++ b/backend/src/modules/permissions/permissions.repository.ts
+@@ -1,4 +1,4 @@
+-import { BaseRepository } from "../../repositories/base.repository";
++import { BaseRepository } from "../../shared/base.repository";
+ import { prisma } from "../../lib/prisma";
+ 
+ export class PermissionRepository extends BaseRepository {
+diff --git a/backend/src/modules/roles/roles.repository.ts b/backend/src/modules/roles/roles.repository.ts
+index 8bf4108..d3073c5 100644
+--- a/backend/src/modules/roles/roles.repository.ts
++++ b/backend/src/modules/roles/roles.repository.ts
+@@ -1,7 +1,7 @@
+-import { BaseRepository } from "../../repositories/base.repository";
++import { BaseRepository } from "../../shared/base.repository";
+ import { prisma } from "../../lib/prisma";
+ 
+-export class role.repository extends BaseRepository {
++export class RoleRepository extends BaseRepository {
+   constructor() {
+     super(prisma.role);
+   }
+diff --git a/backend/src/modules/roles/roles.services.ts b/backend/src/modules/roles/roles.services.ts
+index 41e306b..f0aaed9 100644
+--- a/backend/src/modules/roles/roles.services.ts
++++ b/backend/src/modules/roles/roles.services.ts
+@@ -1,10 +1,10 @@
+-import { role.repository } from "./roles.repository";
++import { RoleRepository } from "./roles.repository";
+ 
+ export class RoleService {
+-  private repository: role.repository;
++  private repository: RoleRepository;
+ 
+   constructor() {
+-    this.repository = new role.repository();
++    this.repository = new RoleRepository();
+   }
+ 
+   async getAllRoles() {
+diff --git a/backend/src/modules/settings/setting.repository.ts b/backend/src/modules/settings/setting.repository.ts
+index 3b214cf..aceb7c1 100644
+--- a/backend/src/modules/settings/setting.repository.ts
++++ b/backend/src/modules/settings/setting.repository.ts
+@@ -1,4 +1,4 @@
+-import { BaseRepository } from "../../repositories/base.repository";
++import { BaseRepository } from "../../shared/base.repository";
+ import { prisma } from "../../lib/prisma";
+ 
+ export class SettingRepository extends BaseRepository {
+diff --git a/backend/src/modules/users/users.repository.ts b/backend/src/modules/users/users.repository.ts
+index ee35fb5..c053189 100644
+--- a/backend/src/modules/users/users.repository.ts
++++ b/backend/src/modules/users/users.repository.ts
+@@ -1,4 +1,4 @@
+-import { BaseRepository } from "../../repositories/base.repository.ts";
++import { BaseRepository } from "../../shared/base.repository";
+ import { prisma } from "../../lib/prisma";
+ 
+ export class userRepository extends BaseRepository {
+diff --git a/backend/src/repositories/base.repository.ts b/backend/src/repositories/base.repository.ts
+deleted file mode 100644
+index a4b2f13..0000000
+--- a/backend/src/repositories/base.repository.ts
++++ /dev/null
+@@ -1,52 +0,0 @@
+-import { Pool } from "pg";
+-
+-export class BaseRepository<T> {
+-  protected pool: Pool;
+-  protected table: string;
+-
+-  constructor(pool: Pool, table: string) {
+-    this.pool = pool;
+-    this.table = table;
+-  }
+-
+-  async findAll(): Promise<T[]> {
+-    const result = await this.pool.query(`SELECT * FROM ${this.table}`);
+-    return result.rows;
+-  }
+-
+-  async findById(id: number): Promise<T | null> {
+-    const result = await this.pool.query(
+-      `SELECT * FROM ${this.table} WHERE id = $1`,
+-      [id]
+-    );
+-    return result.rows[0] || null;
+-  }
+-
+-  async create(fields: Record<string, any>): Promise<T> {
+-    const keys = Object.keys(fields);
+-    const values = Object.values(fields);
+-    const placeholders = keys.map((_, i) => `$${i + 1}`).join(", ");
+-
+-    const result = await this.pool.query(
+-      `INSERT INTO ${this.table} (${keys.join(", ")}) VALUES (${placeholders}) RETURNING *`,
+-      values
+-    );
+-    return result.rows[0];
+-  }
+-
+-  async update(id: number, fields: Record<string, any>): Promise<T | null> {
+-    const keys = Object.keys(fields);
+-    const values = Object.values(fields);
+-    const setClause = keys.map((k, i) => `${k} = $${i + 1}`).join(", ");
+-
+-    const result = await this.pool.query(
+-      `UPDATE ${this.table} SET ${setClause} WHERE id = $${keys.length + 1} RETURNING *`,
+-      [...values, id]
+-    );
+-    return result.rows[0] || null;
+-  }
+-
+-  async delete(id: number): Promise<void> {
+-    await this.pool.query(`DELETE FROM ${this.table} WHERE id = $1`, [id]);
+-  }
+-}
+diff --git a/backend/src/shared/base.repository.ts b/backend/src/shared/base.repository.ts
+new file mode 100644
+index 0000000..5f7b6b2
+--- /dev/null
++++ b/backend/src/shared/base.repository.ts
+@@ -0,0 +1,31 @@
++export class BaseRepository<T> {
++  protected model: any;
++
++  constructor(model: any) {
++    this.model = model;
++  }
++
++  async findAll(): Promise<T[]> {
++    return this.model.findMany();
++  }
++
++  async findOne(where: Record<string, any>): Promise<T | null> {
++    return this.model.findFirst({ where });
++  }
++
++  async findById(id: number): Promise<T | null> {
++    return this.model.findUnique({ where: { id } });
++  }
++
++  async create(data: Record<string, any>): Promise<T> {
++    return this.model.create({ data });
++  }
++
++  async update(id: number, data: Record<string, any>): Promise<T | null> {
++    return this.model.update({ where: { id }, data });
++  }
++
++  async delete(id: number): Promise<void> {
++    await this.model.delete({ where: { id } });
++  }
++}
+-- 
+2.43.0
+

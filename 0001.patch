@@ -1,0 +1,574 @@
+From ebadc30cdb391f78fddfd6bb10c31e0147d52119 Mon Sep 17 00:00:00 2001
+From: Jorge Botero <jhbotero.dev@example.com>
+Date: Tue, 4 Aug 2026 04:50:37 +0000
+Subject: [PATCH 1/5] chore: eliminar carpetas y archivos globales sin uso
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Elimina código muerto que violaba la arquitectura modular definida
+(nada en el proyecto los importaba):
+
+- controllers/, routes/, validators/, schemas/, models/, services/
+  y shared/responses/ a nivel raíz de src/ (toda la lógica debe vivir
+  en modules/<nombre>/).
+- config/ completa: usaba require()/module.exports (CommonJS) dentro
+  de archivos .ts, incompatible con "type": "module". config/env.ts
+  ni siquiera era TypeScript válido.
+- utils/crypto.js, date.js, jwt.js, password.js, response.js, token.js:
+  sin ninguna referencia en el código.
+- repositories/audit.repository.ts, role.repository.ts, user.repository.ts:
+  duplicados obsoletos construidos contra la versión anterior (pg.Pool)
+  de BaseRepository.
+---
+ backend/src/config/.env.example               |  4 -
+ backend/src/config/cors.ts                    |  5 --
+ backend/src/config/database.ts                |  7 --
+ backend/src/config/env.ts                     |  4 -
+ backend/src/config/helmet.ts                  |  7 --
+ backend/src/config/index.ts                   | 15 ----
+ backend/src/config/jwt.ts                     |  4 -
+ backend/src/config/logger.ts                  | 10 ---
+ backend/src/config/rateLimit.ts               |  6 --
+ backend/src/config/swagger.ts                 | 10 ---
+ backend/src/controllers/AuditController.js    | 11 ---
+ backend/src/controllers/AuthController.js     |  7 --
+ .../src/controllers/DashboardController.js    |  3 -
+ backend/src/controllers/UserController.js     |  4 -
+ backend/src/models/AuditLog.js                |  0
+ backend/src/models/SystemEvent.js             |  0
+ backend/src/repositories/audit.repository.ts  | 16 ----
+ backend/src/repositories/role.repository.ts   | 16 ----
+ backend/src/repositories/user.repository.ts   | 28 ------
+ backend/src/routes/audit.routes.js            |  0
+ backend/src/routes/auth.routes.js             |  0
+ backend/src/routes/dashboard.routes.js        |  0
+ backend/src/routes/user.routes.js             |  0
+ backend/src/schemas/validation.schemas.js     | 85 -------------------
+ backend/src/services/services.adminservice.ts |  0
+ backend/src/services/services.alertservice.ts |  0
+ backend/src/services/services.auditService.ts |  0
+ .../src/services/services.dashboardService.ts |  0
+ backend/src/services/servivces.authService.ts |  0
+ backend/src/shared/responses/errorResponse.js |  0
+ .../src/shared/responses/successResponse.js   |  0
+ backend/src/utils/crypto.js                   |  0
+ backend/src/utils/date.js                     |  0
+ backend/src/utils/jwt.js                      |  0
+ backend/src/utils/password.js                 |  0
+ backend/src/utils/response.js                 | 39 ---------
+ backend/src/utils/token.js                    |  0
+ backend/src/validators/audit.validator.js     |  0
+ backend/src/validators/auth.validator.js      |  0
+ backend/src/validators/user.validator.js      |  0
+ backend/{src/modules => }/tsconfig.json       |  0
+ 41 files changed, 281 deletions(-)
+ delete mode 100644 backend/src/config/.env.example
+ delete mode 100644 backend/src/config/cors.ts
+ delete mode 100644 backend/src/config/database.ts
+ delete mode 100644 backend/src/config/env.ts
+ delete mode 100644 backend/src/config/helmet.ts
+ delete mode 100644 backend/src/config/index.ts
+ delete mode 100644 backend/src/config/jwt.ts
+ delete mode 100644 backend/src/config/logger.ts
+ delete mode 100644 backend/src/config/rateLimit.ts
+ delete mode 100644 backend/src/config/swagger.ts
+ delete mode 100644 backend/src/controllers/AuditController.js
+ delete mode 100644 backend/src/controllers/AuthController.js
+ delete mode 100644 backend/src/controllers/DashboardController.js
+ delete mode 100644 backend/src/controllers/UserController.js
+ delete mode 100644 backend/src/models/AuditLog.js
+ delete mode 100644 backend/src/models/SystemEvent.js
+ delete mode 100644 backend/src/repositories/audit.repository.ts
+ delete mode 100644 backend/src/repositories/role.repository.ts
+ delete mode 100644 backend/src/repositories/user.repository.ts
+ delete mode 100644 backend/src/routes/audit.routes.js
+ delete mode 100644 backend/src/routes/auth.routes.js
+ delete mode 100644 backend/src/routes/dashboard.routes.js
+ delete mode 100644 backend/src/routes/user.routes.js
+ delete mode 100644 backend/src/schemas/validation.schemas.js
+ delete mode 100644 backend/src/services/services.adminservice.ts
+ delete mode 100644 backend/src/services/services.alertservice.ts
+ delete mode 100644 backend/src/services/services.auditService.ts
+ delete mode 100644 backend/src/services/services.dashboardService.ts
+ delete mode 100644 backend/src/services/servivces.authService.ts
+ delete mode 100644 backend/src/shared/responses/errorResponse.js
+ delete mode 100644 backend/src/shared/responses/successResponse.js
+ delete mode 100644 backend/src/utils/crypto.js
+ delete mode 100644 backend/src/utils/date.js
+ delete mode 100644 backend/src/utils/jwt.js
+ delete mode 100644 backend/src/utils/password.js
+ delete mode 100644 backend/src/utils/response.js
+ delete mode 100644 backend/src/utils/token.js
+ delete mode 100644 backend/src/validators/audit.validator.js
+ delete mode 100644 backend/src/validators/auth.validator.js
+ delete mode 100644 backend/src/validators/user.validator.js
+ rename backend/{src/modules => }/tsconfig.json (100%)
+
+diff --git a/backend/src/config/.env.example b/backend/src/config/.env.example
+deleted file mode 100644
+index 7ca6adf..0000000
+--- a/backend/src/config/.env.example
++++ /dev/null
+@@ -1,4 +0,0 @@
+-# Plantilla de configuración
+-POSTGRES_DB=security_edge
+-POSTGRES_USER=tu_usuario
+-POSTGRES_PASSWORD=tu_contraseña_secreta
+\ No newline at end of file
+diff --git a/backend/src/config/cors.ts b/backend/src/config/cors.ts
+deleted file mode 100644
+index 7100b0c..0000000
+--- a/backend/src/config/cors.ts
++++ /dev/null
+@@ -1,5 +0,0 @@
+-module.exports = {
+-  origin: process.env.ALLOWED_ORIGINS || "http://localhost:3000",
+-  methods: ["GET", "POST", "PUT", "DELETE"],
+-  allowedHeaders: ["Content-Type", "Authorization"],
+-};
+diff --git a/backend/src/config/database.ts b/backend/src/config/database.ts
+deleted file mode 100644
+index 40f3fd2..0000000
+--- a/backend/src/config/database.ts
++++ /dev/null
+@@ -1,7 +0,0 @@
+-const { Pool } = require("pg");
+-
+-const pool = new Pool({
+-  connectionString: process.env.DATABASE_URL,
+-});
+-
+-module.exports = pool;
+diff --git a/backend/src/config/env.ts b/backend/src/config/env.ts
+deleted file mode 100644
+index f6f5755..0000000
+--- a/backend/src/config/env.ts
++++ /dev/null
+@@ -1,4 +0,0 @@
+-
+-POSTGRES_DB=security_edge
+-POSTGRES_USER=postgres
+-POSTGRES_PASSWORD=postgres
+diff --git a/backend/src/config/helmet.ts b/backend/src/config/helmet.ts
+deleted file mode 100644
+index 40f3fd2..0000000
+--- a/backend/src/config/helmet.ts
++++ /dev/null
+@@ -1,7 +0,0 @@
+-const { Pool } = require("pg");
+-
+-const pool = new Pool({
+-  connectionString: process.env.DATABASE_URL,
+-});
+-
+-module.exports = pool;
+diff --git a/backend/src/config/index.ts b/backend/src/config/index.ts
+deleted file mode 100644
+index 63577e8..0000000
+--- a/backend/src/config/index.ts
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/**
+- * Dónde: config/index.js
+- * Para qué: Exportar toda la configuración de seguridad y servicios como un solo módulo.
+- */
+-
+-module.exports = {
+-  cors: require("./cors"),
+-  db: require("./database"),
+-  env: require("./env"),
+-  helmet: require("./helmet"),
+-  jwt: require("./jwt"),
+-  logger: require("./logger"),
+-  rateLimit: require("./rateLimit"),
+-  swagger: require("./swagger"),
+-};
+diff --git a/backend/src/config/jwt.ts b/backend/src/config/jwt.ts
+deleted file mode 100644
+index 1591f58..0000000
+--- a/backend/src/config/jwt.ts
++++ /dev/null
+@@ -1,4 +0,0 @@
+-module.exports = {
+-  secret: process.env.JWT_SECRET,
+-  expiresIn: "1h",
+-};
+diff --git a/backend/src/config/logger.ts b/backend/src/config/logger.ts
+deleted file mode 100644
+index 443bcc2..0000000
+--- a/backend/src/config/logger.ts
++++ /dev/null
+@@ -1,10 +0,0 @@
+-const winston = require("winston");
+-
+-module.exports = winston.createLogger({
+-  level: "info",
+-  format: winston.format.json(),
+-  transports: [
+-    new winston.transports.File({ filename: "security.log" }),
+-    new winston.transports.Console(),
+-  ],
+-});
+diff --git a/backend/src/config/rateLimit.ts b/backend/src/config/rateLimit.ts
+deleted file mode 100644
+index bbbbb9c..0000000
+--- a/backend/src/config/rateLimit.ts
++++ /dev/null
+@@ -1,6 +0,0 @@
+-const rateLimit = require("express-rate-limit");
+-
+-module.exports = rateLimit({
+-  windowMs: 15 * 60 * 1000, // 15 minutos
+-  max: 100, // Límite de 100 peticiones por IP
+-});
+diff --git a/backend/src/config/swagger.ts b/backend/src/config/swagger.ts
+deleted file mode 100644
+index 23cb2eb..0000000
+--- a/backend/src/config/swagger.ts
++++ /dev/null
+@@ -1,10 +0,0 @@
+-module.exports = {
+-  swaggerDefinition: {
+-    info: {
+-      title: "Security API",
+-      version: "1.0.0",
+-      description: "API del proyecto de Seguridad",
+-    },
+-  },
+-  apis: ["./src/interfaces/*.js"],
+-};
+diff --git a/backend/src/controllers/AuditController.js b/backend/src/controllers/AuditController.js
+deleted file mode 100644
+index d810341..0000000
+--- a/backend/src/controllers/AuditController.js
++++ /dev/null
+@@ -1,11 +0,0 @@
+-const logger = require("../config/logger");
+-
+-exports.getAuditLogs = async (req, res) => {
+-  try {
+-    // Implementar llamada al servicio de auditoría
+-    logger.info("Solicitud de logs de auditoría");
+-    res.status(200).json({ message: "Logs de auditoría obtenidos" });
+-  } catch (error) {
+-    res.status(500).json({ error: error.message });
+-  }
+-};
+diff --git a/backend/src/controllers/AuthController.js b/backend/src/controllers/AuthController.js
+deleted file mode 100644
+index 9b50414..0000000
+--- a/backend/src/controllers/AuthController.js
++++ /dev/null
+@@ -1,7 +0,0 @@
+-const jwt = require("../config/jwt");
+-// Importar servicio de auth aquí
+-
+-exports.login = async (req, res) => {
+-  // Lógica de validación de credenciales
+-  res.status(200).json({ token: "ejemplo_token_jwt" });
+-};
+diff --git a/backend/src/controllers/DashboardController.js b/backend/src/controllers/DashboardController.js
+deleted file mode 100644
+index f437ce2..0000000
+--- a/backend/src/controllers/DashboardController.js
++++ /dev/null
+@@ -1,3 +0,0 @@
+-exports.getDashboardData = async (req, res) => {
+-  res.status(200).json({ data: "Datos sensibles del dashboard" });
+-};
+diff --git a/backend/src/controllers/UserController.js b/backend/src/controllers/UserController.js
+deleted file mode 100644
+index 7e752be..0000000
+--- a/backend/src/controllers/UserController.js
++++ /dev/null
+@@ -1,4 +0,0 @@
+-exports.createUser = async (req, res) => {
+-  // Lógica de creación de usuario
+-  res.status(201).json({ message: "Usuario creado" });
+-};
+diff --git a/backend/src/models/AuditLog.js b/backend/src/models/AuditLog.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/models/SystemEvent.js b/backend/src/models/SystemEvent.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/repositories/audit.repository.ts b/backend/src/repositories/audit.repository.ts
+deleted file mode 100644
+index 215c27a..0000000
+--- a/backend/src/repositories/audit.repository.ts
++++ /dev/null
+@@ -1,16 +0,0 @@
+-import { Pool } from "pg";
+-import { BaseRepository } from "./base.repository";
+-
+-export class auditRepository extends BaseRepository<any> {
+-  constructor(pool: Pool) {
+-    super(pool, "audits");
+-  }
+-
+-  async findByUser(userId: number) {
+-    const result = await this.pool.query(
+-      "SELECT * FROM audits WHERE userId = $1",
+-      [userId]
+-    );
+-    return result.rows;
+-  }
+-}
+diff --git a/backend/src/repositories/role.repository.ts b/backend/src/repositories/role.repository.ts
+deleted file mode 100644
+index c9099ed..0000000
+--- a/backend/src/repositories/role.repository.ts
++++ /dev/null
+@@ -1,16 +0,0 @@
+-import { Pool } from "pg";
+-import { BaseRepository } from "./base.repository";
+-
+-export class roleRepository extends BaseRepository<any> {
+-  constructor(pool: Pool) {
+-    super(pool, "roles");
+-  }
+-
+-  async findByName(name: string) {
+-    const result = await this.pool.query(
+-      "SELECT * FROM roles WHERE name = $1",
+-      [name]
+-    );
+-    return result.rows[0] || null;
+-  }
+-}
+diff --git a/backend/src/repositories/user.repository.ts b/backend/src/repositories/user.repository.ts
+deleted file mode 100644
+index e22d916..0000000
+--- a/backend/src/repositories/user.repository.ts
++++ /dev/null
+@@ -1,28 +0,0 @@
+-import { Pool } from "pg";
+-import { BaseRepository } from "./base.repository";
+-
+-export class userRepository extends BaseRepository<any> {
+-  constructor(pool: Pool) {
+-    super(pool, "users");
+-  }
+-
+-  async findByEmail(email: string) {
+-    const result = await this.pool.query(
+-      "SELECT * FROM users WHERE email = $1",
+-      [email]
+-    );
+-    return result.rows[0] || null;
+-  }
+-
+-  async findWithRoles(id: number) {
+-    const result = await this.pool.query(
+-      `SELECT u.*, r.* 
+-       FROM users u 
+-       LEFT JOIN user_roles ur ON u.id = ur.userId 
+-       LEFT JOIN roles r ON ur.roleId = r.id 
+-       WHERE u.id = $1`,
+-      [id]
+-    );
+-    return result.rows;
+-  }
+-}
+diff --git a/backend/src/routes/audit.routes.js b/backend/src/routes/audit.routes.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/routes/auth.routes.js b/backend/src/routes/auth.routes.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/routes/dashboard.routes.js b/backend/src/routes/dashboard.routes.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/routes/user.routes.js b/backend/src/routes/user.routes.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/schemas/validation.schemas.js b/backend/src/schemas/validation.schemas.js
+deleted file mode 100644
+index 5ed337e..0000000
+--- a/backend/src/schemas/validation.schemas.js
++++ /dev/null
+@@ -1,85 +0,0 @@
+-import { z } from "zod";
+-
+-/**
+- * Login request validation schema
+- */
+-export const loginSchema = z.object({
+-  email: z
+-    .string()
+-    .email("Invalid email format")
+-    .transform((val) => val.toLowerCase()),
+-  password: z
+-    .string()
+-    .min(8, "Password must be at least 8 characters")
+-    .max(128, "Password is too long"),
+-});
+-
+-/**
+- * Register request validation schema
+- */
+-export const registerSchema = z.object({
+-  name: z
+-    .string()
+-    .min(2, "Name must be at least 2 characters")
+-    .max(255, "Name is too long"),
+-  email: z
+-    .string()
+-    .email("Invalid email format")
+-    .transform((val) => val.toLowerCase()),
+-  password: z
+-    .string()
+-    .min(8, "Password must be at least 8 characters")
+-    .max(128, "Password is too long")
+-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+-    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+-    .regex(/[0-9]/, "Password must contain at least one number")
+-    .regex(
+-      /[!@#$%^&*]/,
+-      "Password must contain at least one special character (!@#$%^&*)"
+-    ),
+-  department: z
+-    .string()
+-    .max(100, "Department name is too long")
+-    .optional(),
+-});
+-
+-/**
+- * Password change validation schema
+- */
+-export const passwordChangeSchema = z.object({
+-  currentPassword: z.string().min(1, "Current password is required"),
+-  newPassword: z
+-    .string()
+-    .min(8, "New password must be at least 8 characters")
+-    .regex(/[A-Z]/, "Must contain uppercase letter")
+-    .regex(/[a-z]/, "Must contain lowercase letter")
+-    .regex(/[0-9]/, "Must contain number")
+-    .regex(/[!@#$%^&*]/, "Must contain special character"),
+-});
+-
+-/**
+- * Audit log filter validation schema
+- */
+-export const auditLogFilterSchema = z.object({
+-  userId: z.number().int().optional(),
+-  action: z.string().max(100).optional(),
+-  resource: z.string().max(100).optional(),
+-  status: z.enum(["SUCCESS", "FAILED", "PENDING"]).optional(),
+-  startDate: z.coerce.date().optional(),
+-  endDate: z.coerce.date().optional(),
+-  page: z.number().int().positive().default(1),
+-  limit: z.number().int().positive().max(100).default(20),
+-});
+-
+-/**
+- * Security event filter validation schema
+- */
+-export const securityEventFilterSchema = z.object({
+-  eventType: z.string().optional(),
+-  severity: z.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]).optional(),
+-  resolved: z.boolean().optional(),
+-  startDate: z.coerce.date().optional(),
+-  endDate: z.coerce.date().optional(),
+-  page: z.number().int().positive().default(1),
+-  limit: z.number().int().positive().max(100).default(20),
+-});
+diff --git a/backend/src/services/services.adminservice.ts b/backend/src/services/services.adminservice.ts
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/services/services.alertservice.ts b/backend/src/services/services.alertservice.ts
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/services/services.auditService.ts b/backend/src/services/services.auditService.ts
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/services/services.dashboardService.ts b/backend/src/services/services.dashboardService.ts
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/services/servivces.authService.ts b/backend/src/services/servivces.authService.ts
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/shared/responses/errorResponse.js b/backend/src/shared/responses/errorResponse.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/shared/responses/successResponse.js b/backend/src/shared/responses/successResponse.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/utils/crypto.js b/backend/src/utils/crypto.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/utils/date.js b/backend/src/utils/date.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/utils/jwt.js b/backend/src/utils/jwt.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/utils/password.js b/backend/src/utils/password.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/utils/response.js b/backend/src/utils/response.js
+deleted file mode 100644
+index 75b0297..0000000
+--- a/backend/src/utils/response.js
++++ /dev/null
+@@ -1,39 +0,0 @@
+-/**
+- * Success response formatter
+- */
+-export function successResponse(data, message = "Success", statusCode = 200) {
+-  return {
+-    success: true,
+-    message,
+-    data,
+-    statusCode,
+-  };
+-}
+-
+-/**
+- * Paginated response formatter
+- */
+-export function paginatedResponse(data, page, limit, total, message = "Success") {
+-  return {
+-    success: true,
+-    message,
+-    data,
+-    pagination: {
+-      page,
+-      limit,
+-      total,
+-      pages: Math.ceil(total / limit),
+-    },
+-  };
+-}
+-
+-/**
+- * Error response formatter
+- */
+-export function errorResponse(error, statusCode = 500) {
+-  return {
+-    success: false,
+-    error,
+-    statusCode,
+-  };
+-}
+\ No newline at end of file
+diff --git a/backend/src/utils/token.js b/backend/src/utils/token.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/validators/audit.validator.js b/backend/src/validators/audit.validator.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/validators/auth.validator.js b/backend/src/validators/auth.validator.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/validators/user.validator.js b/backend/src/validators/user.validator.js
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/backend/src/modules/tsconfig.json b/backend/tsconfig.json
+similarity index 100%
+rename from backend/src/modules/tsconfig.json
+rename to backend/tsconfig.json
+-- 
+2.43.0
+

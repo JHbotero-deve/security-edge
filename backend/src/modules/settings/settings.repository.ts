@@ -1,8 +1,8 @@
 import { BaseRepository } from "../../shared/base.repository.js";
 import { prisma } from "../../lib/prisma.js";
 
-export class AlertRepository extends BaseRepository {
+export class SettingsRepository extends BaseRepository {
   constructor() {
-    super(prisma.alert);
+    super(prisma.setting);
   }
 }

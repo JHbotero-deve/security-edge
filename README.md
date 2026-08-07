@@ -55,14 +55,14 @@ PostgreSQL
 ## Frontend
 
 - React
-- Vite
-- JavaScript
+- TypeScript
 - Tailwind CSS
 
 ## Backend
 
 - Node.js
 - Express
+- TypeScript (100%)
 - Prisma ORM
 - PostgreSQL
 

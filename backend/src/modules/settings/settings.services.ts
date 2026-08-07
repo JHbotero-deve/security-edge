@@ -1,10 +1,10 @@
-import { SettingRepository } from "./setting.repository.js";
+import { SettingsRepository } from "./settings.repository.js";
 
-export class SettingService {
-  private repository: SettingRepository;
+export class SettingsService {
+  private repository: SettingsRepository;
 
   constructor() {
-    this.repository = new SettingRepository();
+    this.repository = new SettingsRepository();
   }
 
   async getAllSettings() {

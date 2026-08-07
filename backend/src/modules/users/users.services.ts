@@ -1,10 +1,11 @@
-import { userRepository } from "./users.repository.js";
+import { UserRepository } from "./users.repository.js";
+import bcrypt from "bcrypt";
 
 export class UserService {
-  private repository: userRepository;
+  private repository: UserRepository;
 
   constructor() {
-    this.repository = new userRepository();
+    this.repository = new UserRepository();
   }
 
   async getAllUsers() {
@@ -19,12 +20,18 @@ export class UserService {
     return user;
   }
 
-  async createUser(data: { username: string; email: string }) {
+  async createUser(data: any) {
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
     return await this.repository.create(data);
   }
 
-  async updateUser(id: number, data: { username?: string | undefined; email?: string | undefined }) {
+  async updateUser(id: number, data: any) {
     await this.getUserById(id);
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
     return await this.repository.update(id, data);
   }
 
