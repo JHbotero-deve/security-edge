@@ -13,9 +13,11 @@ import {
   Move,
   Cpu,
   Ghost,
-  Sparkles
+  Sparkles,
+  ShieldCheck
 } from 'lucide-react';
 import { cn } from '@/shared/utils';
+import { EscudoSeguridad } from '../components/EscudoSeguridad';
 
 const ComponentWrapper = ({ title, children, description }: { title: string; children: React.ReactNode; description: string }) => {
   return (
@@ -113,6 +115,10 @@ export const PaginaLaboratorio = () => {
           <AnimatePresence mode='wait'>
             {activeTab === 'ui' && (
               <>
+                <ComponentWrapper title="Core Engine" description="System Hub" key="shield">
+                  <EscudoSeguridad nivel={98} estado="seguro" />
+                </ComponentWrapper>
+
                 <ComponentWrapper title="Botón Primario" description="Componente Atómico" key="btn-p">
                   <Boton className="shadow-lg shadow-primary-500/20 px-8">DESPLEGAR PROTOCOLO</Boton>
                 </ComponentWrapper>
