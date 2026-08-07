@@ -11,8 +11,8 @@ export class AuditController {
 
   getAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const filters = auditLogFilterSchema.parse(req.query);
-      const data = await this.service.getAuditLogs(filters);
+      const { query } = auditLogFilterSchema.parse({ query: req.query });
+      const data = await this.service.getAuditLogs(query);
       res.status(200).json({
         success: true,
         data,
@@ -22,3 +22,4 @@ export class AuditController {
     }
   };
 }
+
