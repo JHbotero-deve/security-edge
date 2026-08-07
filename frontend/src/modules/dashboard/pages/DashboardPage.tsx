@@ -1,4 +1,4 @@
-import { Header } from '@/components/Header';
+import { Layout } from '@/shared/components/Layout';
 import { DataTable } from '@/components/DataTable';
 import { Activity, ShieldAlert, Users, Database } from 'lucide-react';
 
@@ -45,15 +45,17 @@ export const DashboardPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col">
-      <Header />
-
-      <main className="flex-1 p-6 max-w-7xl mx-auto w-full space-y-8">
+    <Layout>
+      <div className="space-y-8">
         <section>
-          <h2 className="text-xl font-bold text-white mb-6">Resumen de Seguridad</h2>
+          <div className="mb-6">
+            <h1 className="text-2xl font-bold text-white">Panel de Control</h1>
+            <p className="text-slate-500 text-sm">Resumen del estado actual de la seguridad corporativa.</p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {stats.map((stat, i) => (
-              <div key={i} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-slate-700 transition-all group">
+              <div key={i} className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-slate-700 transition-all group shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div className={`${stat.bg} ${stat.color} p-3 rounded-xl group-hover:scale-110 transition-transform`}>
                     <stat.icon size={24} />
@@ -68,12 +70,12 @@ export const DashboardPage = () => {
 
         <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-white">Últimos Incidentes</h2>
-            <button className="text-primary-500 text-sm font-semibold hover:underline">Ver todo</button>
+            <h2 className="text-xl font-bold text-white">Incidentes Recientes</h2>
+            <button className="text-primary-500 text-sm font-semibold hover:underline">Auditar todos los eventos</button>
           </div>
           <DataTable columns={columns} data={recentIncidents} />
         </section>
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 };
