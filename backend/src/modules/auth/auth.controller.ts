@@ -11,8 +11,8 @@ export class AuthController {
 
   register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const data = registerSchema.parse(req.body);
-      const result = await this.service.register(data);
+      const { body } = registerSchema.parse({ body: req.body });
+      const result = await this.service.register(body);
       res.status(201).json({
         success: true,
         data: result,
@@ -24,8 +24,8 @@ export class AuthController {
 
   login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const data = loginSchema.parse(req.body);
-      const result = await this.service.login(data);
+      const { body } = loginSchema.parse({ body: req.body });
+      const result = await this.service.login(body);
       res.status(200).json({
         success: true,
         data: result,
@@ -34,4 +34,18 @@ export class AuthController {
       next(error);
     }
   };
+
+  getProfile = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const user = (req as any).user;
+      const result = await this.service.getProfile(user.id);
+      res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
 }
