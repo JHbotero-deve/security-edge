@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { MonitoringService } from "./monitoring.services.js";
-import { monitoringFilterSchema } from "./monitoring.validation.js";
+import { getMonitoringFilterSchema, getMonitoringByIdSchema } from "./monitoring.validation.js";
 
 export class MonitoringController {
   private service: MonitoringService;
@@ -11,8 +11,8 @@ export class MonitoringController {
 
   getAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const filters = monitoringFilterSchema.parse(req.query);
-      const data = await this.service.getMetrics(filters);
+      const { query } = getMonitoringFilterSchema.parse({ query: req.query });
+      const data = await this.service.getMetrics(query);
       res.status(200).json({ success: true, data });
     } catch (error) {
       next(error);
@@ -21,8 +21,8 @@ export class MonitoringController {
 
   getById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const id = parseInt(String(req.params.id), 10);
-      const data = await this.service.getMetricById(id);
+      const { params } = getMonitoringByIdSchema.parse({ params: req.params });
+      const data = await this.service.getMetricById(params.id);
       res.status(200).json({ success: true, data });
     } catch (error) {
       next(error);
