@@ -1,4 +1,5 @@
 import { SettingsRepository } from "./settings.repository.js";
+import { AppError } from "../../utils/errors.js";
 
 export class SettingsService {
   private repository: SettingsRepository;
@@ -14,7 +15,7 @@ export class SettingsService {
   async getSettingByKey(key: string) {
     const setting = await this.repository.findOne({ key });
     if (!setting) {
-      throw new Error("Setting key not found");
+      throw new AppError("Configuración no encontrada", 404);
     }
     return setting;
   }
@@ -22,7 +23,7 @@ export class SettingsService {
   async createSetting(data: { key: string; value: string }) {
     const existing = await this.repository.findOne({ key: data.key });
     if (existing) {
-      throw new Error("Setting key already exists");
+      throw new AppError("La clave de configuración ya existe", 400);
     }
     return await this.repository.create(data);
   }
@@ -30,7 +31,7 @@ export class SettingsService {
   async updateSetting(id: number, data: { value: string }) {
     const setting = await this.repository.findById(id);
     if (!setting) {
-      throw new Error("Setting not found");
+      throw new AppError("Configuración no encontrada", 404);
     }
     return await this.repository.update(id, data);
   }
