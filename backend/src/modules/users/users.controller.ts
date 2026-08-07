@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { UserService } from "./users.services.js";
-import { createUserSchema, updateUserSchema, getUserByIdSchema } from "./users.validation.js";
+import { createUserSchema, updateUserSchema, getUserByIdSchema, getUsersFilterSchema } from "./users.validation.js";
+
 
 export class UserController {
   private service: UserService;
@@ -11,7 +12,8 @@ export class UserController {
 
   getAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const data = await this.service.getAllUsers();
+      const { query } = getUsersFilterSchema.parse({ query: req.query });
+      const data = await this.service.getAllUsers(query);
       res.status(200).json({ success: true, data });
     } catch (error) {
       next(error);
@@ -52,9 +54,10 @@ export class UserController {
     try {
       const parsed = getUserByIdSchema.parse({ params: req.params });
       await this.service.deleteUser(parsed.params.id);
-      res.status(200).json({ success: true, message: "User deleted successfully" });
+      res.status(200).json({ success: true, message: "Usuario eliminado correctamente" });
     } catch (error) {
       next(error);
     }
   };
 }
+

@@ -1,5 +1,15 @@
 import { z } from "zod";
 
+export const getUsersFilterSchema = z.object({
+  query: z.object({
+    role: z.string().optional(),
+    status: z.string().optional(),
+    search: z.string().optional(),
+    page: z.coerce.number().int().positive().default(1),
+    limit: z.coerce.number().int().positive().max(100).default(20),
+  }),
+});
+
 export const createUserSchema = z.object({
   body: z.object({
     username: z.string().min(3).max(50),
@@ -30,3 +40,4 @@ export const getUserByIdSchema = z.object({
     id: z.string().transform((val) => parseInt(val, 10)),
   }),
 });
+
