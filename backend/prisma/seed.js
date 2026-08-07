@@ -1,87 +1,96 @@
-import "dotenv/config";
+import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { PrismaClient } from "../src/generated/prisma/index.js";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("🌱 Starting database seed...");
-  await prisma.auditLog.deleteMany();
-  await prisma.securityEvent.deleteMany();
-  await prisma.session.deleteMany();
-  await prisma.user.deleteMany();
+  console.log("🌱 Iniciando siembra de base de datos (Seeding)...");
 
-  const adminPassword = await bcrypt.hash("Admin@12345", 10);
-  const admin = await prisma.user.create({
+  // Limpiar datos existentes
+  await prisma.auditLog.deleteMany();
+  await prisma.incident.deleteMany();
+  await prisma.usuario.deleteMany();
+  await prisma.role.deleteMany();
+  await prisma.permission.deleteMany();
+  await prisma.monitoring.deleteMany();
+  await prisma.notification.deleteMany();
+  await prisma.setting.deleteMany();
+
+  // 1. Roles
+  const adminRole = await prisma.role.create({ data: { name: "ADMIN" } });
+  const operatorRole = await prisma.role.create({ data: { name: "OPERATOR" } });
+  const userRole = await prisma.role.create({ data: { name: "USER" } });
+
+  // 2. Usuarios
+  const hashedPassword = await bcrypt.hash("Admin123!", 10);
+  const adminUser = await prisma.usuario.create({
     data: {
-      name: "System Administrator",
-      email: "admin@securityedge.io",
-      passwordHash: adminPassword,
+      username: "admin",
+      email: "admin@securityedge.com",
+      password: hashedPassword,
+      name: "Administrador del Sistema",
       role: "ADMIN",
       status: "ACTIVE",
-      department: "IT Security",
-      emailVerified: true,
     },
   });
-  const analystPassword = await bcrypt.hash("Analyst@12345", 10);
-  const analyst = await prisma.user.create({
+
+  const operatorUser = await prisma.usuario.create({
     data: {
-      name: "Security Analyst",
-      email: "analyst@securityedge.io",
-      passwordHash: analystPassword,
-      role: "ANALYST",
+      username: "operador1",
+      email: "operador1@securityedge.com",
+      password: hashedPassword,
+      name: "Operador de Seguridad",
+      role: "OPERATOR",
       status: "ACTIVE",
-      department: "Security",
-      emailVerified: true,
     },
   });
-  const viewerPassword = await bcrypt.hash("Viewer@12345", 10);
-  const viewer = await prisma.user.create({
-    data: {
-      name: "Security Viewer",
-      email: "viewer@securityedge.io",
-      passwordHash: viewerPassword,
-      role: "VIEWER",
-      status: "ACTIVE",
-      department: "Operations",
-      emailVerified: true,
-    },
+
+  // 3. Incidentes
+  await prisma.incident.createMany({
+    data: [
+      { title: "Intento de fuerza bruta detectado", description: "Múltiples fallos de login desde IP externa", severity: "HIGH", status: "OPEN" },
+      { title: "Escaneo de puertos", description: "Detección de escaneo masivo en el segmento 10.0.0.x", severity: "MEDIUM", status: "IN_PROGRESS" },
+      { title: "Detección de Malware", description: "Archivo sospechoso detectado en el servidor de archivos", severity: "CRITICAL", status: "RESOLVED" },
+    ],
   });
+
+  // 4. Monitoreo
+  await prisma.monitoring.createMany({
+    data: [
+      { type: "CPU_USAGE", value: "45%", status: "NORMAL" },
+      { type: "MEM_USAGE", value: "2.4GB", status: "NORMAL" },
+      { type: "DISK_USAGE", value: "88%", status: "WARNING" },
+    ],
+  });
+
+  // 5. Ajustes
+  await prisma.setting.createMany({
+    data: [
+      { key: "SYSTEM_NAME", value: "Security Edge Enterprise" },
+      { key: "SESSION_TIMEOUT", value: "3600" },
+      { key: "MAINTENANCE_MODE", value: "false" },
+    ],
+  });
+
+  // 6. Auditoría
   await prisma.auditLog.create({
     data: {
-      userId: admin.id,
-      action: "USER_LOGIN",
-      resource: "Authentication",
-      details: "Admin user logged in via web interface",
-      ipAddress: "192.168.1.100",
-      status: "SUCCESS",
+      userId: adminUser.id,
+      action: "DATABASE_SEED",
+      details: "Siembra inicial de datos realizada con éxito",
+      ipAddress: "127.0.0.1",
     },
   });
 
-  await prisma.securityEvent.create({
-    data: {
-      userId: admin.id,
-      eventType: "LOGIN_SUCCESS",
-      severity: "LOW",
-      description: "Admin login successful",
-      ipAddress: "192.168.1.100",
-      resolved: true,
-    },
-  });
-
-  console.log("✅ Database seeded successfully!");
-  console.log("\n📊 Created users:");
-  console.log(`  - Admin: ${admin.email}`);
-  console.log(`  - Analyst: ${analyst.email}`);
-  console.log(`  - Viewer: ${viewer.email}`);
+  console.log("✅ Base de datos sembrada exitosamente.");
+  console.log(`- Usuario Admin: admin@securityedge.com / Admin123!`);
 }
 
 main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error("❌ Seed error:", e);
-    await prisma.$disconnect();
+  .catch((e) => {
+    console.error("❌ Error en el Seeding:", e);
     process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
   });
