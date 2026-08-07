@@ -11,7 +11,8 @@ import {
   X,
   PanelLeftClose,
   PanelLeftOpen,
-  Terminal
+  Terminal,
+  Ghost
 } from 'lucide-react';
 import { useSidebar } from '@/shared/providers/ProveedorBarraLateral';
 import { cn } from '@/shared/utils';
@@ -47,6 +48,7 @@ const navigation: NavItem[] = [
   { title: 'Notificaciones', href: '/notifications', icon: Bell },
   { title: 'Configuración', href: '/settings', icon: Settings },
   { title: 'Terminal', href: '/terminal', icon: Terminal },
+  { title: 'Laboratorio', href: '/laboratorio', icon: Ghost },
 ];
 
 export const BarraLateral = () => {

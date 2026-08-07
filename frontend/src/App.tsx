@@ -10,6 +10,7 @@ import { PaginaNotificaciones } from './modules/notifications/pages/PaginaNotifi
 import { PaginaRoles } from './modules/roles/pages/PaginaRoles';
 import { PaginaConfiguracion } from './modules/settings/pages/PaginaConfiguracion';
 import { PaginaTerminal } from './modules/terminal/pages/PaginaTerminal';
+import { PaginaLaboratorio } from './modules/playground/pages/PaginaLaboratorio';
 
 function App() {
   const { isAuthenticated } = useAuthStore();
@@ -55,6 +56,10 @@ function App() {
         <Route
           path="/terminal"
           element={isAuthenticated ? <PaginaTerminal /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/laboratorio"
+          element={isAuthenticated ? <PaginaLaboratorio /> : <Navigate to="/login" />}
         />
 
         <Route path="*" element={<Navigate to="/" />} />
