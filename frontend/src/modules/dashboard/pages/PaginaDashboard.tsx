@@ -1,8 +1,8 @@
-import { Layout } from '@/shared/components/Layout';
-import { DataTable } from '@/components/DataTable';
+import { DiseñoBase } from '@/shared/components/DiseñoBase';
+import { TablaDatos } from '@/components/TablaDatos';
 import { Activity, ShieldAlert, Users, Database } from 'lucide-react';
 
-export const DashboardPage = () => {
+export const PaginaDashboard = () => {
   const stats = [
     { label: 'Incidentes Activos', value: '12', icon: ShieldAlert, color: 'text-red-500', bg: 'bg-red-500/10' },
     { label: 'Usuarios Activos', value: '48', icon: Users, color: 'text-primary-500', bg: 'bg-primary-500/10' },
@@ -45,7 +45,7 @@ export const DashboardPage = () => {
   ];
 
   return (
-    <Layout>
+    <DiseñoBase>
       <div className="space-y-8">
         <section>
           <div className="mb-6">
@@ -73,9 +73,9 @@ export const DashboardPage = () => {
             <h2 className="text-xl font-bold text-white">Incidentes Recientes</h2>
             <button className="text-primary-500 text-sm font-semibold hover:underline">Auditar todos los eventos</button>
           </div>
-          <DataTable columns={columns} data={recentIncidents} />
+          <TablaDatos columns={columns} data={recentIncidents} />
         </section>
       </div>
-    </Layout>
+    </DiseñoBase>
   );
 };

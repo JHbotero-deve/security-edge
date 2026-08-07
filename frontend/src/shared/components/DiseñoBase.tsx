@@ -1,26 +1,25 @@
 import React from 'react';
-import { Sidebar } from '@/components/Sidebar';
-import { Header } from '@/components/Header';
-import { useSidebar } from '@/shared/providers/SidebarProvider';
+import { BarraLateral } from '@/components/BarraLateral';
+import { Encabezado } from '@/components/Encabezado';
+import { useSidebar } from '@/shared/providers/ProveedorBarraLateral';
 import { cn } from '@/shared/utils';
 
-interface LayoutProps {
+interface DiseñoBaseProps {
   children: React.ReactNode;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export const DiseñoBase: React.FC<DiseñoBaseProps> = ({ children }) => {
   const { isCollapsed } = useSidebar();
 
   return (
     <div className="min-h-screen bg-slate-950 flex">
-      {/* Sidebar is fixed, so we need a placeholder or margin */}
-      <Sidebar />
+      <BarraLateral />
 
       <div className={cn(
         "flex-1 flex flex-col transition-all duration-300 ease-in-out",
         isCollapsed ? "lg:ml-20" : "lg:ml-72"
       )}>
-        <Header />
+        <Encabezado />
         <main className="flex-1 p-6 overflow-y-auto">
           <div className="max-w-7xl mx-auto w-full">
             {children}

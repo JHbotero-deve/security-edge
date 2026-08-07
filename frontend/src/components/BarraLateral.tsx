@@ -5,18 +5,14 @@ import {
   LayoutDashboard,
   Users,
   ShieldAlert,
-  History,
   Settings,
   Bell,
   ChevronRight,
-  ChevronDown,
-  Menu,
   X,
   PanelLeftClose,
   PanelLeftOpen,
-  Activity
 } from 'lucide-react';
-import { useSidebar } from '@/shared/providers/SidebarProvider';
+import { useSidebar } from '@/shared/providers/ProveedorBarraLateral';
 import { cn } from '@/shared/utils';
 
 interface NavItem {
@@ -51,7 +47,7 @@ const navigation: NavItem[] = [
   { title: 'Configuración', href: '/settings', icon: Settings },
 ];
 
-export const Sidebar = () => {
+export const BarraLateral = () => {
   const { isOpen, isCollapsed, toggleSidebar, toggleCollapse } = useSidebar();
   const [openMenus, setOpenMenus] = useState<string[]>([]);
 
@@ -106,7 +102,6 @@ export const Sidebar = () => {
           {navigation.map((item) => (
             <div key={item.title}>
               {item.href ? (
-                /* Simple Link */
                 <NavLink
                   to={item.href}
                   className={({ isActive }) => cn(
@@ -122,7 +117,6 @@ export const Sidebar = () => {
                   {isActive && <div className="absolute left-0 w-1 h-6 bg-primary-600 rounded-r-full" />}
                 </NavLink>
               ) : (
-                /* Collapsible Submenu */
                 <div>
                   <button
                     onClick={() => !isCollapsed && toggleSubmenu(item.title)}
@@ -144,7 +138,6 @@ export const Sidebar = () => {
                     )}
                   </button>
 
-                  {/* Submenu Items */}
                   {!isCollapsed && openMenus.includes(item.title) && (
                     <div className="mt-1 ml-9 space-y-1 border-l border-slate-700/50 pl-4 animate-in fade-in slide-in-from-top-2 duration-200">
                       {item.subItems?.map((sub) => (
@@ -169,7 +162,6 @@ export const Sidebar = () => {
           ))}
         </nav>
 
-        {/* Footer / Status */}
         <div className="p-4 border-t border-slate-800">
           <div className={cn("flex items-center p-2 rounded-xl bg-slate-800/50 border border-slate-700/50 transition-all", isCollapsed && "justify-center")}>
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mr-2" />

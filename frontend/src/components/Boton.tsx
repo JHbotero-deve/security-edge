@@ -1,20 +1,20 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/shared/utils';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface BotonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: 'primary' | 'secondary' | 'danger';
   isLoading?: boolean;
 }
 
-export const Button = ({
+export const Boton = ({
   children,
   variant = 'primary',
   isLoading,
   className,
   disabled,
   ...props
-}: ButtonProps) => {
+}: BotonProps) => {
   const variants = {
     primary: 'bg-primary-600 hover:bg-primary-700 text-white',
     secondary: 'bg-slate-700 hover:bg-slate-600 text-white',

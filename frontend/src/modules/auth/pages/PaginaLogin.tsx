@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '@/store/auth.store';
-import { authService } from '../services/auth.service';
-import { Input } from '@/components/Input';
-import { Button } from '@/components/Button';
+import { useAuthStore } from '@/store/autenticacion.estado';
+import { autenticacionServicio } from '../services/autenticacion.servicio';
+import { Entrada } from '@/components/Entrada';
+import { Boton } from '@/components/Boton';
 import { ShieldCheck } from 'lucide-react';
 
-export const LoginPage = () => {
+export const PaginaLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +21,7 @@ export const LoginPage = () => {
     setError('');
 
     try {
-      const { data } = await authService.login({ email, password });
+      const { data } = await autenticacionServicio.login({ email, password });
       setAuth(data.user, data.token);
       navigate('/');
     } catch (err: any) {
@@ -43,7 +43,7 @@ export const LoginPage = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <Input
+          <Entrada
             label="Correo Electrónico"
             type="email"
             placeholder="usuario@empresa.com"
@@ -51,7 +51,7 @@ export const LoginPage = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <Input
+          <Entrada
             label="Contraseña"
             type="password"
             placeholder="••••••••"
@@ -66,9 +66,9 @@ export const LoginPage = () => {
             </div>
           )}
 
-          <Button type="submit" className="w-full py-3" isLoading={isLoading}>
+          <Boton type="submit" className="w-full py-3" isLoading={isLoading}>
             Ingresar al Sistema
-          </Button>
+          </Boton>
         </form>
 
         <div className="mt-8 text-center">

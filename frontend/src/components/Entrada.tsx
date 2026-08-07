@@ -1,12 +1,12 @@
 import { InputHTMLAttributes, forwardRef } from 'react';
 import { cn } from '@/shared/utils';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface EntradaProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Entrada = forwardRef<HTMLInputElement, EntradaProps>(
   ({ label, error, className, ...props }, ref) => {
     return (
       <div className="w-full space-y-1">

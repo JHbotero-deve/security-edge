@@ -6,14 +6,14 @@ interface Column<T> {
   render?: (item: T) => ReactNode;
 }
 
-interface DataTableProps<T> {
+interface TablaDatosProps<T> {
   columns: Column<T>[];
   data: T[];
   isLoading?: boolean;
   emptyMessage?: string;
 }
 
-export function DataTable<T>({ columns, data, isLoading, emptyMessage = 'No hay registros encontrados' }: DataTableProps<T>) {
+export function TablaDatos<T>({ columns, data, isLoading, emptyMessage = 'No hay registros encontrados' }: TablaDatosProps<T>) {
   return (
     <div className="w-full overflow-hidden rounded-xl border border-slate-800 bg-slate-900/30">
       <div className="overflow-x-auto">

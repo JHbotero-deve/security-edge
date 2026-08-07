@@ -1,20 +1,18 @@
-import { useAuthStore } from '@/store/auth.store';
-import { useSidebar } from '@/shared/providers/SidebarProvider';
+import { useAuthStore } from '@/store/autenticacion.estado';
+import { useSidebar } from '@/shared/providers/ProveedorBarraLateral';
 import { ShieldCheck, LogOut, User, Bell, Menu } from 'lucide-react';
 import { cn } from '@/shared/utils';
 
-export const Header = () => {
+export const Encabezado = () => {
   const { user, logout } = useAuthStore();
   const { toggleSidebar, isCollapsed } = useSidebar();
 
   return (
     <header className={cn(
       "h-16 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md flex items-center justify-between px-6 sticky top-0 z-40 transition-all duration-300",
-      // On desktop, the margin shifts based on sidebar state
       "lg:ml-0"
     )}>
       <div className="flex items-center gap-4">
-        {/* Mobile Menu Trigger */}
         <button
           onClick={toggleSidebar}
           className="lg:hidden p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
@@ -22,7 +20,6 @@ export const Header = () => {
           <Menu size={24} />
         </button>
 
-        {/* Brand (Visible only if sidebar is collapsed on desktop or on mobile) */}
         <div className={cn("flex items-center gap-3 lg:opacity-0 transition-opacity duration-300", isCollapsed && "lg:opacity-100")}>
           <div className="bg-primary-600 p-1.5 rounded-lg shadow-lg shadow-primary-500/20">
             <ShieldCheck className="text-white w-5 h-5" />
