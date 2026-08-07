@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { NotificationService } from "./notifications.services.js";
-import { createNotificationSchema, getNotificationByIdSchema, updateNotificationStatusSchema } from "./notifications.validation.js";
+import { createNotificationSchema, getNotificationByIdSchema, updateNotificationStatusSchema, getNotificationsFilterSchema } from "./notifications.validation.js";
+
 
 export class NotificationController {
   private service: NotificationService;
@@ -9,10 +10,11 @@ export class NotificationController {
     this.service = new NotificationService();
   }
 
-  getByUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  getMyNotifications = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const userId = parseInt(String(req.params.userId), 10);
-      const data = await this.service.getNotificationsByUser(userId);
+      const user = (req as any).user;
+      const { query } = getNotificationsFilterSchema.parse({ query: req.query });
+      const data = await this.service.getNotificationsByUser(user.id, query);
       res.status(200).json({ success: true, data });
     } catch (error) {
       next(error);
@@ -21,8 +23,8 @@ export class NotificationController {
 
   create = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const parsed = createNotificationSchema.parse({ body: req.body });
-      const data = await this.service.sendNotification(parsed.body);
+      const { body } = createNotificationSchema.parse({ body: req.body });
+      const data = await this.service.sendNotification(body);
       res.status(201).json({ success: true, data });
     } catch (error) {
       next(error);
@@ -31,8 +33,9 @@ export class NotificationController {
 
   updateStatus = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const parsed = updateNotificationStatusSchema.parse({ params: req.params, body: req.body });
-      const data = await this.service.markAsRead(parsed.params.id, parsed.body.read);
+      const user = (req as any).user;
+      const { params, body } = updateNotificationStatusSchema.parse({ params: req.params, body: req.body });
+      const data = await this.service.markAsRead(params.id, user.id, body.read);
       res.status(200).json({ success: true, data });
     } catch (error) {
       next(error);
@@ -41,9 +44,10 @@ export class NotificationController {
 
   delete = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const parsed = getNotificationByIdSchema.parse({ params: req.params });
-      await this.service.deleteNotification(parsed.params.id);
-      res.status(200).json({ success: true, message: "Notification deleted successfully" });
+      const user = (req as any).user;
+      const { params } = getNotificationByIdSchema.parse({ params: req.params });
+      await this.service.deleteNotification(params.id, user.id);
+      res.status(200).json({ success: true, message: "Notificación eliminada correctamente" });
     } catch (error) {
       next(error);
     }
