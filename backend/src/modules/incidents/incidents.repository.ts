@@ -6,22 +6,17 @@ export class IncidentRepository extends BaseRepository {
     super(prisma.incident);
   }
 
-  async findById(id: number) {
-    return await this.model.findUnique({
-      where: { id },
-    });
+  async count(where: any) {
+    return await this.model.count({ where });
   }
 
-  async update(id: number, data: Record<string, unknown>) {
-    return await this.model.update({
-      where: { id },
-      data,
-    });
-  }
-
-  async delete(id: number) {
-    return await this.model.delete({
-      where: { id },
+  async findManyPaged(args: { where: any; skip: number; take: number }) {
+    return await this.model.findMany({
+      where: args.where,
+      skip: args.skip,
+      take: args.take,
+      orderBy: { createdAt: "desc" },
     });
   }
 }
+

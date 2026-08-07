@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { IncidentService } from "./incidents.services.js";
-import { createIncidentSchema, updateIncidentSchema, getIncidentByIdSchema } from "./incidents.validation.js";
+import { createIncidentSchema, updateIncidentSchema, getIncidentByIdSchema, getIncidentsFilterSchema } from "./incidents.validation.js";
 
 export class IncidentController {
   private service: IncidentService;
@@ -11,12 +11,14 @@ export class IncidentController {
 
   getAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const data = await this.service.getAllIncidents();
+      const { query } = getIncidentsFilterSchema.parse({ query: req.query });
+      const data = await this.service.getAllIncidents(query);
       res.status(200).json({ success: true, data });
     } catch (error) {
       next(error);
     }
   };
+
 
   getById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
