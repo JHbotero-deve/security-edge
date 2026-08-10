@@ -9,6 +9,7 @@
     "@types/node": "^26.1.1",
     "@types/pg": "^8.20.3",
     "prisma": "^6.19.3",
+    "tar": "^7.5.22",
     "ts-node": "^10.9.2",
     "typescript": "^7.0.2"
   },
@@ -30,5 +31,8 @@
   "scripts": {
     "test:db": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' src/test-db.ts",
     "dev": "node src/index.js"
+  },
+  "overrides": {
+    "tar": "^7.5.22"
   }
 }
