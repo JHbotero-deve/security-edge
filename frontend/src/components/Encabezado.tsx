@@ -7,6 +7,11 @@ export const Encabezado = () => {
   const { user, logout } = useAuthStore();
   const { toggleSidebar, isCollapsed } = useSidebar();
 
+  const handleLogout = () => {
+    logout();
+    window.location.href = '/laboratorio'; // Redirigir al supermercado al salir
+  };
+
   return (
     <header className={cn(
       "h-16 border-b border-slate-200 bg-white/80 backdrop-blur-md flex items-center justify-between px-6 sticky top-0 z-40 transition-all duration-300",
@@ -60,7 +65,7 @@ export const Encabezado = () => {
               <div className="h-[1px] bg-slate-100 my-1 mx-2"></div>
 
               <button
-                onClick={logout}
+                onClick={handleLogout}
                 className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 hover:text-red-600 flex items-center gap-2 transition-colors"
               >
                 <LogOut className="w-4 h-4" /> Finalizar Sesión

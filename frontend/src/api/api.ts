@@ -18,12 +18,13 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // No redirigir si estamos en el laboratorio o rutas de vitrina
-    const isShowcase = window.location.pathname.includes('/laboratorio');
+    // ELIMINADO: Redirección automática a /login.
+    // Para el "Nexus Supermarket", permitimos que la UI maneje los fallos de auth
+    // o muestre datos de prueba sin expulsar al usuario.
 
-    if (error.response?.status === 401 && !isShowcase) {
+    if (error.response?.status === 401) {
+      console.warn('Sesión no iniciada o expirada. Operando en modo Showcase / Vista Previa.');
       localStorage.removeItem('token');
-      window.location.href = '/login';
     }
     return Promise.reject(error);
   }
