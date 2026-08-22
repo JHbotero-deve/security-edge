@@ -24,8 +24,7 @@ El formato está basado en el estándar **Keep a Changelog** y sigue el esquema 
 - Eliminadas las carpetas globales sin uso que violaban la arquitectura modular definida (`controllers/`, `routes/`, `validators/`, `schemas/`, `models/`, `shared/responses/`, `config/`, `services/` a nivel raíz de `src/`) y utilidades sueltas sin ninguna referencia en el código (`utils/crypto.js`, `date.js`, `jwt.js`, `password.js`, `response.js`, `token.js`).
 - Eliminados repositorios globales duplicados y obsoletos (`repositories/audit.repository.ts`, `role.repository.ts`, `user.repository.ts`), construidos contra la versión anterior de `BaseRepository`.
 
-### Known issues
-
+ 
 - Módulo `monitoring`: `monitoring.routes.ts` no contiene un router de Express (tiene pegado el código de un repository) y `monitoring.controller.ts` tiene pegado el `index.ts` del módulo `incidents`. No se conecta a `index.ts` hasta reconstruir ambos archivos.
 - Módulo `alerts`: `alerts.routes.ts` tiene el mismo problema — contiene código de repository (`findAllRepository`, `findByIdRepository`) en vez de rutas de Express. Tampoco se puede registrar en `index.ts` hasta reconstruirlo.
 - `admin.repository.ts` y `alerts.repository.ts` referencian modelos de Prisma que no existen en `schema.prisma` (`stats`, `auditLogs`, `securityEvents`, `alerts` en plural).

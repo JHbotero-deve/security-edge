@@ -2,7 +2,7 @@
 
 ## Project Structure
 
-```
+ -```
 backend/src/
 ├── constants/          # HTTP status, error codes
 ├── lib/               # Database, external services
@@ -11,13 +11,13 @@ backend/src/
 ├── shared/            # Reusable types, base classes
 ├── utils/             # Helpers, error management
 └── index.ts          # Express app entry point
-```
+ -```
 
 ## Module Architecture
 
 Each module follows MVCS pattern:
 
-```
+ -```
 modules/{name}/
 ├── {name}.validation.ts   # Zod schemas
 ├── {name}.repository.ts   # Data access layer
@@ -25,7 +25,7 @@ modules/{name}/
 ├── {name}.controller.ts   # HTTP handlers
 ├── {name}.routes.ts       # Express routes
 └── index.ts              # Exports
-```
+ -```
 
 ## Creating a New Module
 

@@ -16,15 +16,15 @@ export const Boton = ({
   ...props
 }: BotonProps) => {
   const variants = {
-    primary: 'bg-primary-600 hover:bg-primary-700 text-white',
-    secondary: 'bg-slate-700 hover:bg-slate-600 text-white',
-    danger: 'bg-red-600 hover:bg-red-700 text-white',
+    primary: 'bg-primary-600 hover:bg-primary-700 text-white shadow-lg shadow-primary-500/20 hover:shadow-primary-500/40 -translate-y-[1px] active:translate-y-0 active:scale-[0.98]',
+    secondary: 'bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-100 hover:border-slate-200 shadow-sm active:scale-[0.98]',
+    danger: 'bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-500/20 hover:shadow-red-500/40 -translate-y-[1px] active:translate-y-0 active:scale-[0.98]',
   };
 
   return (
     <button
       className={cn(
-        "px-4 py-2 rounded-md font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2",
+        "px-6 py-3 rounded-2xl font-black transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 text-[11px] uppercase tracking-widest italic",
         variants[variant],
         className
       )}

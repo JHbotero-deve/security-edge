@@ -15,7 +15,7 @@ import {
   Ghost
 } from 'lucide-react';
 import { useSidebar } from '@/shared/providers/ProveedorBarraLateral';
-import { cn } from '@/shared/utils';
+import { cn } from '@/shared/utils/index';
 
 interface NavItem {
   title: string;
@@ -75,28 +75,28 @@ export const BarraLateral = () => {
       {/* Sidebar Container */}
       <aside
         className={cn(
-          "fixed top-0 left-0 h-screen bg-slate-900 border-r border-slate-800 z-50 transition-all duration-300 ease-in-out flex flex-col",
+          "fixed top-0 left-0 h-screen bg-white border-r border-slate-200 z-50 transition-all duration-300 ease-in-out flex flex-col",
           isCollapsed ? "w-20" : "w-72",
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
         {/* Header / Logo */}
-        <div className="h-16 flex items-center justify-between px-6 border-b border-slate-800 bg-slate-900/50">
+        <div className="h-16 flex items-center justify-between px-6 border-b border-slate-100 bg-white">
           <div className={cn("flex items-center gap-3 transition-opacity duration-200", isCollapsed && "opacity-0 invisible")}>
             <div className="bg-primary-600 p-1.5 rounded-lg">
               <ShieldCheck className="text-white w-5 h-5" />
             </div>
-            <span className="font-bold text-white tracking-tight text-lg">SECURITY EDGE</span>
+            <span className="font-bold text-slate-900 tracking-tight text-lg">SECURITY EDGE</span>
           </div>
 
           <button
             onClick={toggleCollapse}
-            className="hidden lg:flex text-slate-400 hover:text-white transition-colors p-1.5 hover:bg-slate-800 rounded-md"
+            className="hidden lg:flex text-slate-500 hover:text-slate-900 transition-colors p-1.5 hover:bg-slate-100 rounded-md"
           >
             {isCollapsed ? <PanelLeftOpen size={20} /> : <PanelLeftClose size={20} />}
           </button>
 
-          <button onClick={toggleSidebar} className="lg:hidden text-slate-400">
+          <button onClick={toggleSidebar} className="lg:hidden text-slate-500">
             <X size={24} />
           </button>
         </div>
@@ -111,23 +111,27 @@ export const BarraLateral = () => {
                   className={({ isActive }) => cn(
                     "flex items-center p-3 rounded-xl transition-all group relative",
                     isActive
-                      ? "bg-primary-600/10 text-primary-500 font-semibold"
-                      : "text-slate-400 hover:bg-slate-800/50 hover:text-slate-200",
+                      ? "bg-primary-50 text-primary-600 font-semibold"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
                     isCollapsed && "justify-center"
                   )}
                 >
-                  <item.icon className={cn("shrink-0", isCollapsed ? "w-6 h-6" : "w-5 h-5 mr-3")} />
-                  {!isCollapsed && <span className="flex-1 whitespace-nowrap">{item.title}</span>}
-                  {isActive && <div className="absolute left-0 w-1 h-6 bg-primary-600 rounded-r-full" />}
+                  {({ isActive }) => (
+                    <>
+                      <item.icon className={cn("shrink-0", isCollapsed ? "w-6 h-6" : "w-5 h-5 mr-3")} />
+                      {!isCollapsed && <span className="flex-1 whitespace-nowrap">{item.title}</span>}
+                      {isActive && <div className="absolute left-0 w-1 h-6 bg-primary-600 rounded-r-full" />}
+                    </>
+                  )}
                 </NavLink>
               ) : (
                 <div>
                   <button
                     onClick={() => !isCollapsed && toggleSubmenu(item.title)}
                     className={cn(
-                      "w-full flex items-center p-3 rounded-xl text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition-all group",
+                      "w-full flex items-center p-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all group",
                       isCollapsed && "justify-center",
-                      openMenus.includes(item.title) && !isCollapsed && "text-white bg-slate-800/30"
+                      openMenus.includes(item.title) && !isCollapsed && "text-slate-900 bg-slate-50"
                     )}
                   >
                     <item.icon className={cn("shrink-0", isCollapsed ? "w-6 h-6" : "w-5 h-5 mr-3")} />
@@ -143,16 +147,16 @@ export const BarraLateral = () => {
                   </button>
 
                   {!isCollapsed && openMenus.includes(item.title) && (
-                    <div className="mt-1 ml-9 space-y-1 border-l border-slate-700/50 pl-4 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="mt-1 ml-9 space-y-1 border-l border-slate-200 pl-4 animate-in fade-in slide-in-from-top-2 duration-200">
                       {item.subItems?.map((sub) => (
                         <NavLink
                           key={sub.title}
                           to={sub.href}
-                          className={({ isActive }) => cn(
+                          className={({ isActive: isSubActive }) => cn(
                             "block py-2 px-3 text-sm rounded-lg transition-colors",
-                            isActive
-                              ? "text-primary-500 font-medium"
-                              : "text-slate-500 hover:text-slate-300 hover:bg-slate-800/50"
+                            isSubActive
+                              ? "text-primary-600 font-medium"
+                              : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
                           )}
                         >
                           {sub.title}
@@ -166,10 +170,10 @@ export const BarraLateral = () => {
           ))}
         </nav>
 
-        <div className="p-4 border-t border-slate-800">
-          <div className={cn("flex items-center p-2 rounded-xl bg-slate-800/50 border border-slate-700/50 transition-all", isCollapsed && "justify-center")}>
+        <div className="p-4 border-t border-slate-100">
+          <div className={cn("flex items-center p-2 rounded-xl bg-slate-50 border border-slate-200 transition-all", isCollapsed && "justify-center")}>
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mr-2" />
-            {!isCollapsed && <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">System Online</span>}
+            {!isCollapsed && <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">System Online</span>}
           </div>
         </div>
       </aside>

@@ -13,56 +13,26 @@ import { PaginaTerminal } from './modules/terminal/pages/PaginaTerminal';
 import { PaginaLaboratorio } from './modules/playground/pages/PaginaLaboratorio';
 
 function App() {
-  const { isAuthenticated } = useAuthStore();
-
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={!isAuthenticated ? <PaginaLogin /> : <Navigate to="/" />} />
+        <Route path="/login" element={<PaginaLogin />} />
 
-        {/* Rutas Protegidas */}
-        <Route
-          path="/"
-          element={isAuthenticated ? <PaginaDashboard /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/incidents"
-          element={isAuthenticated ? <PaginaIncidentes /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/users"
-          element={isAuthenticated ? <PaginaUsuarios /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/audit"
-          element={isAuthenticated ? <PaginaAuditoria /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/monitoring"
-          element={isAuthenticated ? <PaginaMonitoreo /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/notifications"
-          element={isAuthenticated ? <PaginaNotificaciones /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/roles"
-          element={isAuthenticated ? <PaginaRoles /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/settings"
-          element={isAuthenticated ? <PaginaConfiguracion /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/terminal"
-          element={isAuthenticated ? <PaginaTerminal /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/laboratorio"
-          element={isAuthenticated ? <PaginaLaboratorio /> : <Navigate to="/login" />}
-        />
+        {/* Rutas sin protección para uso como biblioteca de componentes */}
+        <Route path="/" element={<Navigate to="/laboratorio" />} />
 
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/dashboard" element={<PaginaDashboard />} />
+        <Route path="/incidents" element={<PaginaIncidentes />} />
+        <Route path="/users" element={<PaginaUsuarios />} />
+        <Route path="/audit" element={<PaginaAuditoria />} />
+        <Route path="/monitoring" element={<PaginaMonitoreo />} />
+        <Route path="/notifications" element={<PaginaNotificaciones />} />
+        <Route path="/roles" element={<PaginaRoles />} />
+        <Route path="/settings" element={<PaginaConfiguracion />} />
+        <Route path="/terminal" element={<PaginaTerminal />} />
+        <Route path="/laboratorio" element={<PaginaLaboratorio />} />
+
+        <Route path="*" element={<Navigate to="/laboratorio" />} />
       </Routes>
     </Router>
   );

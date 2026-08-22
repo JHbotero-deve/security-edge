@@ -34,19 +34,19 @@ export const EscudoSeguridad = ({ nivel, estado }: EscudoSeguridadProps) => {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1, rotate: 5 }}
-        className={`relative z-10 w-32 h-32 bg-slate-900 border-2 rounded-3xl flex items-center justify-center shadow-2xl ${colores[estado]}`}
+        className={`relative z-10 w-32 h-32 bg-white border-2 rounded-3xl flex items-center justify-center shadow-xl ${colores[estado]}`}
       >
         <ShieldCheck size={60} strokeWidth={1.5} />
 
         {/* Glow Effect */}
-        <div className={`absolute inset-0 blur-xl opacity-30 rounded-3xl bg-current`} />
+        <div className={`absolute inset-0 blur-xl opacity-10 rounded-3xl bg-current`} />
       </motion.div>
 
       {/* Stats Below */}
       <div className="mt-8 text-center space-y-1">
-        <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em]">Security Level</p>
-        <h4 className="text-4xl font-black text-white italic tracking-tighter">
-          {nivel}% <span className="text-primary-500">OPTIMIZED</span>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Security Level</p>
+        <h4 className="text-4xl font-black text-slate-900 italic tracking-tighter">
+          {nivel}% <span className="text-primary-600">OPTIMIZED</span>
         </h4>
         <div className="flex items-center gap-4 pt-2">
           <div className="flex items-center gap-1 text-emerald-500 text-[10px] font-bold">

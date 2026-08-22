@@ -32,14 +32,14 @@ export const PaginaLogin = () => {
   };
 
   return (
-    <div className="min-vh-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-slate-900/50 border border-slate-800 p-8 rounded-2xl shadow-2xl backdrop-blur-xl">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50">
+      <div className="w-full max-w-md bg-white border border-slate-200 p-8 rounded-2xl shadow-xl">
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 bg-primary-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-primary-500/20">
             <ShieldCheck className="text-white w-10 h-10" />
           </div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">Security Edge</h1>
-          <p className="text-gray-400 text-sm mt-1 uppercase tracking-widest font-semibold">Enterprise Protection</p>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Security Edge</h1>
+          <p className="text-slate-500 text-sm mt-1 uppercase tracking-widest font-semibold">Enterprise Protection</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">

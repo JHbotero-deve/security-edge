@@ -1,6 +1,6 @@
-# Security Edge
+# Security Edge & Nexus Infrastructure
 
-Sistema empresarial para la gestión, monitoreo y auditoría de eventos de ciberseguridad.
+Sistema empresarial para la gestión, monitoreo y auditoría de eventos de ciberseguridad, potenciado por la infraestructura **Nexus Supermarket**.
 
 ---
 
@@ -8,7 +8,7 @@ Sistema empresarial para la gestión, monitoreo y auditoría de eventos de ciber
 
 Security Edge es una plataforma web desarrollada para centralizar la administración de la seguridad informática dentro de una organización.
 
-El sistema integra procesos de autenticación, autorización, auditoría, monitoreo, gestión de incidentes y administración de usuarios mediante una arquitectura modular, escalable y orientada a buenas prácticas de desarrollo.
+Además de su capacidad analítica, integra el **Nexus Supermarket**: un ecosistema de componentes interactivos de grado empresarial ("Suministros") que permite a los equipos de desarrollo construir interfaces rápidas, seguras y profesionales de forma unilateral.
 
 El proyecto hace parte del ecosistema **JB Core**, diseñado para construir soluciones empresariales modernas, seguras y mantenibles.
 
@@ -22,6 +22,7 @@ El proyecto hace parte del ecosistema **JB Core**, diseñado para construir solu
 - Gestionar incidentes.
 - Detectar comportamientos anómalos.
 - Monitorear eventos.
+- **Nexus Infrastructure:** Proveer un catálogo interactivo de componentes "Plug & Play" para toda la organización.
 - Facilitar futuras integraciones con inteligencia artificial.
 - Mantener una arquitectura limpia y escalable.
 

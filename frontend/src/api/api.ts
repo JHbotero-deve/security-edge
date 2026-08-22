@@ -18,7 +18,10 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    // No redirigir si estamos en el laboratorio o rutas de vitrina
+    const isShowcase = window.location.pathname.includes('/laboratorio');
+
+    if (error.response?.status === 401 && !isShowcase) {
       localStorage.removeItem('token');
       window.location.href = '/login';
     }

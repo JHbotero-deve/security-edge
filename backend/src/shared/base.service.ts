@@ -18,10 +18,10 @@ export abstract class BaseService<T extends { id: number }> {
     return this.repository.create(data);
   }
 
-  async update(id: number, data: Partial<T>): Promise<T> {
+  async update(id: number, data: Partial<T>): Promise<T | null> {
     const exists = await this.repository.findById(id);
     if (!exists) throw new AppError("Not found", 404);
-    return this.repository.update(id, data);
+      return this.repository.update(id, data);
   }
 
   async delete(id: number): Promise<void> {
