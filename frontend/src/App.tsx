@@ -11,6 +11,8 @@ import { PaginaRoles } from './modules/roles/pages/PaginaRoles';
 import { PaginaConfiguracion } from './modules/settings/pages/PaginaConfiguracion';
 import { PaginaTerminal } from './modules/terminal/pages/PaginaTerminal';
 import { PaginaLaboratorio } from './modules/playground/pages/PaginaLaboratorio';
+import { PaginaBuilder } from './modules/builder/pages/PaginaBuilder';
+import { PaginaInteligencia } from './modules/assistant/pages/PaginaInteligencia';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
         <Route path="/settings" element={<PaginaConfiguracion />} />
         <Route path="/terminal" element={<PaginaTerminal />} />
         <Route path="/laboratorio" element={<PaginaLaboratorio />} />
+        <Route path="/builder" element={<PaginaBuilder />} />
+        <Route path="/intelligence" element={<PaginaInteligencia />} />
 
         <Route path="*" element={<Navigate to="/laboratorio" />} />
       </Routes>

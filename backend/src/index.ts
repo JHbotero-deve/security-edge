@@ -27,7 +27,14 @@ const NODE_ENV = process.env.NODE_ENV || "development";
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+    origin: (origin, callback) => {
+      // Permitir localhost y cualquier túnel de Cloudflare/Pinggy
+      if (!origin || origin.match(/localhost|trycloudflare\.com|pinggy\.link|loca\.lt/)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   })
 );

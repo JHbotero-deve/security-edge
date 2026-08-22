@@ -1,14 +1,38 @@
-import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { DiseñoBase } from '@/shared/components/DiseñoBase';
 import { TablaDatos } from '@/components/TablaDatos';
 import { rolesServicio } from '../services/roles.servicio';
-import { Shield, Key } from 'lucide-react';
+import { Shield, Key, Plus } from 'lucide-react';
+import { Boton } from '@/components/Boton';
+import { Modal } from '@/components/Modal';
+import { Entrada } from '@/components/Entrada';
 
 export const PaginaRoles = () => {
+  const queryClient = useQueryClient();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newRoleName, setNewRoleName] = useState('');
+
   const { data, isLoading } = useQuery({
     queryKey: ['roles'],
     queryFn: () => rolesServicio.obtenerTodos(),
   });
+
+  const mutation = useMutation({
+    mutationFn: rolesServicio.crear,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['roles'] });
+      setIsModalOpen(false);
+      setNewRoleName('');
+    },
+  });
+
+  const handleCreate = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newRoleName.trim()) {
+      mutation.mutate({ name: newRoleName });
+    }
+  };
 
   const columnas = [
     { header: 'ID', key: 'id' },
@@ -31,33 +55,74 @@ export const PaginaRoles = () => {
 
   return (
     <DiseñoBase>
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-            <Shield className="text-primary-500" />
-            Roles y Permisos
-          </h1>
-          <p className="text-slate-500 text-sm mt-1">Configuración del modelo de control de acceso basado en roles (RBAC).</p>
+      <div className="space-y-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-black text-slate-900 flex items-center gap-3 italic uppercase tracking-tighter">
+              <Shield className="text-primary-600" size={32} />
+              Roles y Permisos
+            </h1>
+            <p className="text-slate-500 text-sm font-medium mt-1">Configuración del modelo de control de acceso basado en roles (RBAC).</p>
+          </div>
+
+          <Boton onClick={() => setIsModalOpen(true)} className="flex items-center gap-2">
+            <Plus size={18} /> Crear Rol
+          </Boton>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-start gap-4 mb-6">
-          <div className="bg-amber-500/10 text-amber-500 p-3 rounded-xl">
+        <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-[2rem] flex items-start gap-4 mb-6 shadow-2xl">
+          <div className="bg-amber-500/10 text-amber-500 p-3 rounded-2xl">
             <Key size={24} />
           </div>
           <div>
-            <h3 className="text-white font-semibold">Política de Mínimo Privilegio</h3>
-            <p className="text-slate-400 text-sm mt-1 leading-relaxed">
+            <h3 className="text-white font-black italic uppercase text-xs tracking-widest">Política de Mínimo Privilegio</h3>
+            <p className="text-slate-400 text-[11px] mt-1 leading-relaxed font-bold italic">
               Recuerde que los cambios en los roles afectan el acceso inmediato de los usuarios a funciones críticas del sistema.
             </p>
           </div>
         </div>
 
-        <TablaDatos
-          columns={columnas}
-          data={data?.data || []}
-          isLoading={isLoading}
-        />
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <TablaDatos
+            columns={columnas}
+            data={data?.data || []}
+            isLoading={isLoading}
+          />
+        </div>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Crear Nuevo Rol"
+      >
+        <form onSubmit={handleCreate} className="space-y-6">
+          <Entrada
+            label="Nombre del Rol"
+            placeholder="Ej: Auditor Senior"
+            value={newRoleName}
+            onChange={(e) => setNewRoleName(e.target.value)}
+            required
+            autoFocus
+          />
+          <div className="flex justify-end gap-3 pt-4">
+            <Boton
+              type="button"
+              variant="secondary"
+              onClick={() => setIsModalOpen(false)}
+            >
+              Cancelar
+            </Boton>
+            <Boton
+              type="submit"
+              isLoading={mutation.isPending}
+              disabled={!newRoleName.trim()}
+            >
+              Guardar Rol
+            </Boton>
+          </div>
+        </form>
+      </Modal>
     </DiseñoBase>
   );
 };

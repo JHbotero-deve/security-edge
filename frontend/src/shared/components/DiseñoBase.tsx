@@ -12,11 +12,11 @@ export const DiseñoBase: React.FC<DiseñoBaseProps> = ({ children }) => {
   const { isCollapsed } = useSidebar();
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-slate-950 flex text-slate-200">
       <BarraLateral />
 
       <div className={cn(
-        "flex-1 flex flex-col transition-all duration-300 ease-in-out bg-slate-50/50",
+        "flex-1 flex flex-col transition-all duration-300 ease-in-out bg-slate-900/30",
         isCollapsed ? "lg:ml-20" : "lg:ml-72"
       )}>
         <Encabezado />
@@ -27,8 +27,8 @@ export const DiseñoBase: React.FC<DiseñoBaseProps> = ({ children }) => {
 
           {/* Firma Minimalista */}
           <footer className="mt-auto pt-12 pb-4 text-center">
-            <p className="text-[9px] font-black text-slate-300 uppercase tracking-[0.4em] italic">
-              Powered by Nexus Infrastructure <span className="mx-2">|</span> Assisted by <span className="text-primary-400/50">jorgedevop</span>
+            <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.4em] italic">
+              Powered by Nexus Infrastructure <span className="mx-2">|</span> Assisted by <span className="text-primary-400/30">jorgedevop</span>
             </p>
           </footer>
         </main>

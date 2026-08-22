@@ -1,5 +1,6 @@
 import { InputHTMLAttributes, forwardRef } from 'react';
 import { cn } from '@/shared/utils';
+import { ShieldAlert } from 'lucide-react';
 
 interface EntradaProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -27,7 +28,7 @@ export const Entrada = forwardRef<HTMLInputElement, EntradaProps>(
           />
           {error && (
             <div className="absolute right-4 top-1/2 -translate-y-1/2 text-red-500">
-               <ShieldCheck size={16} className="rotate-180" />
+               <ShieldAlert size={16} />
             </div>
           )}
         </div>

@@ -12,7 +12,8 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   Terminal,
-  Ghost
+  Ghost,
+  Sparkles
 } from 'lucide-react';
 import { useSidebar } from '@/shared/providers/ProveedorBarraLateral';
 import { cn } from '@/shared/utils/index';
@@ -49,6 +50,21 @@ const navigation: NavItem[] = [
   { title: 'Configuración', href: '/settings', icon: Settings },
   { title: 'Terminal', href: '/terminal', icon: Terminal },
   { title: 'Laboratorio', href: '/laboratorio', icon: Ghost },
+  { title: 'Pregúntale a Nexus', href: '/intelligence', icon: Sparkles },
+  {
+    title: 'Biblioteca Nexus',
+    icon: Sparkles,
+    subItems: [
+      { title: 'Constructor Visual', href: '/builder' },
+      { title: 'Sección Logins', href: '/builder?cat=login' },
+      { title: 'Sección Botones', href: '/builder?cat=button' },
+      { title: 'Sección Tablas', href: '/builder?cat=table' },
+      { title: 'Sección Formularios', href: '/builder?cat=form' },
+      { title: 'Sección Encabezados', href: '/builder?cat=header' },
+      { title: 'Sección Footers', href: '/builder?cat=footer' },
+      { title: 'Documentación', href: '/builder?cat=docs' },
+    ]
+  },
 ];
 
 export const BarraLateral = () => {
@@ -179,4 +195,4 @@ export const BarraLateral = () => {
       </aside>
     </>
   );
-};
+}
