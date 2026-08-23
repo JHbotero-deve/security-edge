@@ -7,36 +7,47 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  build-and-verify:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout del código
         uses: actions/checkout@v4
 
-      - name: Instalar Docker Compose (si fuera necesario)
-        run: |
-          docker compose version
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-      - name: Levantar servicios (PostgreSQL)
-        run: docker compose up -d
+      - name: Instalar Dependencias (Root)
+        run: npm install
 
-      - name: Esperar a que la base de datos esté lista
+      - name: Validar Backend
         run: |
-          echo "Esperando a que Postgres inicie en el puerto 5432..."
-          for i in {1..15}; do
-            if nc -z localhost 5432; then
-              echo "¡Postgres está listo!"
+          cd backend
+          npm install
+          npx tsc --noEmit
+
+      - name: Validar Frontend
+        run: |
+          cd frontend
+          npm install
+          npx tsc --noEmit
+
+      - name: Levantar Infraestructura de Prueba
+        run: docker compose up -d database
+
+      - name: Verificar Integridad de Base de Datos
+        run: |
+          echo "Iniciando secuencia de verificación del nodo de datos..."
+          for i in {1..10}; do
+            if docker exec security-edge-db pg_isready -U postgres; then
+              echo "¡Conexión establecida! Nodo de datos sincronizado."
               exit 0
             fi
-            echo "Intentando conectar... ($i/15)"
-            sleep 3
+            echo "Esperando sincronización del nodo... ($i/10)"
+            sleep 5
           done
-          echo "Error: Postgres no inició a tiempo."
+          echo "ERROR: El nodo de datos no respondió en el tiempo esperado."
           exit 1
-
-      - name: Ejecutar pruebas
-        run: |
-          # Aquí reemplazarás este comando por el de tus pruebas reales
-          # Ejemplo: npm install && npm test
-          echo "Ejecutando pruebas del proyecto..."

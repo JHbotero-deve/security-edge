@@ -3,9 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "npx concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
     "build-ui-index": "node tools/ui-indexer.js"
   },
   "dependencies": {
-    "glob": "^10.3.3"
+    "@prisma/client": "^7.9.0",
+    "glob": "^10.3.3",
+    "pg": "^8.22.0",
+    "concurrently": "^9.1.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.1.1",
+    "prisma": "^7.9.0",
+    "typescript": "^7.0.2"
   }
 }

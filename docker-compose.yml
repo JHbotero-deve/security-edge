@@ -1,5 +1,5 @@
 services:
-  postgres:
+  database:
     image: postgres:16
     container_name: security-edge-db
     restart: unless-stopped
@@ -11,7 +11,36 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./init:/docker-entrypoint-initdb.d
+    networks:
+      - security-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: security-edge-backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@database:5432/security_edge?schema=public
+      JWT_SECRET: super_secret_key_change_me
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    networks:
+      - security-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: security-edge-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
     networks:
       - security-network
 

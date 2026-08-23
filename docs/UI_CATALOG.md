@@ -1,6 +1,12 @@
-# Catálogo de UI
+# Catálogo de UI & Nexus Supermarket
 
-Usa este documento para registrar elementos de la interfaz (botones, formularios de inicio de sesión, tablas, rutas, etc.) para que sean fácilmente localizables por el equipo.
+Este catálogo documenta los elementos de la interfaz, integrados ahora en el **Nexus Supermarket** para una experiencia interactiva de desarrollo.
+
+## Nexus Supermarket
+El acceso al catálogo interactivo se encuentra en la ruta `/laboratorio` del frontend. Aquí los desarrolladores pueden:
+- **Configurar:** Probar variantes, estados y tamaños en tiempo real.
+- **Visualizar:** Ver el comportamiento en escritorio y móvil.
+- **Extraer:** Copiar el código fuente listo para producción de forma unilateral.
 
 Cómo usar
 
@@ -22,13 +28,13 @@ Ejemplo de entrada
 
 Secciones
 
-- # inicio de sesión
-- # botón
-- # tabla
-- # ruta
-- # formulario
-- # barra-de-navegación
-- # otros
+- inicio de sesión
+- botón
+- tabla
+- ruta
+-formulario
+- barra-de-navegación
+- otros
 
 Mantenimiento del índice
 

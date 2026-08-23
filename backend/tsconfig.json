@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* Target y módulo */
+    "target": "ES2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    /* Tipos y librerías */
+    "types": ["node", "express"],
+    "lib": ["esnext"],
+
+    /* Opciones de depuración */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    /* Chequeos estrictos */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    /* Estilo y buenas prácticas */
+    "isolatedModules": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
