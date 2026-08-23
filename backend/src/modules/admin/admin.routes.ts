@@ -1,8 +1,12 @@
 import { Router } from "express";
 import { AdminController } from "./admin.controller.js";
+import { jwtMiddleware, roleMiddleware } from "../../middlewares/auth.middleware.js";
 
 const router = Router();
 const controller = new AdminController();
+
+// Todas las rutas de administración requieren rol ADMIN
+router.use(jwtMiddleware, roleMiddleware(["ADMIN"]));
 
 router.get("/dashboard", controller.getDashboard);
 router.get("/audit", controller.getAuditLogs);

@@ -4,6 +4,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ProveedorBarraLateral } from './shared/providers/ProveedorBarraLateral'
 import App from './App'
 import './theme/globals.css'
+import { registerSW } from 'virtual:pwa-register'
+
+// Registro automático del Service Worker para modo Offline
+registerSW({ immediate: true })
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -20,8 +20,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<PaginaLogin />} />
 
-        {/* Rutas sin protección para uso como biblioteca de componentes */}
-        <Route path="/" element={<Navigate to="/laboratorio" />} />
+        {/* Página Principal: Ahora el Laboratorio es la raíz para un link más limpio */}
+        <Route path="/" element={<PaginaLaboratorio />} />
 
         <Route path="/dashboard" element={<PaginaDashboard />} />
         <Route path="/incidents" element={<PaginaIncidentes />} />

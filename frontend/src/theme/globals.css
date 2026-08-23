@@ -31,5 +31,87 @@ body {
   @apply bg-transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
+  @apply bg-primary-500/50 rounded-full hover:bg-primary-500 transition-colors shadow-[0_0_10px_rgba(59,130,246,0.5)];
+}
+
+/* --- GAMER / HIGH-TECH EFFECTS --- */
+
+@keyframes border-flow {
+  0%, 100% { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59,130,246,0.3); }
+  33% { border-color: #a855f7; box-shadow: 0 0 15px rgba(168,85,247,0.3); }
+  66% { border-color: #10b981; box-shadow: 0 0 15px rgba(16,185,129,0.3); }
+}
+
+.animate-gamer-border {
+  animation: border-flow 4s infinite linear;
+  border-width: 2px;
+}
+
+@keyframes text-glow {
+  0%, 100% { text-shadow: 0 0 10px rgba(59,130,246,0.5); color: #fff; }
+  50% { text-shadow: 0 0 20px rgba(59,130,246,0.8); color: #3b82f6; }
+}
+
+.text-glow-gamer {
+  animation: text-glow 3s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59,130,246,0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(59,130,246,0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+}
+
+.animate-pulse-gamer {
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(500%); }
+}
+
+.animate-scan {
+  animation: scan 4s linear infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
+
+.hover-glitch:hover {
+  animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
+}
+
+.shadow-glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+.shadow-glow-strong {
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+}
+
+.text-gradient-nexus {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-primary-400 to-primary-600;
+}
+
+.bg-designer-grid {
+  background-image:
+    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+}
+
+.glass-morphism {
+  @apply bg-slate-900/40 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+}
+
+.neon-card {
+  @apply border-2 border-primary-500/20 hover:border-primary-500/60 transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.4)];
 }

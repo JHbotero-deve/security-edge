@@ -60,12 +60,24 @@ const SUGGESTIONS = [
 ];
 
 export const PaginaInteligencia = () => {
-  const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const saved = localStorage.getItem('nexus_chat_history');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        return parsed.map((m: any) => ({ ...m, timestamp: new Date(m.timestamp) }));
+      } catch (e) {
+        return INITIAL_MESSAGES;
+      }
+    }
+    return INITIAL_MESSAGES;
+  });
   const [inputValue, setInputValue] = useState('');
   const [isThinking, setIsThinking] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    localStorage.setItem('nexus_chat_history', JSON.stringify(messages));
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
@@ -81,8 +93,28 @@ export const PaginaInteligencia = () => {
       timestamp: new Date()
     };
 
+    // Capa de ahorro de Tokens: Verificar caché de respuestas idénticas
+    const cachedResponse = messages.find(m =>
+      m.role === 'assistant' &&
+      messages[messages.indexOf(m) - 1]?.content === inputValue
+    );
+
     setMessages(prev => [...prev, userMsg]);
     setInputValue('');
+
+    if (cachedResponse) {
+      // Si ya preguntaste esto y tenemos la respuesta, no procesamos de nuevo
+      setTimeout(() => {
+        const newAssistantMsg: Message = {
+          ...cachedResponse,
+          id: (Date.now() + 1).toString(),
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, newAssistantMsg]);
+      }, 500);
+      return;
+    }
+
     setIsThinking(true);
 
     // Simular procesamiento del núcleo
@@ -195,6 +227,15 @@ export const PaginaInteligencia = () => {
              </div>
              <div className="flex gap-4">
                 <button
+                  onClick={() => {
+                    localStorage.removeItem('nexus_chat_history');
+                    setMessages(INITIAL_MESSAGES);
+                  }}
+                  className="px-3 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-lg text-[8px] font-black text-primary-400 uppercase tracking-widest hover:bg-primary-500 hover:text-white transition-all"
+                >
+                   🗑️ Limpiar Memoria
+                </button>
+                <button
                   onClick={() => setMessages(prev => [...prev, INITIAL_MESSAGES[0]])}
                   className="px-3 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-lg text-[8px] font-black text-primary-400 uppercase tracking-widest hover:bg-primary-500 hover:text-white transition-all"
                 >
@@ -216,18 +257,21 @@ export const PaginaInteligencia = () => {
                    className={cn("flex gap-5 max-w-[90%]", msg.role === 'user' ? "ml-auto flex-row-reverse" : "")}
                  >
                    <div className={cn(
-                     "w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center border shadow-2xl transition-transform hover:scale-110",
-                     msg.role === 'user' ? "bg-slate-800 border-slate-700 text-slate-500" : "bg-primary-600 border-primary-400 text-white shadow-primary-500/20"
+                     "w-14 h-14 shrink-0 rounded-[1.8rem] flex items-center justify-center border shadow-2xl transition-all hover:scale-110 active:scale-95 group",
+                     msg.role === 'user' ? "bg-slate-800 border-white/5 text-slate-500" : "bg-primary-600 border-primary-400 text-white shadow-glow-strong"
                    )}>
-                      {msg.role === 'user' ? <TerminalIcon size={20}/> : <Bot size={20}/>}
+                      {msg.role === 'user' ? <TerminalIcon size={24}/> : <Bot size={24} className="group-hover:animate-pulse"/>}
                    </div>
-                   <div className="space-y-3">
+                   <div className="space-y-4">
                       <div className={cn(
-                        "p-6 rounded-[2.5rem] text-sm leading-relaxed shadow-xl",
+                        "p-8 rounded-[3rem] text-[13px] leading-relaxed shadow-2xl relative overflow-hidden",
                         msg.role === 'user'
-                          ? "bg-slate-800 text-white rounded-tr-none border border-slate-700"
-                          : "bg-slate-950 text-slate-300 rounded-tl-none border border-slate-800"
+                          ? "bg-slate-800 text-white rounded-tr-none border border-white/5"
+                          : "bg-slate-950 text-slate-300 rounded-tl-none border border-white/5"
                       )}>
+                         {msg.role === 'assistant' && (
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-600 to-indigo-500 opacity-20" />
+                         )}
                          <p className="font-bold tracking-tight text-slate-200">{msg.content}</p>
 
                          {msg.code && (
