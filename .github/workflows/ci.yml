@@ -40,5 +40,14 @@ jobs:
 
       - name: Verificar Integridad de Base de Datos
         run: |
-          echo "Verificando conexión con el nodo de datos..."
-          docker exec security-edge-db pg_isready -U postgres -t 30
+          echo "Iniciando secuencia de verificación del nodo de datos..."
+          for i in {1..10}; do
+            if docker exec security-edge-db pg_isready -U postgres; then
+              echo "¡Conexión establecida! Nodo de datos sincronizado."
+              exit 0
+            fi
+            echo "Esperando sincronización del nodo... ($i/10)"
+            sleep 5
+          done
+          echo "ERROR: El nodo de datos no respondió en el tiempo esperado."
+          exit 1
