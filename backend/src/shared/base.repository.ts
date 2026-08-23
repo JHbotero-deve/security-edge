@@ -32,4 +32,8 @@ export class BaseRepository<T = any> {
   async delete(id: number): Promise<void> {
     await this.model.delete({ where: { id } });
   }
+
+  async count(where: any = {}): Promise<number> {
+    return this.model.count({ where });
+  }
 }

@@ -1,4 +1,5 @@
 import { DiseñoBase } from '@/shared/components/DiseñoBase';
+import { Boton } from '@/components/Boton';
 import {
   Activity,
   ShieldAlert,

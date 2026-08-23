@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   ShieldCheck,
   LayoutDashboard,
@@ -180,20 +181,24 @@ export const BarraLateral = () => {
                         <NavLink
                           key={sub.title}
                           to={sub.href}
-                          className={({ isActive: isSubActive }) => cn(
+                          className={({ isActive }) => cn(
                             "block py-3 px-4 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all relative group",
-                            isSubActive
+                            isActive
                               ? "text-primary-400 bg-primary-500/5"
                               : "text-slate-600 hover:text-slate-300 hover:bg-white/5"
                           )}
                         >
-                          {sub.title}
-                          {/* Indicator for sub-active */}
-                          <div className={cn(
-                            "absolute left-[-25px] top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-primary-500 transition-all",
-                            "opacity-0 group-hover:opacity-30",
-                            "isSubActive" && "opacity-100 shadow-[0_0_8px_rgba(59,130,246,0.8)]"
-                          )} />
+                          {({ isActive }) => (
+                            <>
+                              {sub.title}
+                              {/* Indicator for sub-active */}
+                              <div className={cn(
+                                "absolute left-[-25px] top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-primary-500 transition-all",
+                                "opacity-0 group-hover:opacity-30",
+                                isActive && "opacity-100 shadow-[0_0_8px_rgba(59,130,246,0.8)]"
+                              )} />
+                            </>
+                          )}
                         </NavLink>
                       ))}
                     </div>

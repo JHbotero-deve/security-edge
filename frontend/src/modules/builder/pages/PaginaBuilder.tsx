@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion, Reorder, AnimatePresence } from 'framer-motion';
 import { DiseñoBase } from '@/shared/components/DiseñoBase';
 import { Boton } from '@/components/Boton';
@@ -31,7 +31,10 @@ import {
   Cpu,
   MousePointer2,
   LayoutTemplate,
-  Plus
+  Plus,
+  Eye,
+  X,
+  ArrowRight
 } from 'lucide-react';
 import { cn, copyToClipboard } from '@/shared/utils/index';
 import { CATALOG } from '../components/BibliotecaComponentes';
@@ -70,6 +73,7 @@ export const PaginaBuilder = () => {
   });
   const [activePage, setActivePage] = useState('Principal');
   const [canvasItems, setCanvasItems] = useState<any[]>([]);
+  const navigate = useNavigate();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [projectName, setProjectName] = useState('Mi Proyecto Profesional');

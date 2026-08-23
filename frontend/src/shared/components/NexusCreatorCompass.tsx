@@ -98,7 +98,7 @@ export const NexusCreatorCompass = () => {
 
       <motion.button
         whileHover={{ scale: 1.05 }}
-        whileActive={{ scale: 0.95 }}
+        whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-all relative group",

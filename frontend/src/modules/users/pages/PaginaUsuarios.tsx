@@ -1,14 +1,4 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { DiseñoBase } from '@/shared/components/DiseñoBase';
-import { TablaDatos } from '@/components/TablaDatos';
-import { TarjetaUsuario } from '@/components/TarjetaUsuario';
-import { usuariosServicio } from '../services/usuarios.servicio';
-import { Users, UserPlus, LayoutGrid, List } from 'lucide-react';
-import { Boton } from '@/components/Boton';
-import { cn } from '@/shared/utils';
-
-import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { DiseñoBase } from '@/shared/components/DiseñoBase';
 import { TablaDatos } from '@/components/TablaDatos';
