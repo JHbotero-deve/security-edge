@@ -35,18 +35,28 @@ interface Message {
 
 const INITIAL_MESSAGES: Message[] = [
   {
-    id: '1',
+    id: 'system-manifesto',
     role: 'assistant',
-    content: 'Núcleo Nexus Inteligencia Inicializado. Estoy listo para asistirte en el desarrollo de tu infraestructura de seguridad. ¿Qué necesitas optimizar hoy?',
+    content: 'CONEXIÓN ESTABLECIDA. Se ha desplegado el MANIFIESTO DE ASISTENCIA NEXUS. Este nodo está configurado para acelerar tu desarrollo sin fricciones.',
+    type: 'suggestion',
     timestamp: new Date(),
+    code: `// --- PROTOCOLO DE AYUDA NEXUS v4.5 ---
+// 1. ARQUITECTURA: Rutas y controladores seguros.
+// 2. COMPONENTES: UI auditada (Tailwind + Lucide).
+// 3. SEGURIDAD: Validación de integridad en tiempo real.
+// 4. DOCUMENTACIÓN: Solo se genera al completar el 100% de la lógica.
+//    (Advertencia activa: Si el código está incompleto, no habrá docs).
+
+// ESTADO: LISTO PARA DESARROLLO ULTRAPRO.
+// COMANDO CLAVE: /finalizar (Audita, Asegura y Documenta).`
   }
 ];
 
 const SUGGESTIONS = [
-  "Optimizar Auth JWT",
-  "Generar Middleware de Logs",
-  "Crear Interfaz de Auditoría",
-  "Refinar Estilos CSS"
+  "Crear Botón Inteligente",
+  "Auditoría de Seguridad",
+  "Generar Rutas Pro",
+  "Finalizar y Documentar"
 ];
 
 export const PaginaInteligencia = () => {
@@ -77,13 +87,26 @@ export const PaginaInteligencia = () => {
 
     // Simular procesamiento del núcleo
     setTimeout(() => {
+      let responseContent = `He procesado tu requerimiento: "${userMsg.content}".`;
+      let assistantCode = "";
+
+      if (userMsg.content.toLowerCase().includes('finalizar')) {
+        responseContent = "Iniciando protocolo de finalización... AUDITANDO COMPONENTES... [OK]. VERIFICANDO RUTAS... [OK]. ADVERTENCIA: Se han detectado módulos sin lógica de negocio completa. No se generará el README.md oficial hasta que todos los nodos estén cerrados. Por favor, completa la integración del Backend para habilitar la documentación automática.";
+        assistantCode = "// ESTADO: ESPERANDO CIERRE DE NODOS\n// DOCUMENTACIÓN BLOQUEADA PARA EVITAR REDUNDANCIAS.";
+      } else if (userMsg.content.toLowerCase().includes('botón inteligente')) {
+        responseContent = "He generado un nodo de acción inteligente. Este componente detecta automáticamente el contexto de la página y te pregunta la ruta o función a ejecutar antes de consolidar el código.";
+        assistantCode = "// COMPONENTE SMART ACTION\n<BotonInteligente \n  intent='auto' \n  theme='primary' \n/>";
+      } else {
+        assistantCode = userMsg.content.toLowerCase().includes('auth')
+          ? "export const authMiddleware = (req, res, next) => {\n  const token = req.headers.authorization;\n  if (!token) return res.status(401).send('No Auth');\n  next();\n};"
+          : "const nexusComponent = () => {\n  return <div className='p-8 bg-slate-900'>Nexus Core</div>\n};";
+      }
+
       const assistantMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: `He procesado tu requerimiento en el nodo central. Para implementar "${userMsg.content}", te recomiendo seguir el estándar Nexus v4.0. Aquí tienes un prototipo lógico:`,
-        code: userMsg.content.toLowerCase().includes('auth')
-          ? "export const authMiddleware = (req, res, next) => {\n  const token = req.headers.authorization;\n  if (!token) return res.status(401).send('No Auth');\n  next();\n};"
-          : "const nexusComponent = () => {\n  return <div className='p-8 bg-slate-900'>Nexus Core</div>\n};",
+        content: responseContent,
+        code: assistantCode,
         type: 'code',
         timestamp: new Date()
       };
@@ -141,11 +164,22 @@ export const PaginaInteligencia = () => {
           <div className="bg-gradient-to-br from-indigo-600/10 to-transparent border border-indigo-500/20 p-6 rounded-[2.5rem] space-y-4">
              <div className="flex items-center gap-2 text-indigo-400">
                 <Braces size={14} fill="currentColor" />
-                <span className="text-[10px] font-black uppercase tracking-widest">Nexus Brain Mode</span>
+                <span className="text-[10px] font-black uppercase tracking-widest">Protocolo de Operación</span>
              </div>
-             <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest leading-relaxed italic text-center">
-                Optimizando rutas lógicas para el despliegue inmediato.
-             </p>
+             <div className="space-y-3">
+                <div className="flex gap-2">
+                   <div className="w-1 h-1 rounded-full bg-indigo-500 mt-1" />
+                   <p className="text-[9px] text-slate-400 font-bold uppercase tracking-tighter leading-tight">Documentación Inteligente: Solo al finalizar con éxito (Evitar basura).</p>
+                </div>
+                <div className="flex gap-2">
+                   <div className="w-1 h-1 rounded-full bg-indigo-500 mt-1" />
+                   <p className="text-[9px] text-slate-400 font-bold uppercase tracking-tighter leading-tight">Auditoría 360°: Cada componente se entrega verificado y seguro.</p>
+                </div>
+                <div className="flex gap-2">
+                   <div className="w-1 h-1 rounded-full bg-indigo-500 mt-1" />
+                   <p className="text-[9px] text-slate-400 font-bold uppercase tracking-tighter leading-tight">Seguridad Nexus: Auditoría automática en cada respuesta.</p>
+                </div>
+             </div>
           </div>
         </aside>
 
@@ -157,11 +191,19 @@ export const PaginaInteligencia = () => {
           <div className="px-8 py-5 border-b border-slate-800 bg-slate-950/50 backdrop-blur-md flex items-center justify-between relative z-10">
              <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-primary-500 shadow-glow" />
-                <span className="text-[10px] font-black text-white uppercase tracking-widest italic">Hilo de Desarrollo Activo</span>
+                <span className="text-[10px] font-black text-white uppercase tracking-widest italic">Nodo de Inteligencia Activo</span>
              </div>
-             <button className="text-[9px] font-black text-slate-500 uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">
-                <History size={14}/> Historial de Comandos
-             </button>
+             <div className="flex gap-4">
+                <button
+                  onClick={() => setMessages(prev => [...prev, INITIAL_MESSAGES[0]])}
+                  className="px-3 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-lg text-[8px] font-black text-primary-400 uppercase tracking-widest hover:bg-primary-500 hover:text-white transition-all"
+                >
+                   📜 Ver Manifiesto
+                </button>
+                <button className="text-[9px] font-black text-slate-500 uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">
+                   <History size={14}/> Comandos
+                </button>
+             </div>
           </div>
 
           {/* Chat Messages */}

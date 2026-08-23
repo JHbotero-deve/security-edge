@@ -236,10 +236,10 @@ export const PaginaBuilder = () => {
   }, [activePage, projectPages]);
 
   const generateFullCode = () => {
-    return `// Nexus Studio Export: ${projectName}\n// Generado: ${new Date().toLocaleString()}\n\nimport React from 'react';\n\n${Object.keys(projectPages).map(p => {
+    return `// Proyecto Dinámico Nexus Studio: ${projectName}\n// Las rutas son flexibles para evitar errores de compilación.\n\nimport React from 'react';\nimport { useNavigate } from 'react-router-dom';\n\n${Object.keys(projectPages).map(p => {
       const pData = projectPages[p];
-      return `/** \n * Página: ${p}\n * Propósito: ${pData.type}\n */\nexport const Page_${p.replace(/\s+/g, '')} = () => (\n  <div className="space-y-12 pb-24" style={{ backgroundColor: '${canvasBg}', color: '${themeColor}' }}>\n${pData.items.map((item: any) => `    <${item.title.replace(/\s+/g, '')} />`).join('\n')}\n  </div>\n);`;
-    }).join('\n\n')}`;
+      return `/** \n * Página: ${p}\n * Propósito: ${pData.type}\n */\nexport const Page_${p.replace(/\s+/g, '')} = () => {\n  const navigate = useNavigate();\n  return (\n    <div className="space-y-12 pb-24" style={{ backgroundColor: '${canvasBg}', color: '${themeColor}' }}>\n${pData.items.map((item: any) => `      <${item.title.replace(/\s+/g, '')} />`).join('\n')}\n    </div>\n  );\n};`;
+    }).join('\n\n')}\n\n// MAPA DE RUTAS SUGERIDO\n// ${Object.keys(projectPages).map(p => `path: "/${p.toLowerCase().replace(/\s+/g, '-')}"`).join('\n// ')}`;
   };
 
   const handleCopy = async () => {
@@ -404,9 +404,9 @@ export const PaginaBuilder = () => {
                 <div className="flex flex-col">
                   <span className="text-[10px] font-black text-white uppercase italic tracking-tighter leading-none">{projectName}</span>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className="text-[8px] font-bold text-primary-500 uppercase tracking-widest">{activePage}</span>
+                    <span className="text-[8px] font-bold text-primary-500 uppercase tracking-widest">tinyurl.com/JorgeDevops</span>
                     <Command size={10} className="text-slate-600" />
-                    <span className="text-[7px] text-slate-600 font-bold uppercase">{projectPages[activePage]?.type}</span>
+                    <span className="text-[7px] text-slate-600 font-bold uppercase">{activePage} // {projectPages[activePage]?.type}</span>
                   </div>
                 </div>
              </div>

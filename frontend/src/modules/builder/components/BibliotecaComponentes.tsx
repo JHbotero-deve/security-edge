@@ -406,11 +406,58 @@ export const TestimonialsGlass = ({ themeColor = '#3b82f6' }: { themeColor?: str
   </div>
 );
 
+// --- SMART COMPONENTS ---
+
+export const BotonInteligente = ({ themeColor = '#3b82f6' }: { themeColor?: string }) => {
+  const [config, setConfig] = React.useState({ route: '', use: '' });
+
+  return (
+    <div className="p-6 bg-slate-900 rounded-[2rem] border border-white/5 shadow-2xl flex flex-col gap-4">
+      <div className="flex items-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-widest border-b border-white/5 pb-2">
+        <Sparkles size={12} className="text-primary-500"/> Configuración de Acción Inteligente
+      </div>
+      {!config.use ? (
+        <div className="space-y-3">
+          <p className="text-[11px] text-white font-bold italic">¿Cuál es el propósito de este botón?</p>
+          <div className="grid grid-cols-2 gap-2">
+            {['Navegación', 'Ejecución API', 'Descarga PDF', 'Cierre Sesión'].map(u => (
+              <button
+                key={u}
+                onClick={() => setConfig({...config, use: u})}
+                className="px-3 py-2 bg-slate-800 rounded-xl text-[9px] font-black text-slate-300 uppercase hover:bg-primary-600 hover:text-white transition-all"
+              >
+                {u}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-4 animate-in fade-in zoom-in-95">
+          <div className="flex justify-between items-center">
+            <span className="text-[10px] font-black text-primary-400 uppercase">{config.use}</span>
+            <button onClick={() => setConfig({route:'', use:''})} className="text-[8px] text-slate-600 underline uppercase">Cambiar</button>
+          </div>
+          <Entrada
+            className="bg-slate-950 border-slate-800 text-white py-2"
+            placeholder="Ingresa destino o función (Libre)..."
+          />
+          <Boton className="w-full py-2" style={{ backgroundColor: themeColor }}>
+            Confirmar Acción
+          </Boton>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // --- COMPONENT CATALOG FOR BUILDER ---
 
 export const CATALOG = [
+  // Inteligencia - ¡Nuevo!
+  { id: 'smart-btn', aisle: 'Inteligencia', title: 'Botón de Acción Inteligente', type: 'button', isPremium: true, render: (t: string) => <div className="flex justify-center"><BotonInteligente themeColor={t} /></div> },
+
   // 1. ESTRUCTURA: ENCABEZADOS
-  { id: 'header-nex', aisle: 'Encabezados', title: 'Header Corporativo Pro', type: 'header', render: (t: string) => <HeaderNexus themeColor={t} /> },
+  { id: 'header-nex', aisle: 'Encabezados', title: 'Header Corporativo Pro', type: 'header', isPremium: true, render: (t: string) => <HeaderNexus themeColor={t} /> },
   { id: 'header-min', aisle: 'Encabezados', title: 'Header Minimalista', type: 'header', render: (t: string) => <div className="w-full bg-slate-900 p-4 rounded-xl flex justify-between items-center text-white"><span className="font-black italic uppercase tracking-tighter text-xs">Mini Nexus</span><div className="flex gap-2"><div className="w-2 h-2 rounded-full" style={{backgroundColor: t}}/><div className="w-2 h-2 rounded-full bg-slate-700"/></div></div> },
 
   // 2. IMPACTO: HERO SECTIONS

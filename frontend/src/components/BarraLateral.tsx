@@ -186,7 +186,17 @@ export const BarraLateral = () => {
           ))}
         </nav>
 
-        <div className="p-4 border-t border-slate-100">
+        <div className="p-4 border-t border-slate-100 space-y-3">
+          <div className="bg-gradient-to-tr from-amber-500/10 to-transparent border border-amber-500/20 p-4 rounded-2xl">
+             <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-black text-amber-600 uppercase tracking-widest">Plan Actual</span>
+                <span className="px-2 py-0.5 bg-slate-900 text-white text-[7px] font-black rounded-full uppercase">Trial</span>
+             </div>
+             <p className="text-[9px] text-slate-500 font-bold leading-tight mb-3">7 días restantes de Nexus Studio Pro.</p>
+             <button className="w-full py-2 bg-amber-500 text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-amber-600 transition-all shadow-lg shadow-amber-500/20">
+                Mejorar a Pro
+             </button>
+          </div>
           <div className={cn("flex items-center p-2 rounded-xl bg-slate-50 border border-slate-200 transition-all", isCollapsed && "justify-center")}>
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mr-2" />
             {!isCollapsed && <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">System Online</span>}

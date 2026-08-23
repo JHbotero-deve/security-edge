@@ -423,8 +423,8 @@ export const PaginaLaboratorio = () => {
              <div className="flex items-center gap-6">
                 <div className="flex flex-col border-r border-slate-800 pr-6">
                    <span className="text-xs font-black text-white italic uppercase tracking-tighter">Nexus Supermarket</span>
-                   <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">
-                     Terminal: <span className="text-primary-500/60">{window.location.hostname}</span>
+                   <span className="text-[8px] font-bold text-primary-500 uppercase tracking-widest mt-0.5">
+                     Link Pro: <span className="text-white">tinyurl.com/JorgeDevops</span>
                    </span>
                 </div>
                 <div className="flex items-center gap-2">
