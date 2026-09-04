@@ -25,9 +25,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || "development";
 
-// Sin JWT_SECRET, la app no puede firmar/verificar tokens de forma segura.
-// Antes se usaba un valor por defecto ("secret") si faltaba la variable:
-// eso permite forjar tokens válidos. Ahora se detiene el arranque.
 if (!process.env.JWT_SECRET) {
   logger.error("JWT_SECRET no está definido. Configúralo en tu .env antes de iniciar el servidor.");
   process.exit(1);
@@ -35,10 +32,6 @@ if (!process.env.JWT_SECRET) {
 
 app.use(helmet());
 
-// Orígenes permitidos, anclados con ^ y $: antes el regex solo buscaba si el
-// origin "contenía" estas palabras en cualquier parte (ej: un dominio como
-// "no-es-localhost.atacante.com" también pasaba). Ahora se exige coincidencia
-// completa del dominio.
 const ALLOWED_ORIGIN_PATTERNS = [
   /^https?:\/\/localhost(:\d+)?$/,
   /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
