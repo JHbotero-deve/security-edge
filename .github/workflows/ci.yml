@@ -36,7 +36,7 @@ jobs:
           npx tsc --noEmit
 
       - name: Start Test Infrastructure
-        run: docker compose up -d db
+        run: docker compose up -d database
 
       - name: Verify Database Integrity
         run: |
