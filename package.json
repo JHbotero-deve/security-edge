@@ -1,23 +1,41 @@
+
 {
-  "name": "security-edge-ui-tools",
+  "name": "security-edge-backend",
   "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "npx concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "cd backend && npm run dev",
-    "dev:frontend": "cd frontend && npm run dev",
-    "build-ui-index": "node tools/ui-indexer.js"
+  "type": "module",
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.1.1",
+    "@types/pg": "^8.20.3",
+    "prisma": "^6.19.3",
+    "tar": "^7.5.22",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
   },
   "dependencies": {
-    "@prisma/client": "^7.9.0",
-    "glob": "^10.3.3",
+    "@prisma/adapter-pg": "^6.4.1",
+    "@prisma/client": "^6.19.3",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "pg": "^8.22.0",
-    "concurrently": "^9.1.2"
+    "winston": "^3.17.0",
+    "zod": "^3.24.2"
   },
-  "devDependencies": {
-    "@types/express": "^5.0.6",
-    "@types/node": "^26.1.1",
-    "prisma": "^7.9.0",
-    "typescript": "^7.0.2"
+  "scripts": {
+    "test:db": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' src/test-db.ts",
+    "dev": "npx tsx watch src/index.ts"
+  },
+  "overrides": {
+    "tar": "^7.5.22"
   }
 }
