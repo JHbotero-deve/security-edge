@@ -85,10 +85,15 @@ app.use("/api/monitoring", monitoringRoutes);
 app.use("/api/builder", builderRoutes);
 
 app.use(notFoundHandler);
+
+
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  logger.info("Security Edge server running", {
+
+app.listen(PORT,
+  () => {
+    logger.info("Security Edge server running",
+  {
     port: PORT,
     environment: NODE_ENV,
     timestamp: new Date(),

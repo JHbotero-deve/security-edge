@@ -1,9 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import logger from "../utils/logger.js";
 
-/**
- * Middleware to log all requests
- */
 export function requestLogger(req: Request, res: Response, next: NextFunction) {
   const start = Date.now();
 
@@ -24,9 +21,6 @@ export function requestLogger(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
-/**
- * Middleware to attach request metadata
- */
 export function requestMetadata(req: Request, res: Response, next: NextFunction) {
   (req as any).metadata = {
     ip: req.ip,

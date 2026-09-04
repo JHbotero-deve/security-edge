@@ -22,10 +22,9 @@ export class AuthService {
         throw new AppError("El nombre de usuario ya está registrado", 400);
       }
     }
-
     const hashedPassword = await bcrypt.hash(data.password, 10);
     const user = await this.repository.create({
-      ...data,
+      data,
       password: hashedPassword,
       username: data.username || data.email.split("@")[0],
       role: "USER",
@@ -70,7 +69,7 @@ export class AuthService {
       throw new AppError("Usuario no encontrado", 404);
     }
 
-    const { password, ...userWithoutPassword } = user as any;
+    const { password, userWithoutPassword } = user as any;
     return userWithoutPassword;
   }
 

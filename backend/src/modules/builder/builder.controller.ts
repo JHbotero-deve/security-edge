@@ -39,8 +39,7 @@ export class ProjectController {
       res.status(201).json({ success: true, data });
     } catch (error) {
       next(error);
-    }
-  };
+    } };
 
   update = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {

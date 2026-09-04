@@ -5,7 +5,6 @@ import { jwtMiddleware, roleMiddleware } from "../../middlewares/auth.middleware
 const router = Router();
 const controller = new AdminController();
 
-// Todas las rutas de administración requieren rol ADMIN
 router.use(jwtMiddleware, roleMiddleware(["ADMIN"]));
 
 router.get("/dashboard", controller.getDashboard);

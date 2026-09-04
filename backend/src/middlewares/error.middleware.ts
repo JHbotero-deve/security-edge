@@ -1,9 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import logger from "../utils/logger.js";
 
-/**
- * 404 Not Found handler
- */
 export function notFoundHandler(req: Request, res: Response) {
   logger.warn("Route not found", {
     method: req.method,
@@ -18,10 +15,6 @@ export function notFoundHandler(req: Request, res: Response) {
   });
 }
 
-/**
- * Global error handler middleware
- * Must be the last middleware registered
- */
 export function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
   const status = err.statusCode || err.status || 500;
   const message = err.message || "Internal Server Error";
@@ -35,15 +28,13 @@ export function errorHandler(err: any, req: Request, res: Response, next: NextFu
     ip: req.ip,
   });
 
-  // Prisma validation errors
+
   if (err.code === "P2002") {
     return res.status(409).json({
       success: false,
       error: `Unique constraint violation on field: ${err.meta?.target?.[0] || "unknown"}`,
     });
   }
-
-  // Prisma not found errors
   if (err.code === "P2025") {
     return res.status(404).json({
       success: false,
@@ -51,7 +42,6 @@ export function errorHandler(err: any, req: Request, res: Response, next: NextFu
     });
   }
 
-  // Zod validation errors
   if (err.name === "ZodError") {
     return res.status(400).json({
       success: false,
@@ -62,8 +52,6 @@ export function errorHandler(err: any, req: Request, res: Response, next: NextFu
       })),
     });
   }
-
-  // JWT errors
   if (err.name === "JsonWebTokenError") {
     return res.status(401).json({
       success: false,
@@ -78,7 +66,6 @@ export function errorHandler(err: any, req: Request, res: Response, next: NextFu
     });
   }
 
-  // Default error response
   return res.status(status).json({
     success: false,
     error: message,
