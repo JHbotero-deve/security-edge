@@ -1,0 +1,4 @@
+2026-09-04 17:17:15 [info] : Security Edge server running {
+  "port": "8000",
+  "environment": "development"
+}
