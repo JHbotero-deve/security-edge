@@ -1,24 +1,24 @@
+import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-<<<<<<< HEAD
 import type { ReactNode } from 'react';
-=======
->>>>>>> origin/main
 import { useAuthStore } from './store/autenticacion.estado';
-import { PaginaLogin } from './modules/auth/pages/PaginaLogin';
-import { PaginaDashboard } from './modules/dashboard/pages/PaginaDashboard';
-import { PaginaIncidentes } from './modules/incidents/pages/PaginaIncidentes';
-import { PaginaUsuarios } from './modules/users/pages/PaginaUsuarios';
-import { PaginaAuditoria } from './modules/audit/pages/PaginaAuditoria';
-import { PaginaMonitoreo } from './modules/monitoring/pages/PaginaMonitoreo';
-import { PaginaNotificaciones } from './modules/notifications/pages/PaginaNotificaciones';
-import { PaginaRoles } from './modules/roles/pages/PaginaRoles';
-import { PaginaConfiguracion } from './modules/settings/pages/PaginaConfiguracion';
-import { PaginaTerminal } from './modules/terminal/pages/PaginaTerminal';
-import { PaginaLaboratorio } from './modules/playground/pages/PaginaLaboratorio';
-import { PaginaBuilder } from './modules/builder/pages/PaginaBuilder';
-import { PaginaInteligencia } from './modules/assistant/pages/PaginaInteligencia';
-<<<<<<< HEAD
-import { PaginaAlertas } from './modules/alerts/pages/PaginaAlertas';
+
+// Carga perezosa por ruta: cada página se descarga solo cuando el usuario
+// navega a ella, en vez de venir toda junta en el bundle inicial.
+const PaginaLogin = lazy(() => import('./modules/auth/pages/PaginaLogin').then(m => ({ default: m.PaginaLogin })));
+const PaginaDashboard = lazy(() => import('./modules/dashboard/pages/PaginaDashboard').then(m => ({ default: m.PaginaDashboard })));
+const PaginaIncidentes = lazy(() => import('./modules/incidents/pages/PaginaIncidentes').then(m => ({ default: m.PaginaIncidentes })));
+const PaginaUsuarios = lazy(() => import('./modules/users/pages/PaginaUsuarios').then(m => ({ default: m.PaginaUsuarios })));
+const PaginaAuditoria = lazy(() => import('./modules/audit/pages/PaginaAuditoria').then(m => ({ default: m.PaginaAuditoria })));
+const PaginaMonitoreo = lazy(() => import('./modules/monitoring/pages/PaginaMonitoreo').then(m => ({ default: m.PaginaMonitoreo })));
+const PaginaNotificaciones = lazy(() => import('./modules/notifications/pages/PaginaNotificaciones').then(m => ({ default: m.PaginaNotificaciones })));
+const PaginaRoles = lazy(() => import('./modules/roles/pages/PaginaRoles').then(m => ({ default: m.PaginaRoles })));
+const PaginaConfiguracion = lazy(() => import('./modules/settings/pages/PaginaConfiguracion').then(m => ({ default: m.PaginaConfiguracion })));
+const PaginaTerminal = lazy(() => import('./modules/terminal/pages/PaginaTerminal').then(m => ({ default: m.PaginaTerminal })));
+const PaginaLaboratorio = lazy(() => import('./modules/playground/pages/PaginaLaboratorio').then(m => ({ default: m.PaginaLaboratorio })));
+const PaginaBuilder = lazy(() => import('./modules/builder/pages/PaginaBuilder').then(m => ({ default: m.PaginaBuilder })));
+const PaginaInteligencia = lazy(() => import('./modules/assistant/pages/PaginaInteligencia').then(m => ({ default: m.PaginaInteligencia })));
+const PaginaAlertas = lazy(() => import('./modules/alerts/pages/PaginaAlertas').then(m => ({ default: m.PaginaAlertas })));
 
 // Rutas que en el backend exigen rol ADMIN (users, roles, audit, settings).
 // Antes solo se ocultaban del menú visualmente; alguien que escribiera la
@@ -33,46 +33,34 @@ function RutaAdmin({ children }: { children: ReactNode }) {
 
   return <>{children}</>;
 }
-=======
->>>>>>> origin/main
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/login" element={<PaginaLogin />} />
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/login" element={<PaginaLogin />} />
 
-        {/* Página Principal: Ahora el Laboratorio es la raíz para un link más limpio */}
-        <Route path="/" element={<PaginaLaboratorio />} />
+          {/* Página Principal: Ahora el Laboratorio es la raíz para un link más limpio */}
+          <Route path="/" element={<PaginaLaboratorio />} />
 
-        <Route path="/dashboard" element={<PaginaDashboard />} />
-        <Route path="/incidents" element={<PaginaIncidentes />} />
-<<<<<<< HEAD
-        <Route path="/users" element={<RutaAdmin><PaginaUsuarios /></RutaAdmin>} />
-        <Route path="/audit" element={<RutaAdmin><PaginaAuditoria /></RutaAdmin>} />
-        <Route path="/monitoring" element={<PaginaMonitoreo />} />
-        <Route path="/notifications" element={<PaginaNotificaciones />} />
-        <Route path="/roles" element={<RutaAdmin><PaginaRoles /></RutaAdmin>} />
-        <Route path="/settings" element={<RutaAdmin><PaginaConfiguracion /></RutaAdmin>} />
-=======
-        <Route path="/users" element={<PaginaUsuarios />} />
-        <Route path="/audit" element={<PaginaAuditoria />} />
-        <Route path="/monitoring" element={<PaginaMonitoreo />} />
-        <Route path="/notifications" element={<PaginaNotificaciones />} />
-        <Route path="/roles" element={<PaginaRoles />} />
-        <Route path="/settings" element={<PaginaConfiguracion />} />
->>>>>>> origin/main
-        <Route path="/terminal" element={<PaginaTerminal />} />
-        <Route path="/laboratorio" element={<PaginaLaboratorio />} />
-        <Route path="/builder" element={<PaginaBuilder />} />
-        <Route path="/intelligence" element={<PaginaInteligencia />} />
-<<<<<<< HEAD
-        <Route path="/alerts" element={<PaginaAlertas />} />
-=======
->>>>>>> origin/main
+          <Route path="/dashboard" element={<PaginaDashboard />} />
+          <Route path="/incidents" element={<PaginaIncidentes />} />
+          <Route path="/users" element={<RutaAdmin><PaginaUsuarios /></RutaAdmin>} />
+          <Route path="/audit" element={<RutaAdmin><PaginaAuditoria /></RutaAdmin>} />
+          <Route path="/monitoring" element={<PaginaMonitoreo />} />
+          <Route path="/notifications" element={<PaginaNotificaciones />} />
+          <Route path="/roles" element={<RutaAdmin><PaginaRoles /></RutaAdmin>} />
+          <Route path="/settings" element={<RutaAdmin><PaginaConfiguracion /></RutaAdmin>} />
+          <Route path="/terminal" element={<PaginaTerminal />} />
+          <Route path="/laboratorio" element={<PaginaLaboratorio />} />
+          <Route path="/builder" element={<PaginaBuilder />} />
+          <Route path="/intelligence" element={<PaginaInteligencia />} />
+          <Route path="/alerts" element={<PaginaAlertas />} />
 
-        <Route path="*" element={<Navigate to="/laboratorio" />} />
-      </Routes>
+          <Route path="*" element={<Navigate to="/laboratorio" />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }

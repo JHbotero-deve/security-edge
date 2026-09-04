@@ -63,7 +63,7 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
-    allowedHosts: true,
+    allowedHosts: ['localhost', '.trycloudflare.com', '.pinggy.link', '.loca.lt'],
     hmr: {
       clientPort: 443,
     },

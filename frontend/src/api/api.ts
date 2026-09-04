@@ -18,7 +18,6 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-<<<<<<< HEAD
     const status = error.response?.status;
     const method = (error.config?.method || '').toLowerCase();
     const isWriteAction = ['post', 'put', 'patch', 'delete'].includes(method);
@@ -36,15 +35,6 @@ api.interceptors.response.use(
         // PUERTA: mirar/explorar la app sigue abierto sin registro (modo Showcase).
         console.warn('Sesión no iniciada o expirada. Mostrando datos de vista previa.');
       }
-=======
-    // ELIMINADO: Redirección automática a /login.
-    // Para el "Nexus Supermarket", permitimos que la UI maneje los fallos de auth
-    // o muestre datos de prueba sin expulsar al usuario.
-
-    if (error.response?.status === 401) {
-      console.warn('Sesión no iniciada o expirada. Operando en modo Showcase / Vista Previa.');
-      localStorage.removeItem('token');
->>>>>>> origin/main
     }
     return Promise.reject(error);
   }

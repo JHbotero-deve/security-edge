@@ -1,6 +1,6 @@
 # Setup Guide para security-edge
 
-## ❌ Docker No Instalado
+## Docker No Instalado
 
 ### Solución 1: Instalar Docker Desktop (Recomendado)
 
@@ -63,7 +63,7 @@ npm run dev
 
 ---
 
-## 🔧 Comandos PowerShell Correctos
+## Comandos PowerShell Correctos
 
 ### Navegar al proyecto
 ```powershell
@@ -106,7 +106,7 @@ Remove-Item -Recurse -Force frontend\node_modules
 
 ---
 
-## 📋 Próximos Pasos
+## Próximos Pasos
 
 **Opción A: Con Docker (Recomendado para producción)**
 1. Instala Docker Desktop

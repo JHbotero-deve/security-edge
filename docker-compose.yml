@@ -22,8 +22,9 @@ services:
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql://postgres:postgres@database:5432/security_edge?schema=public
-      JWT_SECRET: super_secret_key_change_me
+      JWT_SECRET: ${JWT_SECRET:-super_secret_key_change_me}
       PORT: 3000
+      ENABLE_HEALTH_CHECK: "true"
     ports:
       - "3000:3000"
     depends_on:

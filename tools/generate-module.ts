@@ -10,7 +10,7 @@ if (!moduleName) {
   process.exit(1);
 }
 
-const pascalCase = (str: string): string => 
+const pascalCase = (str: string): string =>
   str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
 const moduleDir = path.join(__dirname, `../backend/src/modules/${moduleName}`);

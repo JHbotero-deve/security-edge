@@ -139,7 +139,6 @@ model AuditLog {
 }
 
 // ==========================================
-<<<<<<< HEAD
 // MÓDULO: builder (Proyectos guardados del constructor visual)
 // ==========================================
 model Project {
@@ -156,8 +155,6 @@ model Project {
 }
 
 // ==========================================
-=======
->>>>>>> origin/main
 // MÓDULO: dashboard & auth (Mapeos auxiliares persistentes)
 // ==========================================
 model DashboardMetric {

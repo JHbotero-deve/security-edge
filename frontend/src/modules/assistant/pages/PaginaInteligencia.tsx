@@ -24,15 +24,12 @@ import {
 } from 'lucide-react';
 import { cn } from '@/shared/utils/index';
 
-<<<<<<< HEAD
 // NOTA: Este asistente responde con reglas simuladas (setTimeout + keywords),
 // no está conectado a un modelo de IA real. Para producción, reemplazar
 // handleSend por una llamada a un endpoint propio (ej: api.post('/assistant', ...))
 // que a su vez llame a un proveedor de IA con su API key en el backend
 // (nunca exponer una API key de IA en el frontend).
 
-=======
->>>>>>> origin/main
 interface Message {
   id: string;
   role: 'user' | 'assistant';
@@ -242,13 +239,13 @@ export const PaginaInteligencia = () => {
                   }}
                   className="px-3 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-lg text-[8px] font-black text-primary-400 uppercase tracking-widest hover:bg-primary-500 hover:text-white transition-all"
                 >
-                   🗑️ Limpiar Memoria
+                   Limpiar Memoria
                 </button>
                 <button
                   onClick={() => setMessages(prev => [...prev, INITIAL_MESSAGES[0]])}
                   className="px-3 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-lg text-[8px] font-black text-primary-400 uppercase tracking-widest hover:bg-primary-500 hover:text-white transition-all"
                 >
-                   📜 Ver Manifiesto
+                   Ver Manifiesto
                 </button>
                 <button className="text-[9px] font-black text-slate-500 uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2">
                    <History size={14}/> Comandos
@@ -351,11 +348,7 @@ export const PaginaInteligencia = () => {
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-3 z-20">
                    <div className="hidden md:flex flex-col items-end mr-2">
                       <span className="text-[7px] font-black text-slate-600 uppercase tracking-widest italic">Núcleo Nexus v4.2</span>
-<<<<<<< HEAD
                       <span className="text-[9px] font-bold text-amber-500 uppercase">Modo Demostración</span>
-=======
-                      <span className="text-[9px] font-bold text-primary-500 uppercase">Seguridad Activa</span>
->>>>>>> origin/main
                    </div>
                    <button
                      onClick={handleSend}

@@ -16,9 +16,9 @@ Garantizar que todas las vulnerabilidades identificadas sean tratadas de forma r
 
 | Versión | Soporte |
 |----------|----------|
-| Unreleased | ✅ |
-| 0.1.x | ✅ |
-| Versiones anteriores | ❌ |
+| Unreleased | Sí |
+| 0.1.x | Sí |
+| Versiones anteriores | No |
 
 ---
 

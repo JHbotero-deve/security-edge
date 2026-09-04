@@ -14,10 +14,7 @@ import notificationsRoutes from "./modules/notifications/notifications.routes.js
 import settingsRoutes from "./modules/settings/settings.routes.js";
 import alertRoutes from "./modules/alerts/alerts.routes.js";
 import monitoringRoutes from "./modules/monitoring/monitoring.routes.js";
-<<<<<<< HEAD
 import builderRoutes from "./modules/builder/builder.routes.js";
-=======
->>>>>>> origin/main
 import { apiLimiter } from "./middlewares/rate-limit.middleware.js";
 import { requestLogger, requestMetadata } from "./middlewares/logging.middleware.js";
 import { notFoundHandler, errorHandler } from "./middlewares/error.middleware.js";
@@ -28,7 +25,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || "development";
 
-<<<<<<< HEAD
 // Sin JWT_SECRET, la app no puede firmar/verificar tokens de forma segura.
 // Antes se usaba un valor por defecto ("secret") si faltaba la variable:
 // eso permite forjar tokens válidos. Ahora se detiene el arranque.
@@ -55,14 +51,6 @@ app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin || ALLOWED_ORIGIN_PATTERNS.some((pattern) => pattern.test(origin))) {
-=======
-app.use(helmet());
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Permitir localhost y cualquier túnel de Cloudflare/Pinggy
-      if (!origin || origin.match(/localhost|trycloudflare\.com|pinggy\.link|loca\.lt/)) {
->>>>>>> origin/main
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
@@ -101,10 +89,7 @@ app.use("/api/notifications", notificationsRoutes);
 app.use("/api/settings", settingsRoutes);
 app.use("/api/alerts", alertRoutes);
 app.use("/api/monitoring", monitoringRoutes);
-<<<<<<< HEAD
 app.use("/api/builder", builderRoutes);
-=======
->>>>>>> origin/main
 
 app.use(notFoundHandler);
 app.use(errorHandler);

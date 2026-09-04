@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("🌱 Iniciando siembra de base de datos (Seeding)...");
+  console.log("Iniciando siembra de base de datos (Seeding)...");
 
   // Limpiar datos existentes
   await prisma.auditLog.deleteMany();
@@ -82,13 +82,13 @@ async function main() {
     },
   });
 
-  console.log("✅ Base de datos sembrada exitosamente.");
+  console.log("Base de datos sembrada exitosamente.");
   console.log(`- Usuario Admin: admin@securityedge.com / Admin123!`);
 }
 
 main()
   .catch((e) => {
-    console.error("❌ Error en el Seeding:", e);
+    console.error("Error en el Seeding:", e);
     process.exit(1);
   })
   .finally(async () => {

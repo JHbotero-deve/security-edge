@@ -5,10 +5,7 @@
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
-<<<<<<< HEAD
     "@types/express": "^5.0.6",
-=======
->>>>>>> origin/main
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^26.1.1",
     "@types/pg": "^8.20.3",
@@ -35,7 +32,9 @@
   },
   "scripts": {
     "test:db": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' src/test-db.ts",
-    "dev": "npx tsx watch src/index.ts"
+    "dev": "npx tsx watch src/index.ts",
+    "build": "npx prisma generate && tsc",
+    "start": "node dist/index.js"
   },
   "overrides": {
     "tar": "^7.5.22"
