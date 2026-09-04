@@ -34,6 +34,7 @@ import {
   Plus,
   Eye,
   X,
+<<<<<<< HEAD
   ArrowRight,
   Lock
 } from 'lucide-react';
@@ -41,6 +42,12 @@ import { cn, copyToClipboard } from '@/shared/utils/index';
 import { CATALOG } from '../components/BibliotecaComponentes';
 import api from '@/api/api';
 import { useAuthStore } from '@/store/autenticacion.estado';
+=======
+  ArrowRight
+} from 'lucide-react';
+import { cn, copyToClipboard } from '@/shared/utils/index';
+import { CATALOG } from '../components/BibliotecaComponentes';
+>>>>>>> origin/main
 
 const THEME_COLORS = [
   { name: 'Azul Nexus', value: '#3b82f6' },
@@ -69,7 +76,10 @@ const PAGE_FUNCTIONS = [
 
 export const PaginaBuilder = () => {
   const [searchParams] = useSearchParams();
+<<<<<<< HEAD
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+=======
+>>>>>>> origin/main
   const [themeColor, setThemeColor] = useState('#3b82f6');
   const [canvasBg, setCanvasBg] = useState('#020617');
   const [projectPages, setProjectPages] = useState<Record<string, any>>({
@@ -81,10 +91,15 @@ export const PaginaBuilder = () => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [projectName, setProjectName] = useState('Mi Proyecto Profesional');
+<<<<<<< HEAD
   const [currentProjectId, setCurrentProjectId] = useState<number | null>(null);
   const [savedProjects, setSavedProjects] = useState<any[]>([]);
   const [showProjectsList, setShowProjectsList] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+=======
+  const [savedProjects, setSavedProjects] = useState<any[]>([]);
+  const [showProjectsList, setShowProjectsList] = useState(false);
+>>>>>>> origin/main
   const [copied, setCopied] = useState(false);
   const [viewMode, setViewMode] = useState<'desktop' | 'mobile'>('desktop');
   const [isPreviewMode, setIsPreviewMode] = useState(false);
@@ -99,6 +114,7 @@ export const PaginaBuilder = () => {
     setCanvasItems(projectPages[activePage]?.items || []);
   }, [activePage, projectPages]);
 
+<<<<<<< HEAD
   const loadProjectsList = useCallback(async () => {
     if (!isAuthenticated) {
       setSavedProjects([]);
@@ -119,6 +135,11 @@ export const PaginaBuilder = () => {
   const buildProjectPayload = useCallback(() => {
     const updatedPages = { ...projectPages, [activePage]: { ...projectPages[activePage], items: canvasItems } };
     return {
+=======
+  const saveProject = useCallback(() => {
+    const updatedPages = { ...projectPages, [activePage]: { ...projectPages[activePage], items: canvasItems } };
+    const project = {
+>>>>>>> origin/main
       name: projectName,
       themeColor,
       canvasBg,
@@ -129,6 +150,7 @@ export const PaginaBuilder = () => {
         };
         return acc;
       }, {}),
+<<<<<<< HEAD
     };
   }, [projectName, themeColor, canvasBg, projectPages, activePage, canvasItems]);
 
@@ -187,6 +209,14 @@ export const PaginaBuilder = () => {
     setCurrentProjectId(null);
   }, []);
 
+=======
+      timestamp: Date.now()
+    };
+    localStorage.setItem('nexus_active_project', JSON.stringify(project));
+    alert(`Proyecto "${projectName}" sincronizado.`);
+  }, [projectName, themeColor, canvasBg, projectPages, activePage, canvasItems]);
+
+>>>>>>> origin/main
   const addItem = (item: any) => {
     const newItems = [...canvasItems, { ...item, instanceId: Math.random().toString(36).substr(2, 9) }];
     setCanvasItems(newItems);
@@ -205,15 +235,24 @@ export const PaginaBuilder = () => {
   };
 
   const filteredCatalog = useMemo(() => {
+<<<<<<< HEAD
     const catFilter = searchParams.get('cat');
     const source = catFilter ? CATALOG.filter(item => item.type === catFilter) : CATALOG;
     const grouped: Record<string, any[]> = {};
     source.forEach(item => {
+=======
+    const grouped: Record<string, any[]> = {};
+    CATALOG.forEach(item => {
+>>>>>>> origin/main
       if (!grouped[item.aisle]) grouped[item.aisle] = [];
       grouped[item.aisle].push(item);
     });
     return grouped;
+<<<<<<< HEAD
   }, [searchParams]);
+=======
+  }, []);
+>>>>>>> origin/main
 
   const generateFullCode = () => {
     return `// Nexus Auto-Generated Module: ${projectName}\nimport React from 'react';\n\n${Object.keys(projectPages).map(p => {
@@ -249,6 +288,7 @@ export const PaginaBuilder = () => {
 
                 {/* Project Context */}
                 <div className="space-y-4">
+<<<<<<< HEAD
                   {!isAuthenticated && (
                     <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-3 flex items-center gap-2">
                       <Lock size={14} className="text-amber-500 shrink-0" />
@@ -257,6 +297,8 @@ export const PaginaBuilder = () => {
                       </p>
                     </div>
                   )}
+=======
+>>>>>>> origin/main
                   <div className="bg-slate-950/50 p-4 rounded-2xl border border-slate-800 space-y-3">
                     <input
                       value={projectName}
@@ -265,9 +307,14 @@ export const PaginaBuilder = () => {
                       placeholder="Project Name..."
                     />
                     <div className="flex gap-2">
+<<<<<<< HEAD
                        <button onClick={saveProject} disabled={isSyncing} className="flex-1 py-2 bg-primary-600 rounded-lg text-[9px] font-black text-white uppercase tracking-widest hover:bg-primary-500 transition-all disabled:opacity-50">{isSyncing ? 'Guardando...' : 'Sincronizar'}</button>
                        <button onClick={() => setShowProjectsList(true)} className="flex-1 py-2 bg-slate-800 rounded-lg text-[9px] font-black text-slate-400 uppercase tracking-widest hover:text-white transition-all">Abrir</button>
                        <button onClick={startNewProject} className="py-2 px-3 bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-all" title="Nuevo proyecto"><FilePlus size={14}/></button>
+=======
+                       <button onClick={saveProject} className="flex-1 py-2 bg-primary-600 rounded-lg text-[9px] font-black text-white uppercase tracking-widest hover:bg-primary-500 transition-all">Sincronizar</button>
+                       <button onClick={() => setShowProjectsList(true)} className="flex-1 py-2 bg-slate-800 rounded-lg text-[9px] font-black text-slate-400 uppercase tracking-widest hover:text-white transition-all">Abrir</button>
+>>>>>>> origin/main
                     </div>
                   </div>
                 </div>
@@ -458,6 +505,7 @@ export const PaginaBuilder = () => {
               <Boton className="w-full">Generar Lienzo</Boton>
            </form>
         </Modal>
+<<<<<<< HEAD
 
         <Modal isOpen={showProjectsList} onClose={() => setShowProjectsList(false)} title="Proyectos Guardados">
            {savedProjects.length === 0 ? (
@@ -485,6 +533,8 @@ export const PaginaBuilder = () => {
              </div>
            )}
         </Modal>
+=======
+>>>>>>> origin/main
       </div>
     </DiseñoBase>
   );

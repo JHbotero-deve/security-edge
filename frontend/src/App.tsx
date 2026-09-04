@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+<<<<<<< HEAD
 import type { ReactNode } from 'react';
+=======
+>>>>>>> origin/main
 import { useAuthStore } from './store/autenticacion.estado';
 import { PaginaLogin } from './modules/auth/pages/PaginaLogin';
 import { PaginaDashboard } from './modules/dashboard/pages/PaginaDashboard';
@@ -14,6 +17,7 @@ import { PaginaTerminal } from './modules/terminal/pages/PaginaTerminal';
 import { PaginaLaboratorio } from './modules/playground/pages/PaginaLaboratorio';
 import { PaginaBuilder } from './modules/builder/pages/PaginaBuilder';
 import { PaginaInteligencia } from './modules/assistant/pages/PaginaInteligencia';
+<<<<<<< HEAD
 import { PaginaAlertas } from './modules/alerts/pages/PaginaAlertas';
 
 // Rutas que en el backend exigen rol ADMIN (users, roles, audit, settings).
@@ -29,6 +33,8 @@ function RutaAdmin({ children }: { children: ReactNode }) {
 
   return <>{children}</>;
 }
+=======
+>>>>>>> origin/main
 
 function App() {
   return (
@@ -41,17 +47,29 @@ function App() {
 
         <Route path="/dashboard" element={<PaginaDashboard />} />
         <Route path="/incidents" element={<PaginaIncidentes />} />
+<<<<<<< HEAD
         <Route path="/users" element={<RutaAdmin><PaginaUsuarios /></RutaAdmin>} />
         <Route path="/audit" element={<RutaAdmin><PaginaAuditoria /></RutaAdmin>} />
         <Route path="/monitoring" element={<PaginaMonitoreo />} />
         <Route path="/notifications" element={<PaginaNotificaciones />} />
         <Route path="/roles" element={<RutaAdmin><PaginaRoles /></RutaAdmin>} />
         <Route path="/settings" element={<RutaAdmin><PaginaConfiguracion /></RutaAdmin>} />
+=======
+        <Route path="/users" element={<PaginaUsuarios />} />
+        <Route path="/audit" element={<PaginaAuditoria />} />
+        <Route path="/monitoring" element={<PaginaMonitoreo />} />
+        <Route path="/notifications" element={<PaginaNotificaciones />} />
+        <Route path="/roles" element={<PaginaRoles />} />
+        <Route path="/settings" element={<PaginaConfiguracion />} />
+>>>>>>> origin/main
         <Route path="/terminal" element={<PaginaTerminal />} />
         <Route path="/laboratorio" element={<PaginaLaboratorio />} />
         <Route path="/builder" element={<PaginaBuilder />} />
         <Route path="/intelligence" element={<PaginaInteligencia />} />
+<<<<<<< HEAD
         <Route path="/alerts" element={<PaginaAlertas />} />
+=======
+>>>>>>> origin/main
 
         <Route path="*" element={<Navigate to="/laboratorio" />} />
       </Routes>

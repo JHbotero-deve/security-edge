@@ -84,6 +84,7 @@ export const LoginSecure = ({ themeColor = '#3b82f6' }: { themeColor?: string })
   </div>
 );
 
+<<<<<<< HEAD
 export const LoginGradient = ({ themeColor = '#3b82f6' }: { themeColor?: string }) => (
   <div
     className="w-full max-w-sm mx-auto p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl relative overflow-hidden text-white"
@@ -106,6 +107,8 @@ export const LoginGradient = ({ themeColor = '#3b82f6' }: { themeColor?: string 
   </div>
 );
 
+=======
+>>>>>>> origin/main
 // --- FOOTER VARIANTS ---
 
 export const FooterEnterprise = ({ themeColor = '#3b82f6' }: { themeColor?: string }) => (
@@ -523,10 +526,15 @@ export const CATALOG = [
   { id: 'table-pro', aisle: 'Tablas', title: 'Auditoría de Datos Pro', type: 'table', render: (t: string) => <TablePro themeColor={t} /> },
 
   // 5. CAPTURA: FORMULARIOS & LOGINS
+<<<<<<< HEAD
   { id: 'login-simple', aisle: 'Formularios', title: 'Login Acceso Rápido', type: 'login', render: (t: string) => <div className="flex justify-center"><LoginSimple themeColor={t} /></div> },
   { id: 'login-std', aisle: 'Formularios', title: 'Login Estándar Privado', type: 'login', render: (t: string) => <div className="flex justify-center"><LoginStandard themeColor={t} /></div> },
   { id: 'login-sec', aisle: 'Formularios', title: 'Login Alta Seguridad', type: 'login', render: (t: string) => <div className="flex justify-center"><LoginSecure themeColor={t} /></div> },
   { id: 'login-gradient', aisle: 'Formularios', title: 'Login Degradado de Marca', type: 'login', render: (t: string) => <div className="flex justify-center"><LoginGradient themeColor={t} /></div> },
+=======
+  { id: 'login-std', aisle: 'Formularios', title: 'Login Estándar Privado', type: 'login', render: (t: string) => <div className="flex justify-center"><LoginStandard themeColor={t} /></div> },
+  { id: 'login-sec', aisle: 'Formularios', title: 'Login Alta Seguridad', type: 'login', render: (t: string) => <div className="flex justify-center"><LoginSecure themeColor={t} /></div> },
+>>>>>>> origin/main
   { id: 'form-cont', aisle: 'Formularios', title: 'Contacto de Soporte', type: 'form', render: (t: string) => <div className="flex justify-center"><FormContacto themeColor={t} /></div> },
   { id: 'form-busq', aisle: 'Formularios', title: 'Buscador de Nodo', type: 'form', render: (t: string) => <div className="flex justify-center"><FormBusqueda themeColor={t} /></div> },
 

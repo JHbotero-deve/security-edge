@@ -17,7 +17,10 @@ import {
   Sparkles
 } from 'lucide-react';
 import { useSidebar } from '@/shared/providers/ProveedorBarraLateral';
+<<<<<<< HEAD
 import { useAuthStore } from '@/store/autenticacion.estado';
+=======
+>>>>>>> origin/main
 import { cn } from '@/shared/utils/index';
 
 interface NavItem {
@@ -29,7 +32,11 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
+<<<<<<< HEAD
   { title: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+=======
+  { title: 'Dashboard', href: '/', icon: LayoutDashboard },
+>>>>>>> origin/main
   {
     title: 'Ciberseguridad',
     icon: ShieldAlert,
@@ -42,7 +49,10 @@ const navigation: NavItem[] = [
   {
     title: 'Administración',
     icon: Users,
+<<<<<<< HEAD
     roles: ['ADMIN'],
+=======
+>>>>>>> origin/main
     subItems: [
       { title: 'Usuarios', href: '/users' },
       { title: 'Roles y Permisos', href: '/roles' },
@@ -50,7 +60,11 @@ const navigation: NavItem[] = [
     ]
   },
   { title: 'Notificaciones', href: '/notifications', icon: Bell },
+<<<<<<< HEAD
   { title: 'Configuración', href: '/settings', icon: Settings, roles: ['ADMIN'] },
+=======
+  { title: 'Configuración', href: '/settings', icon: Settings },
+>>>>>>> origin/main
   { title: 'Terminal', href: '/terminal', icon: Terminal },
   { title: 'Laboratorio', href: '/laboratorio', icon: Ghost },
   { title: 'Asistente Privado', href: '/intelligence', icon: Sparkles },
@@ -73,11 +87,14 @@ const navigation: NavItem[] = [
 export const BarraLateral = () => {
   const { isOpen, isCollapsed, toggleSidebar, toggleCollapse } = useSidebar();
   const [openMenus, setOpenMenus] = useState<string[]>([]);
+<<<<<<< HEAD
   const user = useAuthStore(state => state.user);
 
   const visibleNavigation = navigation.filter(
     item => !item.roles || (user && item.roles.includes(user.role))
   );
+=======
+>>>>>>> origin/main
 
   const toggleSubmenu = (title: string) => {
     setOpenMenus(prev =>
@@ -130,7 +147,11 @@ export const BarraLateral = () => {
 
         {/* Navigation Content */}
         <nav className="flex-1 overflow-y-auto overflow-x-hidden py-8 px-4 space-y-3 custom-scrollbar">
+<<<<<<< HEAD
           {visibleNavigation.map((item) => (
+=======
+          {navigation.map((item) => (
+>>>>>>> origin/main
             <div key={item.title}>
               {item.href ? (
                 <NavLink
