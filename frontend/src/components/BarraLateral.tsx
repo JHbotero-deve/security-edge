@@ -111,8 +111,8 @@ export const BarraLateral = () => {
               <ShieldCheck className="text-white w-6 h-6" />
             </div>
             <div className="flex flex-col">
-              <span className="font-black text-white italic tracking-tighter text-lg uppercase leading-none">Nexus Edge</span>
-              <span className="text-[8px] font-black text-primary-500 uppercase tracking-[0.4em] mt-1">Infrastructure</span>
+              <span className="font-black text-white italic tracking-tighter text-lg uppercase leading-none">Núcleo Nexus</span>
+              <span className="text-[8px] font-black text-primary-500 uppercase tracking-[0.4em] mt-1">Infraestructura Táctica</span>
             </div>
           </div>
 
@@ -241,8 +241,8 @@ export const BarraLateral = () => {
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
             {!isCollapsed && (
               <div className="ml-4 flex flex-col">
-                <span className="text-[9px] font-black text-white uppercase tracking-widest">Nexus Node Alpha</span>
-                <span className="text-[7px] font-bold text-emerald-500 uppercase tracking-[0.3em]">Synched & Secure</span>
+                <span className="text-[9px] font-black text-white uppercase tracking-widest">Nodo Nexus Alpha</span>
+                <span className="text-[7px] font-bold text-emerald-500 uppercase tracking-[0.3em]">Sincronizado y Seguro</span>
               </div>
             )}
           </div>

@@ -64,8 +64,8 @@ export const PaginaLogin = () => {
               <ShieldCheck className="text-white w-8 h-8" />
             </div>
             <div className="flex flex-col">
-              <span className="font-black text-2xl text-white italic tracking-tighter uppercase leading-none">Nexus Security</span>
-              <span className="text-[10px] font-bold text-primary-500 uppercase tracking-[0.4em] mt-1">Edge Infrastructure</span>
+              <span className="font-black text-2xl text-white italic tracking-tighter uppercase leading-none">Seguridad Nexus</span>
+              <span className="text-[10px] font-bold text-primary-500 uppercase tracking-[0.4em] mt-1">Infraestructura de Borde</span>
             </div>
           </motion.div>
 

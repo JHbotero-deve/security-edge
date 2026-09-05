@@ -35,7 +35,7 @@ export const SplashNexus = ({ onComplete }: { onComplete: () => void }) => {
               <div className="absolute inset-0 bg-primary-500 blur-3xl opacity-20 animate-pulse" />
               <ShieldCheck size={80} className="text-primary-500 relative z-10" />
             </div>
-            <h2 className="text-sm font-black text-slate-500 uppercase tracking-[1em] italic">Initializing</h2>
+            <h2 className="text-sm font-black text-slate-500 uppercase tracking-[1em] italic">Iniciando Protocolo</h2>
           </motion.div>
         )}
 
@@ -48,7 +48,7 @@ export const SplashNexus = ({ onComplete }: { onComplete: () => void }) => {
             className="flex flex-col items-center gap-8 w-full max-w-xs"
           >
             <div className="flex justify-between w-full text-[10px] font-black text-primary-400 uppercase tracking-widest">
-              <span>Checking Core Modules</span>
+              <span>Verificando Módulos del Núcleo</span>
               <Activity size={14} className="animate-pulse" />
             </div>
             <div className="w-full h-1 bg-slate-900 rounded-full overflow-hidden border border-white/5">
@@ -90,7 +90,7 @@ export const SplashNexus = ({ onComplete }: { onComplete: () => void }) => {
             className="flex flex-col items-center"
           >
             <div className="text-primary-500 font-black text-xs uppercase tracking-[0.3em] animate-pulse">
-              Link Established. Welcome.
+              Enlace Establecido. Bienvenido.
             </div>
           </motion.div>
         )}

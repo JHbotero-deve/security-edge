@@ -176,10 +176,10 @@ export const AsistenteNexus = () => {
                   <Bot size={20} className="text-white" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-black text-white italic uppercase tracking-tighter">Private Assistant</h3>
+                  <h3 className="text-sm font-black text-white italic uppercase tracking-tighter">Asistente Privado</h3>
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[8px] font-black text-emerald-500 uppercase tracking-widest">Neural Link Active</span>
+                    <span className="text-[8px] font-black text-emerald-500 uppercase tracking-widest">Enlace Neuronal Activo</span>
                   </div>
                 </div>
               </div>
