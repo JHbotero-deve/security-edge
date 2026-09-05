@@ -39,63 +39,71 @@ export const PaginaRegistro = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col lg:row relative overflow-hidden font-sans">
-      {/* Background Tech Elements: PRISMA LIGHT STYLE */}
+    <div className="h-screen bg-slate-50 flex flex-col lg:flex-row relative overflow-hidden font-sans">
+      {/* Background Tech Elements: PRISMA LIGHT NEUTRAL */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-designer-grid" />
-      <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-indigo-50 blur-[150px] rounded-full opacity-50" />
-      <div className="absolute bottom-[-20%] left-[-10%] w-[70%] h-[70%] bg-primary-50 blur-[150px] rounded-full opacity-50" />
+      <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-indigo-100 blur-[150px] rounded-full opacity-30" />
+      <div className="absolute bottom-[-20%] left-[-10%] w-[70%] h-[70%] bg-blue-100 blur-[150px] rounded-full opacity-30" />
 
-      <div className="flex-1 flex flex-col lg:flex-row relative z-10">
-        {/* Left Panel: Majestic Onboarding (PRISMA DARK CORE) */}
-        <div className="hidden lg:flex flex-[1.1] flex-col justify-between p-24 bg-slate-950 text-white relative overflow-hidden">
+      <div className="flex-1 flex flex-col lg:flex-row relative z-10 h-full">
+        {/* Left Panel: Majestic Brand Display (FIXED VIEWPORT) */}
+        <div className="hidden lg:flex flex-[1] flex-col justify-between p-16 bg-slate-950 text-white relative overflow-hidden">
           <div className="absolute inset-0 opacity-10 bg-designer-grid" />
           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-indigo-600/10 to-transparent pointer-events-none" />
 
-          <div className="relative z-10 flex items-center gap-4">
-            <div className="p-4 bg-indigo-600 rounded-[1.8rem] shadow-glow-strong">
-              <ShieldCheck className="text-white w-8 h-8" />
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="relative z-10 flex items-center gap-4"
+          >
+            <div className="p-3 bg-indigo-600 rounded-[1.2rem] shadow-xl">
+              <ShieldCheck className="text-white w-6 h-6" />
             </div>
             <div className="flex flex-col">
-              <span className="font-black text-2xl italic tracking-tighter uppercase leading-none">Seguridad Nexus</span>
-              <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-[0.5em] mt-1">Suministros Tácticos</span>
+              <span className="font-black text-xl italic tracking-tighter uppercase leading-none">Seguridad Nexus</span>
+              <span className="text-[8px] font-bold text-indigo-400 uppercase tracking-[0.4em] mt-1">Suministros Tácticos</span>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative z-10 space-y-12 max-w-2xl">
+          <div className="relative z-10 space-y-10">
              <motion.h1
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-7xl xl:text-8xl font-black italic uppercase tracking-tighter leading-[0.85] text-gradient-nexus"
+              className="text-6xl xl:text-7xl font-black italic uppercase tracking-tighter leading-[0.85] text-gradient-nexus"
             >
-              Forja tu <br /> <span className="text-indigo-500 italic">Identidad</span> <br /> Digital.
+              Forja tu <br /> <span className="text-primary-500 italic">Identidad</span> <br /> Digital.
             </motion.h1>
-            <p className="text-slate-400 font-bold uppercase text-xs tracking-[0.2em] leading-relaxed opacity-70 max-w-md">
-              Únase a la infraestructura de vanguardia. Despliegue su perfil de seguridad y acceda a los nodos de alta fidelidad.
+            <p className="text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em] leading-relaxed opacity-60 max-w-xs">
+              Únase a la red de seguridad del mañana. Despliegue su perfil y tome el control.
             </p>
           </div>
 
-          <div className="relative z-10 pt-10 border-t border-white/5">
-             <p className="text-[8px] font-black text-slate-700 uppercase tracking-[0.6em]">Nexus Infrastructure // Protocol v4.5</p>
+          <div className="relative z-10 pt-8 border-t border-white/5 flex items-center justify-between">
+             <p className="text-[7px] font-black text-slate-600 uppercase tracking-[0.5em]">Infrastructure v4.5</p>
+             <div className="flex gap-2">
+                <div className="w-1 h-1 rounded-full bg-indigo-500" />
+                <div className="w-1 h-1 rounded-full bg-primary-500" />
+             </div>
           </div>
         </div>
 
-        {/* Right Panel: Registration Form (PRISMA LIGHT) */}
-        <div className="flex-1 flex items-center justify-center p-8 lg:p-24 bg-white/50 backdrop-blur-xl">
+        {/* Right Panel: Registration Form (SCROLLABLE BUT FIXED LAYOUT) */}
+        <div className="flex-1 flex items-center justify-center p-8 lg:p-12 bg-white/40 backdrop-blur-xl overflow-y-auto custom-scrollbar">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="w-full max-w-md space-y-16"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-full max-w-sm space-y-10"
           >
-            <div className="space-y-6">
-              <div className="inline-flex px-4 py-1.5 rounded-full bg-indigo-50 text-indigo-600 text-[8px] font-black uppercase tracking-[0.4em] border border-indigo-100">
-                Nuevo Operador
+            <div className="space-y-4 text-center lg:text-left">
+              <div className="inline-flex px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[7px] font-black uppercase tracking-[0.4em] border border-slate-200">
+                Operación de Registro
               </div>
-              <h2 className="text-5xl font-black text-slate-900 italic uppercase tracking-tighter leading-none">Desplegar <br /> Perfil</h2>
-              <p className="text-[11px] text-slate-500 font-bold uppercase tracking-[0.3em] leading-relaxed max-w-xs">Ingrese sus datos para inicializar el protocolo de acceso.</p>
+              <h2 className="text-4xl font-black text-slate-900 italic uppercase tracking-tighter">Nueva Identidad</h2>
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.3em]">Protocolo de Inicialización</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-8">
-              <div className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="space-y-4">
                 <Entrada
                   label="Nombre de Operador"
                   name="name"
@@ -105,7 +113,7 @@ export const PaginaRegistro = () => {
                   required
                 />
                 <Entrada
-                  label="Matriz de Identidad (ID)"
+                  label="Identificador Único"
                   name="username"
                   placeholder="jbotero_ops"
                   value={formData.username}
@@ -133,20 +141,20 @@ export const PaginaRegistro = () => {
               </div>
 
               {error && (
-                <div className="p-5 bg-red-50/50 border border-red-100 rounded-3xl text-red-600 text-[10px] font-black uppercase tracking-widest text-center italic">
+                <div className="p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-[9px] font-black uppercase tracking-widest text-center italic">
                   {error}
                 </div>
               )}
 
-              <Boton type="submit" className="w-full py-6 rounded-[2.5rem] shadow-2xl text-[11px] hover:scale-[1.02] transition-transform">
-                INICIALIZAR IDENTIDAD <ArrowRight className="ml-4" size={20} />
+              <Boton type="submit" className="w-full py-4 rounded-[1.8rem] shadow-xl text-[10px] hover:scale-[1.02] transition-all" isLoading={isLoading}>
+                INICIALIZAR IDENTIDAD <ArrowRight className="ml-3" size={16} />
               </Boton>
             </form>
 
-            <div className="text-center pt-8 border-t border-slate-100">
-               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                 ¿Ya posee una identidad táctica? {' '}
-                 <Link to="/login" className="text-indigo-600 font-black hover:text-indigo-700 ml-2 italic transition-colors">Acceder al Nodo</Link>
+            <div className="text-center pt-6 border-t border-slate-100">
+               <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+                 ¿Ya posee una identidad? {' '}
+                 <Link to="/login" className="text-indigo-600 font-black hover:text-indigo-700 ml-2 italic">Acceder al Nodo</Link>
                </p>
             </div>
           </motion.div>
@@ -154,4 +162,5 @@ export const PaginaRegistro = () => {
       </div>
     </div>
   );
+};
 };
