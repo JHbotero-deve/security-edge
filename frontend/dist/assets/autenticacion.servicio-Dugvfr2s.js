@@ -1,0 +1,1 @@
+import{a as t}from"./api-BPAm5ncY.js";const r={login:async e=>(await t.post("/auth/login",e)).data,register:async e=>(await t.post("/auth/register",e)).data,getProfile:async()=>(await t.get("/auth/profile")).data};export{r as a};

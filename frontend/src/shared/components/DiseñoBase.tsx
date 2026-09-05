@@ -12,7 +12,9 @@ import {
   Mail,
   MessageSquare,
   ShieldCheck,
-  Twitter
+  Twitter,
+  Globe,
+  ChevronRight
 } from 'lucide-react';
 
 interface DiseñoBaseProps {

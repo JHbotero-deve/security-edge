@@ -37,7 +37,6 @@ export const PaginaUsuarios = () => {
 
   const handleEdit = (user: any) => {
     usuariosServicio.obtenerPorId(user.id).then(res => {
-      console.log('User data loaded for edit:', res.data);
       // Aqui se abriria el modal con los datos para editar
     });
   };

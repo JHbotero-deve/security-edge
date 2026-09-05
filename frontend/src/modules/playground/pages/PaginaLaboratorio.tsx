@@ -114,9 +114,6 @@ const ProductCard = ({
     };
     localStorage.setItem('nexus_project_canvas', JSON.stringify([...currentProject, newItem]));
 
-    // Notificación rápida
-    console.log('Componente añadido');
-
     // Redirigir al Builder
     navigate('/builder');
   };
@@ -545,7 +542,6 @@ export const PaginaLaboratorio = () => {
                     "bg-white"
                   )}
                 >
-                   {/* Background Graphics / Mockup Layers - Simplified to prevent lag */}
                    <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
                         style={{
                           backgroundImage: 'radial-gradient(#3b82f6 1px, transparent 0)',

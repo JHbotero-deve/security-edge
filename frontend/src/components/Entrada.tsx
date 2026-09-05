@@ -1,6 +1,7 @@
 import { InputHTMLAttributes, forwardRef } from 'react';
 import { cn } from '@/shared/utils';
 import { ShieldAlert } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface EntradaProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

@@ -16,10 +16,10 @@ import { cn } from '@/shared/utils';
 
 interface Mensaje {
   id: string;
-  texto: string;
-  emisor: 'bot' | 'usuario';
-  imagen?: string;
-  hora: string;
+  role: 'assistant' | 'user';
+  content: string;
+  image?: string;
+  timestamp: Date;
 }
 
 export const AsistenteNexus = () => {
@@ -29,9 +29,9 @@ export const AsistenteNexus = () => {
   const [mensajes, setMensajes] = useState<Mensaje[]>([
     {
       id: '1',
-      texto: '¡Hola! Soy tu Asistente Privado. Puedo analizar imágenes, escuchar tus comandos y ayudarte a construir tu infraestructura. ¿Qué necesitas hoy?',
-      emisor: 'bot',
-      hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      role: 'assistant',
+      content: '¡Hola! Soy tu Asistente Privado Nexus. Potenciado por Gemini, puedo auditar tu seguridad, analizar esquemas y ayudarte a construir infraestructura majestuosa. ¿En qué puedo apoyarte hoy?',
+      timestamp: new Date()
     }
   ]);
   const [isRecording, setIsRecording] = useState(false);
@@ -83,10 +83,10 @@ export const AsistenteNexus = () => {
 
     const nuevoMensaje: Mensaje = {
       id: Date.now().toString(),
-      texto: textoMensaje,
-      emisor: 'usuario',
-      imagen: previewImagen || undefined,
-      hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      role: 'user',
+      content: textoMensaje,
+      image: previewImagen || undefined,
+      timestamp: new Date()
     };
 
     setMensajes(prev => [...prev, nuevoMensaje]);
@@ -102,13 +102,13 @@ export const AsistenteNexus = () => {
 
       const respuestaBot: Mensaje = {
         id: (Date.now() + 1).toString(),
-        texto: isWebQuery
+        role: 'assistant',
+        content: isWebQuery
           ? `[BÚSQUEDA WEB ACTIVADA] He analizado los resultados de la red sobre su solicitud. He encontrado patrones relevantes en el sector de seguridad. ¿Desea que procese la información?`
           : previewImagen
           ? 'Análisis visual completado. He detectado los componentes de su esquema. Estilo "Prisma Light" sugerido para la implementación.'
           : 'Protocolo de respuesta activo. Estoy procesando sus requerimientos de infraestructura.',
-        emisor: 'bot',
-        hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        timestamp: new Date()
       };
       setMensajes(prev => [...prev, respuestaBot]);
     }, 1500);
@@ -200,25 +200,27 @@ export const AsistenteNexus = () => {
             {/* Messages Area: CLEANER BACKGROUND */}
             <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-8 custom-scrollbar bg-white/30">
               {mensajes.map((msg) => (
-                <div key={msg.id} className={cn("flex flex-col", msg.emisor === 'usuario' ? "items-end" : "items-start")}>
+                <div key={msg.id} className={cn("flex flex-col", msg.role === 'user' ? "items-end" : "items-start")}>
                   <div className={cn(
                     "max-w-[85%] p-6 rounded-[2rem] text-sm leading-relaxed shadow-sm transition-all hover:shadow-md",
-                    msg.emisor === 'usuario'
+                    msg.role === 'user'
                       ? "bg-slate-900 text-white rounded-tr-none"
                       : "bg-white text-slate-700 rounded-tl-none border border-slate-100"
                   )}>
-                    {msg.imagen && (
+                    {msg.image && (
                       <div className="relative w-full max-h-[300px] overflow-hidden rounded-2xl mb-3 border border-white/10 bg-slate-950">
                         <img
-                          src={msg.imagen}
+                          src={msg.image}
                           alt="upload"
                           className="w-full h-full object-contain"
                         />
                       </div>
                     )}
-                    {msg.texto}
+                    {msg.content}
                   </div>
-                  <span className="text-[7px] font-black text-slate-600 uppercase tracking-widest mt-2 px-2">{msg.hora}</span>
+                  <span className="text-[7px] font-black text-slate-600 uppercase tracking-widest mt-2 px-2">
+                    {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </span>
                 </div>
               ))}
 

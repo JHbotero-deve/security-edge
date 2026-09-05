@@ -36,14 +36,24 @@ function RutaAdmin({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
 
+function RutaPublica({ children }: { children: ReactNode }) {
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return <>{children}</>;
+}
+
 function App() {
   return (
     <Router>
       <GestorTitulos />
       <Suspense fallback={null}>
         <Routes>
-          <Route path="/login" element={<PaginaLogin />} />
-          <Route path="/register" element={<PaginaRegistro />} />
+          <Route path="/login" element={<RutaPublica><PaginaLogin /></RutaPublica>} />
+          <Route path="/register" element={<RutaPublica><PaginaRegistro /></RutaPublica>} />
 
           {/* Página Principal: Ahora el Laboratorio es la raíz para un link más limpio */}
           <Route path="/" element={<PaginaLaboratorio />} />

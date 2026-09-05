@@ -1,0 +1,19 @@
+import{r as t,j as g}from"./index-CqCnpy_1.js";import{M as $,u as w,P as A,o as T,f as _,L as q,b as L}from"./shield-check-CWI0QHK2.js";class b extends t.Component{getSnapshotBeforeUpdate(c){const e=this.props.childRef.current;if(e&&c.isPresent&&!this.props.isPresent){const n=this.props.sizeRef.current;n.height=e.offsetHeight||0,n.width=e.offsetWidth||0,n.top=e.offsetTop,n.left=e.offsetLeft}return null}componentDidUpdate(){}render(){return this.props.children}}function D({children:i,isPresent:c}){const e=t.useId(),n=t.useRef(null),C=t.useRef({width:0,height:0,top:0,left:0}),{nonce:f}=t.useContext($);return t.useInsertionEffect(()=>{const{width:u,height:o,top:h,left:s}=C.current;if(c||!n.current||!u||!o)return;n.current.dataset.motionPopId=e;const l=document.createElement("style");return f&&(l.nonce=f),document.head.appendChild(l),l.sheet&&l.sheet.insertRule(`
+          [data-motion-pop-id="${e}"] {
+            position: absolute !important;
+            width: ${u}px !important;
+            height: ${o}px !important;
+            top: ${h}px !important;
+            left: ${s}px !important;
+          }
+        `),()=>{document.head.removeChild(l)}},[c]),g.jsx(b,{isPresent:c,childRef:n,sizeRef:C,children:t.cloneElement(i,{ref:n})})}const H=({children:i,initial:c,isPresent:e,onExitComplete:n,custom:C,presenceAffectsLayout:f,mode:u})=>{const o=w(K),h=t.useId(),s=t.useCallback(d=>{o.set(d,!0);for(const x of o.values())if(!x)return;n&&n()},[o,n]),l=t.useMemo(()=>({id:h,initial:c,isPresent:e,custom:C,onExitComplete:s,register:d=>(o.set(d,!1),()=>o.delete(d))}),f?[Math.random(),s]:[e,s]);return t.useMemo(()=>{o.forEach((d,x)=>o.set(x,!1))},[e]),t.useEffect(()=>{!e&&!o.size&&n&&n()},[e]),u==="popLayout"&&(i=g.jsx(D,{isPresent:e,children:i})),g.jsx(A.Provider,{value:l,children:i})};function K(){return new Map}const v=i=>i.key||"";function j(i){const c=[];return t.Children.forEach(i,e=>{t.isValidElement(e)&&c.push(e)}),c}const G=({children:i,custom:c,initial:e=!0,onExitComplete:n,presenceAffectsLayout:C=!0,mode:f="sync",propagate:u=!1})=>{const[o,h]=T(u),s=t.useMemo(()=>j(i),[i]),l=u&&!o?[]:s.map(v),d=t.useRef(!0),x=t.useRef(s),y=w(()=>new Map),[z,I]=t.useState(s),[p,E]=t.useState(s);_(()=>{d.current=!1,x.current=s;for(let a=0;a<p.length;a++){const r=v(p[a]);l.includes(r)?y.delete(r):y.get(r)!==!0&&y.set(r,!1)}},[p,l.length,l.join("-")]);const k=[];if(s!==z){let a=[...s];for(let r=0;r<p.length;r++){const m=p[r],R=v(m);l.includes(R)||(a.splice(r,0,m),k.push(m))}f==="wait"&&k.length&&(a=k),E(j(a)),I(s);return}const{forceRender:M}=t.useContext(q);return g.jsx(g.Fragment,{children:p.map(a=>{const r=v(a),m=u&&!o?!1:s===p||l.includes(r),R=()=>{if(y.has(r))y.set(r,!0);else return;let P=!0;y.forEach(S=>{S||(P=!1)}),P&&(M==null||M(),E(x.current),u&&(h==null||h()),n&&n())};return g.jsx(H,{isPresent:m,initial:!d.current||e?void 0:!1,custom:m?void 0:c,presenceAffectsLayout:C,mode:f,onExitComplete:m?void 0:R,children:a},r)})})};/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const N=[["path",{d:"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",key:"4pj2yx"}],["path",{d:"M20 3v4",key:"1olli1"}],["path",{d:"M22 5h-4",key:"1gvqau"}],["path",{d:"M4 17v2",key:"vumght"}],["path",{d:"M5 18H3",key:"zchphs"}]],O=L("Sparkles",N);/**
+ * @license lucide-react v0.475.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const U=[["polyline",{points:"4 17 10 11 4 5",key:"akl6gq"}],["line",{x1:"12",x2:"20",y1:"19",y2:"19",key:"q2wloq"}]],V=L("Terminal",U);export{G as A,O as S,V as T};
