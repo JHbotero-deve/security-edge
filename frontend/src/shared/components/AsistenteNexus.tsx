@@ -95,16 +95,18 @@ export const AsistenteNexus = () => {
     setNombreArchivo(null);
     setIsBotTyping(true);
 
-    // Respuesta simulada del bot con inteligencia
+    // Respuesta simulada del bot con inteligencia y búsqueda web
     setTimeout(() => {
       setIsBotTyping(false);
+      const isWebQuery = input.toLowerCase().includes('/web') || input.toLowerCase().includes('busca');
+
       const respuestaBot: Mensaje = {
         id: (Date.now() + 1).toString(),
-        texto: previewImagen
-          ? 'He analizado tu imagen. Los patrones de seguridad detectados son óptimos. ¿Quieres que los aplique al constructor?'
-          : nombreArchivo
-          ? `He recibido el archivo "${nombreArchivo}". Estoy escaneando posibles vulnerabilidades...`
-          : 'Entendido. Estoy procesando tu solicitud de infraestructura en tiempo real.',
+        texto: isWebQuery
+          ? `[BÚSQUEDA WEB ACTIVADA] He analizado los resultados de la red sobre su solicitud. He encontrado patrones relevantes en el sector de seguridad. ¿Desea que procese la información?`
+          : previewImagen
+          ? 'Análisis visual completado. He detectado los componentes de su esquema. Estilo "Prisma Light" sugerido para la implementación.'
+          : 'Protocolo de respuesta activo. Estoy procesando sus requerimientos de infraestructura.',
         emisor: 'bot',
         hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
@@ -163,23 +165,23 @@ export const AsistenteNexus = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.9 }}
             className={cn(
-              "fixed z-[100] bg-slate-900 border border-slate-800 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden transition-all duration-300",
+              "fixed z-[100] bg-white/80 backdrop-blur-2xl border border-slate-200 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] flex flex-col overflow-hidden transition-all duration-500",
               isExpanded
                 ? "inset-4 md:inset-8"
-                : "bottom-4 right-4 left-4 md:left-auto md:right-8 md:bottom-8 md:w-[400px] h-[80vh] md:h-[600px] rounded-[2rem] md:rounded-[2.5rem]"
+                : "bottom-4 right-4 left-4 md:left-auto md:right-8 md:bottom-8 md:w-[450px] h-[85vh] md:h-[650px] rounded-[2.5rem] md:rounded-[3rem]"
             )}
           >
-            {/* Header */}
-            <div className="p-6 bg-slate-950/50 border-b border-slate-800 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-500/20">
-                  <Bot size={20} className="text-white" />
+            {/* Header: PRISMA CLEAN STYLE */}
+            <div className="p-8 bg-slate-50/50 border-b border-slate-100 flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-[1.2rem] bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                  <Sparkles size={24} className="text-white" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-black text-white italic uppercase tracking-tighter">Asistente Privado</h3>
-                  <div className="flex items-center gap-2">
+                  <h3 className="text-base font-black text-slate-900 italic uppercase tracking-tighter">Nexus Core IA</h3>
+                  <div className="flex items-center gap-2 mt-0.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[8px] font-black text-emerald-500 uppercase tracking-widest">Enlace Neuronal Activo</span>
+                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Omni-Nodo Conectado</span>
                   </div>
                 </div>
               </div>
@@ -193,15 +195,15 @@ export const AsistenteNexus = () => {
               </div>
             </div>
 
-            {/* Messages Area */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar bg-designer-grid">
+            {/* Messages Area: CLEANER BACKGROUND */}
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-8 custom-scrollbar bg-white/30">
               {mensajes.map((msg) => (
                 <div key={msg.id} className={cn("flex flex-col", msg.emisor === 'usuario' ? "items-end" : "items-start")}>
                   <div className={cn(
-                    "max-w-[85%] p-4 rounded-3xl text-[11px] font-medium leading-relaxed shadow-lg",
+                    "max-w-[85%] p-6 rounded-[2rem] text-sm leading-relaxed shadow-sm transition-all hover:shadow-md",
                     msg.emisor === 'usuario'
-                      ? "bg-primary-600 text-white rounded-tr-none"
-                      : "bg-slate-800 text-slate-200 rounded-tl-none border border-slate-700"
+                      ? "bg-slate-900 text-white rounded-tr-none"
+                      : "bg-white text-slate-700 rounded-tl-none border border-slate-100"
                   )}>
                     {msg.imagen && (
                       <div className="relative w-full max-h-[300px] overflow-hidden rounded-2xl mb-3 border border-white/10 bg-slate-950">
