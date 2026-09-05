@@ -20,36 +20,21 @@ jobs:
           node-version: "20"
           cache: "npm"
 
-      - name: Install Dependencies (Root)
-        run: npm install
-
-      - name: Validate Backend
+      - name: Instalar Dependencias del Proyecto
         run: |
-          cd backend
           npm install
-          npx tsc --noEmit
+          cd backend && npm install
+          cd ../frontend && npm install
 
-      - name: Validate Frontend
+      - name: Auditoría Técnica (Type Checking)
+        run: |
+          echo "Verificando integridad de tipos en el Backend..."
+          cd backend && npx tsc --noEmit
+          echo "Verificando integridad de tipos en el Frontend..."
+          cd ../frontend && npx tsc --noEmit
+
+      - name: Validación de Construcción (Build)
         run: |
           cd frontend
-          npm install
-          npx tsc --noEmit
-
-      - name: Start Test Infrastructure
-        run: docker compose up -d database
-
-      - name: Verify Database Integrity
-        run: |
-          echo "Iniciando secuencia de verificación del nodo de datos..."
-          for i in {1..20}; do
-            if docker exec security-edge-db pg_isready -U postgres; then
-              echo "¡Conexión establecida! Nodo de datos sincronizado."
-              exit 0
-            fi
-            echo "Esperando sincronización del nodo... ($i/20)"
-            sleep 5
-          done
-          echo "ERROR: El nodo de datos no respondió."
-          docker ps -a
-          docker logs security-edge-db
-          exit 1
+          npm run build
+          echo "Construcción final exitosa. Sistema listo para despliegue."

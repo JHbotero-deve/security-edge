@@ -70,8 +70,8 @@ const PAGE_FUNCTIONS = [
 export const PaginaBuilder = () => {
   const [searchParams] = useSearchParams();
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
-  const [themeColor, setThemeColor] = useState('#3b82f6');
-  const [canvasBg, setCanvasBg] = useState('#020617');
+  const [themeColor, setThemeColor] = useState('#6366f1');
+  const [canvasBg, setCanvasBg] = useState('#f8fafc');
   const [projectPages, setProjectPages] = useState<Record<string, any>>({
     'Principal': { items: [], type: 'marketing' }
   });

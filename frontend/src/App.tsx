@@ -2,10 +2,12 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import type { ReactNode } from 'react';
 import { useAuthStore } from './store/autenticacion.estado';
+import { GestorTitulos } from './shared/components/GestorTitulos';
 
 // Carga perezosa por ruta: cada página se descarga solo cuando el usuario
 // navega a ella, en vez de venir toda junta en el bundle inicial.
 const PaginaLogin = lazy(() => import('./modules/auth/pages/PaginaLogin').then(m => ({ default: m.PaginaLogin })));
+const PaginaRegistro = lazy(() => import('./modules/auth/pages/PaginaRegistro').then(m => ({ default: m.PaginaRegistro })));
 const PaginaDashboard = lazy(() => import('./modules/dashboard/pages/PaginaDashboard').then(m => ({ default: m.PaginaDashboard })));
 const PaginaIncidentes = lazy(() => import('./modules/incidents/pages/PaginaIncidentes').then(m => ({ default: m.PaginaIncidentes })));
 const PaginaUsuarios = lazy(() => import('./modules/users/pages/PaginaUsuarios').then(m => ({ default: m.PaginaUsuarios })));
@@ -37,9 +39,11 @@ function RutaAdmin({ children }: { children: ReactNode }) {
 function App() {
   return (
     <Router>
+      <GestorTitulos />
       <Suspense fallback={null}>
         <Routes>
           <Route path="/login" element={<PaginaLogin />} />
+          <Route path="/register" element={<PaginaRegistro />} />
 
           {/* Página Principal: Ahora el Laboratorio es la raíz para un link más limpio */}
           <Route path="/" element={<PaginaLaboratorio />} />

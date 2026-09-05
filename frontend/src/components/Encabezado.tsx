@@ -19,7 +19,7 @@ export const Encabezado = () => {
       "h-16 border-b border-slate-800 bg-slate-950/50 backdrop-blur-md flex items-center justify-between px-6 sticky top-0 z-40 transition-all duration-300",
       "lg:ml-0"
     )}>
-      <div className="flex items-center gap-4 overflow-hidden">
+      <div className="flex items-center gap-4">
         <button
           onClick={toggleSidebar}
           className="lg:hidden p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors flex-shrink-0"
@@ -28,13 +28,13 @@ export const Encabezado = () => {
         </button>
 
         <div className={cn(
-          "flex items-center gap-3 transition-opacity duration-300 overflow-hidden",
-          isCollapsed ? "lg:opacity-100" : "lg:opacity-0"
+          "flex items-center gap-4 transition-all duration-500",
+          isCollapsed ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 pointer-events-none"
         )}>
-          <div className="bg-primary-600 p-1.5 rounded-lg shadow-lg shadow-primary-500/20 flex-shrink-0">
+          <div className="bg-primary-600 p-2 rounded-xl shadow-glow flex-shrink-0">
             <ShieldCheck className="text-white w-5 h-5" />
           </div>
-          <span className="font-black text-white tracking-tighter text-sm uppercase italic truncate">
+          <span className="font-black text-white tracking-tighter text-base uppercase italic truncate max-w-[200px] md:max-w-none">
             {appName}
           </span>
         </div>

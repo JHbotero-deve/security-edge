@@ -331,10 +331,10 @@ export const PaginaLaboratorio = () => {
   const [teachingComponent, setTeachingComponent] = useState<number | null>(null);
   const [showShowroom, setShowShowroom] = useState<string | null>(null);
 
-  // Persistencia de Estilos del Lab
+  // Persistencia de Estilos del Lab: DEFAULT TO GLASS/LIGHT
   const [labStyles, setLabStyles] = useState<LabStyles>(() => {
     const saved = localStorage.getItem('nexus_lab_styles');
-    return saved ? JSON.parse(saved) : { borders: 'thick', background: 'dark' };
+    return saved ? JSON.parse(saved) : { borders: 'normal', background: 'glass' };
   });
 
   // Persistencia de Pins (Canvas)

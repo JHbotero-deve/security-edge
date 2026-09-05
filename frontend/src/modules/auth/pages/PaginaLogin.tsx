@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuthStore } from '@/store/autenticacion.estado';
 import { autenticacionServicio } from '../services/autenticacion.servicio';
@@ -202,7 +202,14 @@ export const PaginaLogin = () => {
                 </Boton>
               </form>
 
-              <div className="mt-16 pt-8 border-t border-white/5 text-center space-y-6">
+              <div className="text-center mt-6">
+                 <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                   ¿Nuevo en el sector? {' '}
+                   <Link to="/register" className="text-primary-500 font-black hover:underline ml-2 italic">Crear Identidad</Link>
+                 </p>
+              </div>
+
+              <div className="mt-12 pt-8 border-t border-white/5 text-center space-y-6">
                  <div className="flex justify-center gap-8 opacity-40 hover:opacity-100 transition-opacity duration-700">
                     <div className="flex flex-col items-center gap-2">
                        <Activity size={18} className="text-primary-500" />
@@ -227,8 +234,8 @@ export const PaginaLogin = () => {
 
         {/* Footer Credit (Mobile View) */}
         <div className="lg:hidden absolute bottom-6 w-full text-center px-4">
-          <p className="text-[8px] font-black text-slate-700 uppercase tracking-[0.3em] bg-slate-950/80 py-2 rounded-full border border-white/5 backdrop-blur-md">
-             Jorge Botero Devops // Securing the Edge
+          <p className="text-[8px] font-black text-slate-700 uppercase tracking-[0.3em] bg-slate-950/80 py-2 rounded-full border border-white/5 backdrop-blur-md italic">
+             Nexus Infrastructure // Secure Edge Node
           </p>
         </div>
       </div>

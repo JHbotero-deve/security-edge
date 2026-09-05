@@ -63,88 +63,83 @@ export const PaginaDashboard = () => {
     <DiseñoBase>
       <div className="space-y-12 pb-20 max-w-[1600px] mx-auto">
 
-        {/* Majestic Header HUD */}
-        <div className="relative p-12 lg:p-16 bg-slate-900 border border-white/5 rounded-[4rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.4)] group">
+        {/* Majestic Header HUD: PRISMA LIGHT STYLE */}
+        <div className="relative p-12 lg:p-20 bg-white border border-slate-100 rounded-[4rem] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] group">
            {/* HUD Background Decoration */}
-           <div className="absolute inset-0 opacity-[0.03] animate-scan pointer-events-none bg-gradient-to-b from-primary-500 to-transparent h-20" />
-           <div className="absolute top-0 right-0 p-16 opacity-5 pointer-events-none group-hover:rotate-12 transition-transform duration-1000">
-              <ShieldCheck size={300} className="text-white" />
+           <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-designer-grid" />
+           <div className="absolute top-0 right-0 p-16 opacity-[0.02] pointer-events-none group-hover:rotate-12 transition-transform duration-1000">
+              <ShieldCheck size={400} className="text-slate-900" />
            </div>
 
            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-12">
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-[10px] font-black text-primary-400 uppercase tracking-[0.5em] backdrop-blur-md"
+                  className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-[10px] font-black text-indigo-600 uppercase tracking-[0.5em] backdrop-blur-md"
                 >
-                  <div className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
-                  Nodo Central: ONLINE
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
+                  Nodo Central: OPERATIVO
                 </motion.div>
 
-                <div className="space-y-2">
-                  <h1 className="text-5xl lg:text-7xl font-black text-white italic uppercase tracking-tighter leading-[0.9]">
-                    Security <span className="text-primary-500">Edge</span><br/>
-                    <span className="text-slate-500 text-4xl lg:text-5xl opacity-50">Comando Nexus</span>
+                <div className="space-y-4">
+                  <h1 className="text-6xl lg:text-8xl font-black text-slate-900 italic uppercase tracking-tighter leading-[0.85]">
+                    Security <span className="text-indigo-600">Edge</span><br/>
+                    <span className="text-slate-300 text-4xl lg:text-6xl">Comando Nexus</span>
                   </h1>
                 </div>
 
-                <p className="text-slate-400 font-bold uppercase text-xs tracking-widest max-w-xl leading-relaxed opacity-70">
-                  Bienvenido, Jorge H. La infraestructura táctica está a su disposición. Todos los sistemas de auditoría y diseño están sincronizados.
+                <p className="text-slate-500 font-bold uppercase text-[11px] tracking-[0.2em] max-w-xl leading-relaxed opacity-80">
+                  Infraestructura táctica sincronizada. Bienvenido al centro de control de alta fidelidad.
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-8 lg:gap-16 bg-slate-950/40 p-10 rounded-[3rem] border border-white/5 backdrop-blur-xl">
-                 <div className="flex flex-col gap-2">
-                    <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
-                       <Globe size={12} className="text-primary-500" /> Latencia Red
+              <div className="flex flex-wrap gap-8 lg:gap-16 bg-slate-50/50 p-12 rounded-[3.5rem] border border-slate-100 backdrop-blur-xl shadow-inner">
+                 <div className="flex flex-col gap-3">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                       <Globe size={14} className="text-indigo-500" /> Latencia Red
                     </span>
-                    <span className="text-2xl font-black text-white italic tracking-tighter">14 MS</span>
+                    <span className="text-3xl font-black text-slate-900 italic tracking-tighter">12 MS</span>
                  </div>
-                 <div className="flex flex-col gap-2">
-                    <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
-                       <Cpu size={12} className="text-indigo-400" /> CPU Cluster
+                 <div className="flex flex-col gap-3">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                       <Cpu size={14} className="text-blue-500" /> CPU Cluster
                     </span>
-                    <span className="text-2xl font-black text-white italic tracking-tighter">22.4%</span>
+                    <span className="text-3xl font-black text-slate-900 italic tracking-tighter">18.2%</span>
                  </div>
-                 <div className="flex flex-col gap-2">
-                    <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
-                       <Lock size={12} className="text-emerald-500" /> Seguridad
+                 <div className="flex flex-col gap-3">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                       <Lock size={14} className="text-emerald-500" /> Seguridad
                     </span>
-                    <span className="text-2xl font-black text-emerald-500 italic tracking-tighter">ACTIVA</span>
+                    <span className="text-3xl font-black text-emerald-600 italic tracking-tighter">ALTA</span>
                  </div>
               </div>
            </div>
         </div>
 
-        {/* Interactive Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Interactive Stats Grid: PRISMA LIGHT */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {stats.map((stat, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="bg-slate-900 border border-white/5 p-10 rounded-[3rem] hover:border-primary-500/40 transition-all group shadow-2xl relative overflow-hidden"
+              className="bg-white border border-slate-100 p-10 rounded-[3.5rem] hover:border-indigo-200 transition-all group shadow-sm hover:shadow-2xl relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-10 transition-opacity">
-                 <stat.icon size={100} />
-              </div>
-
               <div className="flex items-center justify-between mb-8">
-                <div className={`${stat.bg} ${stat.color} p-5 rounded-[1.5rem] group-hover:scale-110 transition-transform shadow-glow`}>
+                <div className={`${stat.bg} ${stat.color} p-5 rounded-[1.5rem] group-hover:scale-110 transition-transform shadow-sm`}>
                   <stat.icon size={28} />
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                  <div>
-                    <p className="text-slate-500 text-[9px] font-black uppercase tracking-[0.3em]">{stat.label}</p>
-                    <p className="text-4xl font-black text-white italic tracking-tighter mt-1">{stat.value}</p>
+                    <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">{stat.label}</p>
+                    <p className="text-4xl font-black text-slate-900 italic tracking-tighter mt-1">{stat.value}</p>
                  </div>
 
-                 {/* Visual Data Chart */}
-                 <NexusChart data={stat.chart} color={stat.color.includes('emerald') ? '#10b981' : stat.color.includes('primary') ? '#3b82f6' : stat.color.includes('blue') ? '#3b82f6' : '#f59e0b'} />
+                 <NexusChart data={stat.chart} color={stat.color.includes('emerald') ? '#10b981' : '#6366f1'} />
               </div>
             </motion.div>
           ))}
