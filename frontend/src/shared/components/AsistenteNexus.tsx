@@ -181,7 +181,9 @@ export const AsistenteNexus = () => {
                   <h3 className="text-base font-black text-slate-900 italic uppercase tracking-tighter">Nexus Core IA</h3>
                   <div className="flex items-center gap-2 mt-0.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Omni-Nodo Conectado</span>
+                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-1">
+                      Potenciado por <span className="text-indigo-600 font-bold">Gemini 1.5 Pro</span>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -307,8 +309,9 @@ export const AsistenteNexus = () => {
                   </div>
                 </div>
               </div>
-              <p className="text-[7px] font-bold text-slate-600 uppercase tracking-[0.2em] text-center mt-4">
-                Powered by Private Neural Engine // Multi-Modal v1.0
+              <p className="text-[7px] font-bold text-slate-400 uppercase tracking-[0.2em] text-center mt-4 flex items-center justify-center gap-2">
+                <Sparkles size={8} className="text-indigo-500" />
+                Arquitectura de Inteligencia Generativa // Google Gemini Engine
               </p>
             </div>
           </motion.div>
