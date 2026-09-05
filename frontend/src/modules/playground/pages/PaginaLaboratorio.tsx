@@ -587,55 +587,69 @@ export const PaginaLaboratorio = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[150] bg-slate-950/95 backdrop-blur-2xl flex flex-col items-center justify-center p-8"
+              className="fixed inset-0 z-[150] bg-slate-950/98 backdrop-blur-3xl flex flex-col items-center justify-center p-8 overflow-y-auto custom-scrollbar"
             >
-               <div className="max-w-4xl w-full space-y-12 text-center">
-                  <motion.div
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="w-32 h-32 mx-auto bg-primary-600 rounded-[3rem] flex items-center justify-center text-white shadow-[0_0_100px_rgba(59,130,246,0.5)]"
-                  >
-                     {(() => {
-                        const Icon = aisles.find(a => a.id === showShowroom)?.icon || Layout;
-                        return <Icon size={64} />;
-                     })()}
-                  </motion.div>
-
-                  <div className="space-y-4">
-                     <h2 className="text-5xl font-black text-white italic uppercase tracking-tighter">
-                        {aisles.find(a => a.id === showShowroom)?.label} <span className="text-primary-500">Showroom</span>
-                     </h2>
-                     <p className="text-slate-400 text-lg font-medium max-w-2xl mx-auto uppercase tracking-widest leading-relaxed">
-                        Explora la filosofía de diseño y la potencia técnica de los componentes integrados en este pasillo.
-                     </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                     {[1,2,3].map(i => (
-                       <div key={i} className="bg-slate-900 border border-white/5 p-8 rounded-[2.5rem] space-y-4">
-                          <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-primary-500">
-                             <Sparkles size={20}/>
-                          </div>
-                          <h4 className="text-white font-black text-xs uppercase italic">Característica {i}</h4>
-                          <p className="text-slate-500 text-[10px] font-bold leading-relaxed">Optimización de renderizado en tiempo real para flujos de alta seguridad.</p>
-                       </div>
-                     ))}
-                  </div>
-
+               <div className="max-w-5xl w-full py-20 relative">
+                  {/* Floating Close Button: PRISMA STYLE */}
                   <button
                     onClick={() => setShowShowroom(null)}
-                    className="px-12 py-5 bg-white text-slate-950 rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-2xl"
+                    className="fixed top-12 right-12 z-[160] p-5 bg-white/5 border border-white/10 rounded-full text-slate-400 hover:text-white hover:bg-red-600 transition-all shadow-2xl group"
                   >
-                     Cerrar Showroom
+                     <X size={24} className="group-hover:rotate-90 transition-transform duration-300" />
                   </button>
-               </div>
 
-               <button
-                 onClick={() => setShowShowroom(null)}
-                 className="absolute top-8 right-8 p-4 text-slate-500 hover:text-white transition-all bg-white/5 rounded-full"
-               >
-                  <X size={32} />
-               </button>
+                  <div className="space-y-16 text-center">
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      className="w-40 h-40 mx-auto bg-indigo-600 rounded-[3.5rem] flex items-center justify-center text-white shadow-[0_0_100px_rgba(79,70,229,0.3)] relative group"
+                    >
+                       <div className="absolute inset-0 bg-indigo-400 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity animate-pulse" />
+                       {(() => {
+                          const Icon = aisles.find(a => a.id === showShowroom)?.icon || Layout;
+                          return <Icon size={80} className="relative z-10" />;
+                       })()}
+                    </motion.div>
+
+                    <div className="space-y-6">
+                       <h2 className="text-6xl font-black text-white italic uppercase tracking-tighter">
+                          {aisles.find(a => a.id === showShowroom)?.label} <span className="text-indigo-500">Showroom</span>
+                       </h2>
+                       <p className="text-slate-400 text-xl font-bold max-w-3xl mx-auto uppercase tracking-[0.3em] leading-relaxed opacity-80">
+                          Explora la filosofía de diseño y la potencia técnica de los suministros Nexus.
+                       </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                       {[
+                         { t: 'Optimización', d: 'Renderizado en tiempo real a 60fps para flujos tácticos.' },
+                         { t: 'Seguridad', d: 'Validación de integridad en cada interacción del suministro.' },
+                         { t: 'Diseño', d: 'Estética Prisma Light optimizada para alta fidelidad.' }
+                       ].map((item, i) => (
+                         <motion.div
+                           key={i}
+                           initial={{ opacity: 0, y: 20 }}
+                           animate={{ opacity: 1, y: 0 }}
+                           transition={{ delay: i * 0.1 }}
+                           className="bg-white/5 border border-white/5 p-10 rounded-[3.5rem] space-y-6 hover:bg-white/[0.07] transition-all group shadow-inner"
+                         >
+                            <div className="w-12 h-12 rounded-2xl bg-slate-900 border border-white/5 flex items-center justify-center text-indigo-500 group-hover:scale-110 transition-transform">
+                               <Sparkles size={24}/>
+                            </div>
+                            <h4 className="text-white font-black text-sm uppercase italic tracking-widest">{item.t}</h4>
+                            <p className="text-slate-500 text-[11px] font-bold leading-relaxed uppercase tracking-tighter opacity-70">{item.d}</p>
+                         </motion.div>
+                       ))}
+                    </div>
+
+                    <Boton
+                      onClick={() => setShowShowroom(null)}
+                      className="px-16 py-6 rounded-[2.5rem] shadow-[0_0_50px_rgba(255,255,255,0.1)]"
+                    >
+                       ENTENDIDO, VOLVER AL STOCK
+                    </Boton>
+                  </div>
+               </div>
             </motion.div>
           )}
         </AnimatePresence>

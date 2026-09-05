@@ -5,7 +5,8 @@ import { useAuthStore } from '@/store/autenticacion.estado';
 import { autenticacionServicio } from '../services/autenticacion.servicio';
 import { Entrada } from '@/components/Entrada';
 import { Boton } from '@/components/Boton';
-import { ShieldCheck, Lock, ArrowRight, Sparkles, Activity, Terminal, Globe, Cpu } from 'lucide-react';
+import { Modal } from '@/components/Modal';
+import { ShieldCheck, Lock, ArrowRight, Sparkles, Activity, Terminal, Globe, Cpu, Mail } from 'lucide-react';
 import { cn } from '@/shared/utils';
 import { SplashNexus } from '@/shared/components/SplashNexus';
 
@@ -15,6 +16,10 @@ export const PaginaLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showSplash, setShowSplash] = useState(true);
+  const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
+  const [recoveryEmail, setRecoveryEmail] = useState('');
+  const [isRecovering, setIsRecovering] = useState(false);
+  const [recoveryStatus, setRecoveryStatus] = useState<'idle' | 'success'>('idle');
 
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
@@ -27,12 +32,22 @@ export const PaginaLogin = () => {
     try {
       const { data } = await autenticacionServicio.login({ email, password });
       setAuth(data.user, data.token);
-      navigate('/laboratorio');
+      navigate('/dashboard'); // Redirigir al comando central
     } catch (err: any) {
       setError(err.response?.data?.error || 'ACCESO DENEGADO: Credenciales no reconocidas en la red Nexus.');
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleRecovery = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsRecovering(true);
+    // Simulación de recuperación táctica
+    setTimeout(() => {
+      setIsRecovering(false);
+      setRecoveryStatus('success');
+    }, 2000);
   };
 
   return (
@@ -147,7 +162,12 @@ export const PaginaLogin = () => {
                     <Terminal className="text-white w-10 h-10" />
                  </motion.div>
                  <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter">Acceso Táctico</h2>
-                 <p className="text-[10px] text-slate-500 font-bold uppercase tracking-[0.4em] mt-3">Identidad Nexus Requerida</p>
+                 <div className="mt-4 flex flex-col items-center gap-2">
+                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-[0.4em]">Identidad Nexus Requerida</p>
+                    <Link to="/register" className="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-[9px] font-black text-indigo-400 uppercase tracking-widest hover:bg-indigo-500 hover:text-white transition-all animate-pulse">
+                       ¿No tiene cuenta? Registre su Identidad aquí
+                    </Link>
+                 </div>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-8">
@@ -158,7 +178,6 @@ export const PaginaLogin = () => {
                     placeholder="usuario@nexus.security"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-slate-950/50 border-white/5 text-white placeholder:text-slate-800 focus:bg-slate-950"
                     required
                   />
                   <Entrada
@@ -167,7 +186,6 @@ export const PaginaLogin = () => {
                     placeholder="••••••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="bg-slate-950/50 border-white/5 text-white placeholder:text-slate-800 focus:bg-slate-950"
                     required
                   />
                 </div>
@@ -180,7 +198,13 @@ export const PaginaLogin = () => {
                     </div>
                     <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-slate-300 transition-colors">Enlace Persistente</span>
                   </label>
-                  <button type="button" className="text-[10px] font-black text-primary-500 uppercase tracking-widest hover:text-white transition-colors">¿Olvidó la Clave?</button>
+                  <button
+                    type="button"
+                    onClick={() => setIsForgotModalOpen(true)}
+                    className="text-[10px] font-black text-primary-500 uppercase tracking-widest hover:text-white transition-colors"
+                  >
+                    ¿Perdió el Acceso?
+                  </button>
                 </div>
 
                 {error && (
@@ -198,30 +222,23 @@ export const PaginaLogin = () => {
                   className="w-full py-5 rounded-[2rem] text-[11px] font-black shadow-glow-strong hover:scale-[1.02] transition-transform"
                   isLoading={isLoading}
                 >
-                  INICIAR PROTOCOLO DE ACCESO <ArrowRight size={18} className="ml-3 group-hover:translate-x-1 transition-transform" />
+                  AUTENTICAR NODO <ArrowRight size={18} className="ml-3 group-hover:translate-x-1 transition-transform" />
                 </Boton>
               </form>
 
-              <div className="text-center mt-6">
-                 <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                   ¿Nuevo en el sector? {' '}
-                   <Link to="/register" className="text-primary-500 font-black hover:underline ml-2 italic">Crear Identidad</Link>
-                 </p>
-              </div>
-
-              <div className="mt-12 pt-8 border-t border-white/5 text-center space-y-6">
+              <div className="mt-12 pt-8 text-center space-y-6">
                  <div className="flex justify-center gap-8 opacity-40 hover:opacity-100 transition-opacity duration-700">
                     <div className="flex flex-col items-center gap-2">
                        <Activity size={18} className="text-primary-500" />
-                       <span className="text-[8px] font-black text-white uppercase tracking-widest">Active</span>
+                       <span className="text-[8px] font-black text-white uppercase tracking-widest">Activo</span>
                     </div>
                     <div className="flex flex-col items-center gap-2">
                        <Lock size={18} className="text-indigo-400" />
-                       <span className="text-[8px] font-black text-white uppercase tracking-widest">Secure</span>
+                       <span className="text-[8px] font-black text-white uppercase tracking-widest">Seguro</span>
                     </div>
                     <div className="flex flex-col items-center gap-2">
                        <Sparkles size={18} className="text-emerald-400" />
-                       <span className="text-[8px] font-black text-white uppercase tracking-widest">Cloud</span>
+                       <span className="text-[8px] font-black text-white uppercase tracking-widest">Nube</span>
                     </div>
                  </div>
                  <p className="text-[8px] text-slate-700 font-black uppercase tracking-[0.5em]">
@@ -231,6 +248,47 @@ export const PaginaLogin = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Modal de Recuperación */}
+        <Modal
+          isOpen={isForgotModalOpen}
+          onClose={() => { setIsForgotModalOpen(false); setRecoveryStatus('idle'); }}
+          title="Recuperación de Enlace"
+        >
+          {recoveryStatus === 'idle' ? (
+            <form onSubmit={handleRecovery} className="space-y-6">
+               <p className="text-[11px] text-slate-500 font-bold uppercase tracking-widest leading-relaxed">
+                 Ingrese su matriz de identidad para recibir un código de acceso temporal.
+               </p>
+               <Entrada
+                 label="Correo de Red"
+                 placeholder="usuario@nexus.security"
+                 type="email"
+                 required
+                 value={recoveryEmail}
+                 onChange={(e) => setRecoveryEmail(e.target.value)}
+               />
+               <Boton className="w-full" isLoading={isRecovering}>
+                 SOLICITAR PROTOCOLO <ArrowRight size={16} className="ml-2" />
+               </Boton>
+            </form>
+          ) : (
+            <div className="text-center space-y-6 py-4">
+               <div className="w-20 h-20 bg-emerald-50 rounded-[2rem] flex items-center justify-center mx-auto text-emerald-500 shadow-lg shadow-emerald-500/10">
+                  <Mail size={40} />
+               </div>
+               <div className="space-y-2">
+                 <h3 className="text-xl font-black text-slate-900 italic uppercase">Enlace Enviado</h3>
+                 <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest leading-relaxed">
+                   Se ha enviado un protocolo de acceso a <span className="text-slate-900">{recoveryEmail}</span>. Revise su bandeja de entrada.
+                 </p>
+               </div>
+               <Boton variant="secondary" className="w-full" onClick={() => setIsForgotModalOpen(false)}>
+                 VOLVER AL ACCESO
+               </Boton>
+            </div>
+          )}
+        </Modal>
 
         {/* Footer Credit (Mobile View) */}
         <div className="lg:hidden absolute bottom-6 w-full text-center px-4">
