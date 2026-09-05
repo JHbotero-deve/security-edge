@@ -511,8 +511,8 @@ export const PaginaLaboratorio = () => {
              <div className="w-full max-w-7xl mx-auto flex-1 flex flex-col p-4 md:p-8 overflow-hidden">
                 <div className="flex justify-between items-center mb-6 md:mb-8">
                    <div className="flex flex-col">
-                      <h2 className="text-xl md:text-3xl font-black text-white italic uppercase tracking-tighter">Live Canvas Privado</h2>
-                      <p className="text-[8px] md:text-[10px] text-slate-500 font-bold uppercase tracking-[0.3em]">Ambiente de Integración Jorge H</p>
+                      <h2 className="text-xl md:text-3xl font-black text-white italic uppercase tracking-tighter">Lienzo Seguriti Privado</h2>
+                      <p className="text-[8px] md:text-[10px] text-slate-500 font-bold uppercase tracking-[0.3em]">Ambiente de Creación de Ideas</p>
                    </div>
                    <div className="flex gap-2">
                       <div className="bg-slate-900 p-1.5 rounded-xl border border-slate-800 flex items-center gap-2 md:gap-4 px-3 md:px-6">
@@ -674,8 +674,8 @@ export const PaginaLaboratorio = () => {
               <div className="relative z-10">
                 <h1 className="text-5xl font-black text-white italic tracking-tighter leading-[0.8] uppercase flex flex-col">
                     <span className="text-[10px] font-black tracking-[0.6em] text-primary-500 mb-2 block">System // Supply</span>
-                    Private<br/>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-600">Stock</span>
+                    SEGURITI<br/>
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-600">IDEAS</span>
                 </h1>
                 <div className="h-1 w-12 bg-primary-500 mt-6 rounded-full" />
               </div>

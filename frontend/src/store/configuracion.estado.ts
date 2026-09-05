@@ -18,7 +18,7 @@ interface ConfiguracionState {
 export const useConfiguracion = create<ConfiguracionState>()(
   persist(
     (set) => ({
-      appName: 'Security Edge Jorge H',
+      appName: 'Seguriti',
       primaryColor: '#0ea5e9',
       isOfflineMode: true,
       globalBorders: 'thick',
@@ -29,7 +29,7 @@ export const useConfiguracion = create<ConfiguracionState>()(
       setGlobalBorders: (style) => set({ globalBorders: style }),
 
       resetAll: () => set({
-        appName: 'Security Edge Jorge H',
+        appName: 'Seguriti',
         primaryColor: '#0ea5e9',
         isOfflineMode: true,
         globalBorders: 'thick',
