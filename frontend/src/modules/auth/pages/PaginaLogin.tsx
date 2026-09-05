@@ -56,61 +56,61 @@ export const PaginaLogin = () => {
         {showSplash && <SplashNexus onComplete={() => setShowSplash(false)} />}
       </AnimatePresence>
 
-      <div className="min-h-screen bg-slate-950 flex flex-col lg:flex-row relative overflow-hidden font-sans">
-        {/* Cinematic Background Elements */}
+      <div className="h-screen bg-slate-50 flex flex-col lg:flex-row relative overflow-hidden font-sans">
+        {/* Cinematic Background Elements: PRISMA LIGHT NEUTRAL */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-designer-grid opacity-[0.07] pointer-events-none" />
-          <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-primary-600/10 blur-[150px] rounded-full animate-pulse" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[70%] h-[70%] bg-indigo-600/10 blur-[150px] rounded-full" />
+          <div className="absolute inset-0 bg-designer-grid opacity-[0.02] pointer-events-none" />
+          <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] bg-indigo-100 blur-[150px] rounded-full opacity-40" />
+          <div className="absolute bottom-[-20%] left-[-10%] w-[70%] h-[70%] bg-blue-100 blur-[150px] rounded-full opacity-40" />
 
           {/* Decorative HUD Elements */}
-          <div className="absolute top-10 left-10 w-32 h-32 border-l border-t border-white/10 rounded-tl-3xl opacity-20 hidden lg:block" />
-          <div className="absolute bottom-10 right-10 w-32 h-32 border-r border-b border-white/10 rounded-br-3xl opacity-20 hidden lg:block" />
+          <div className="absolute top-10 left-10 w-24 h-24 border-l-2 border-t-2 border-slate-200 rounded-tl-3xl opacity-20 hidden lg:block" />
+          <div className="absolute bottom-10 right-10 w-24 h-24 border-r-2 border-b-2 border-slate-200 rounded-br-3xl opacity-20 hidden lg:block" />
         </div>
 
-        {/* Left Panel: Majestic Brand Display */}
-        <div className="hidden lg:flex flex-[1.2] flex-col justify-between p-20 relative z-10">
+        {/* Left Panel: Majestic Brand Display (LIGHT) */}
+        <div className="hidden lg:flex flex-[1.1] flex-col justify-between p-16 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex items-center gap-4"
           >
-            <div className="p-4 bg-primary-600 rounded-[1.5rem] shadow-glow-strong group hover:rotate-6 transition-transform">
-              <ShieldCheck className="text-white w-8 h-8" />
+            <div className="p-3 bg-indigo-600 rounded-[1.2rem] shadow-xl hover:rotate-6 transition-transform">
+              <ShieldCheck className="text-white w-6 h-6" />
             </div>
             <div className="flex flex-col">
-              <span className="font-black text-2xl text-white italic tracking-tighter uppercase leading-none">Seguridad Nexus</span>
-              <span className="text-[10px] font-bold text-primary-500 uppercase tracking-[0.4em] mt-1">Infraestructura de Borde</span>
+              <span className="font-black text-xl text-slate-900 italic tracking-tighter uppercase leading-none">Seguridad Nexus</span>
+              <span className="text-[9px] font-bold text-indigo-500 uppercase tracking-[0.4em] mt-1">Infraestructura de Borde</span>
             </div>
           </motion.div>
 
-          <div className="space-y-10 max-w-2xl">
+          <div className="space-y-8 max-w-xl">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="inline-flex items-center gap-3 px-6 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md"
+              className="inline-flex items-center gap-3 px-5 py-2 bg-indigo-50 border border-indigo-100 rounded-full"
             >
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
-              <span className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em]">Suministros Activos: Nodo Alpha-7</span>
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
+              <span className="text-[9px] font-black text-indigo-600 uppercase tracking-[0.4em]">Nodo Alpha-7 Activo</span>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="text-7xl xl:text-8xl font-black text-white italic uppercase tracking-tighter leading-[0.85] text-gradient-nexus"
+              className="text-6xl xl:text-7xl font-black text-slate-900 italic uppercase tracking-tighter leading-[0.9]"
             >
-              Domina la <br /> <span className="text-primary-500 italic">Arquitectura</span> <br /> del Mañana.
+              Domina la <br /> <span className="text-indigo-600 italic">Arquitectura</span> <br /> del Mañana.
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
-              className="text-slate-400 font-bold uppercase text-sm tracking-widest leading-relaxed max-w-lg opacity-80"
+              className="text-slate-500 font-bold uppercase text-xs tracking-widest leading-relaxed max-w-sm opacity-80"
             >
-              Plataforma de grado empresarial para el monitoreo táctico, despliegue acelerado y blindaje de activos digitales Nexus.
+              Plataforma táctica para el monitoreo y blindaje de activos digitales bajo el estándar JBCore.
             </motion.p>
           </div>
 
@@ -118,60 +118,53 @@ export const PaginaLogin = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9 }}
-            className="flex items-center gap-12 border-t border-white/10 pt-10"
+            className="flex items-center gap-10 border-t border-slate-100 pt-10"
           >
-             <div className="flex items-center gap-4">
-                <div className="p-2 bg-slate-900 rounded-xl border border-white/5 text-primary-500 shadow-glow"><Globe size={20} /></div>
+             <div className="flex items-center gap-3">
+                <div className="p-2 bg-white rounded-xl border border-slate-100 text-indigo-500 shadow-sm"><Globe size={18} /></div>
                 <div className="flex flex-col">
-                   <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Latencia Global</span>
-                   <span className="text-sm font-black text-white uppercase italic">12ms <span className="text-[10px] text-emerald-500 ml-1">OPTIMAL</span></span>
+                   <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Latencia</span>
+                   <span className="text-xs font-black text-slate-900 uppercase italic">12ms</span>
                 </div>
              </div>
-             <div className="flex items-center gap-4">
-                <div className="p-2 bg-slate-900 rounded-xl border border-white/5 text-indigo-400 shadow-glow"><Cpu size={20} /></div>
+             <div className="flex items-center gap-3">
+                <div className="p-2 bg-white rounded-xl border border-slate-100 text-blue-400 shadow-sm"><Cpu size={18} /></div>
                 <div className="flex flex-col">
-                   <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Carga de Nodo</span>
-                   <span className="text-sm font-black text-white uppercase italic">18% <span className="text-[10px] text-primary-400 ml-1">STABLE</span></span>
+                   <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Carga</span>
+                   <span className="text-xs font-black text-slate-900 uppercase italic">18%</span>
                 </div>
              </div>
           </motion.div>
         </div>
 
-        {/* Right Panel: Secure Portal (HUD Style) */}
-        <div className="flex-1 flex items-center justify-center p-8 lg:p-20 relative z-10 bg-slate-950/50 backdrop-blur-sm lg:bg-transparent">
+        {/* Right Panel: Secure Portal (FIXED PRISMA LIGHT) */}
+        <div className="flex-1 flex items-center justify-center p-8 lg:p-12 relative z-10 bg-white/40 backdrop-blur-xl">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: "spring", damping: 20 }}
-            className="w-full max-w-md relative"
+            className="w-full max-w-sm relative"
           >
-            {/* HUD Corner Decorations */}
-            <div className="absolute -top-4 -left-4 w-12 h-12 border-l-2 border-t-2 border-primary-500/40 rounded-tl-2xl z-20" />
-            <div className="absolute -bottom-4 -right-4 w-12 h-12 border-r-2 border-b-2 border-primary-500/40 rounded-br-2xl z-20" />
+            <div className="bg-white/80 border border-slate-200 p-10 lg:p-12 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] backdrop-blur-2xl relative overflow-hidden group">
 
-            <div className="bg-slate-900/90 border border-white/10 p-12 rounded-[3rem] shadow-[0_0_120px_rgba(0,0,0,0.8)] backdrop-blur-2xl relative overflow-hidden group">
-              {/* Internal Scanline Effect */}
-              <div className="absolute inset-0 pointer-events-none opacity-[0.03] animate-scan bg-gradient-to-b from-primary-500 to-transparent h-1" />
-
-              <div className="text-center mb-12">
+              <div className="text-center mb-10">
                  <motion.div
-                   whileHover={{ scale: 1.1, rotate: 360 }}
-                   transition={{ duration: 1 }}
-                   className="w-20 h-20 bg-primary-600 rounded-[1.8rem] flex items-center justify-center mx-auto mb-6 shadow-glow-strong cursor-pointer"
+                   whileHover={{ scale: 1.05 }}
+                   className="w-20 h-20 bg-white border border-slate-100 rounded-[1.8rem] flex items-center justify-center mx-auto mb-6 shadow-xl text-indigo-600"
                  >
-                    <Terminal className="text-white w-10 h-10" />
+                    <Terminal size={36} />
                  </motion.div>
-                 <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter">Acceso Táctico</h2>
-                 <div className="mt-4 flex flex-col items-center gap-2">
-                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-[0.4em]">Identidad Nexus Requerida</p>
-                    <Link to="/register" className="px-4 py-1.5 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-[9px] font-black text-indigo-400 uppercase tracking-widest hover:bg-indigo-500 hover:text-white transition-all animate-pulse">
-                       ¿No tiene cuenta? Registre su Identidad aquí
+                 <h2 className="text-3xl font-black text-slate-900 italic uppercase tracking-tighter leading-none">Acceso <br /> Táctico</h2>
+
+                 <div className="mt-6 flex flex-col items-center gap-3">
+                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.4em]">Identidad Requerida</p>
+                    <Link to="/register" className="px-5 py-2 bg-indigo-50 border border-indigo-100 rounded-full text-[9px] font-black text-indigo-600 uppercase tracking-widest hover:bg-indigo-600 hover:text-white transition-all shadow-sm">
+                       Registrar Nueva Identidad
                     </Link>
                  </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-8">
-                <div className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-5">
                   <Entrada
                     label="Matriz de Identidad (Email)"
                     type="email"
@@ -181,7 +174,7 @@ export const PaginaLogin = () => {
                     required
                   />
                   <Entrada
-                    label="Código de Encriptación"
+                    label="Clave de Encriptación"
                     type="password"
                     placeholder="••••••••••••"
                     value={password}
@@ -190,18 +183,18 @@ export const PaginaLogin = () => {
                   />
                 </div>
 
-                <div className="flex justify-between items-center px-2">
+                <div className="flex justify-between items-center px-2 pt-2">
                   <label className="flex items-center gap-3 cursor-pointer group">
                     <input type="checkbox" className="hidden" />
-                    <div className="w-5 h-5 border-2 border-slate-800 rounded-xl group-hover:border-primary-500 transition-all flex items-center justify-center">
-                       <div className="w-2 h-2 rounded-full bg-primary-500 scale-0 group-hover:scale-100 transition-transform" />
+                    <div className="w-5 h-5 border-2 border-slate-100 rounded-xl group-hover:border-indigo-500 transition-all flex items-center justify-center bg-white shadow-sm">
+                       <div className="w-2 h-2 rounded-full bg-indigo-500 scale-0 group-hover:scale-100 transition-transform" />
                     </div>
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-slate-300 transition-colors">Enlace Persistente</span>
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest group-hover:text-slate-600 transition-colors">Recordar</span>
                   </label>
                   <button
                     type="button"
                     onClick={() => setIsForgotModalOpen(true)}
-                    className="text-[10px] font-black text-primary-500 uppercase tracking-widest hover:text-white transition-colors"
+                    className="text-[10px] font-black text-indigo-600 uppercase tracking-widest hover:text-indigo-800 transition-colors"
                   >
                     ¿Perdió el Acceso?
                   </button>
@@ -211,7 +204,7 @@ export const PaginaLogin = () => {
                   <motion.div
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-500 text-[10px] font-black uppercase tracking-widest text-center italic"
+                    className="p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-[9px] font-black uppercase tracking-widest text-center italic shadow-sm"
                   >
                     {error}
                   </motion.div>
@@ -219,14 +212,14 @@ export const PaginaLogin = () => {
 
                 <Boton
                   type="submit"
-                  className="w-full py-5 rounded-[2rem] text-[11px] font-black shadow-glow-strong hover:scale-[1.02] transition-transform"
+                  className="w-full py-5 rounded-[2rem] text-[11px] font-black shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all active:scale-[0.98]"
                   isLoading={isLoading}
                 >
-                  AUTENTICAR NODO <ArrowRight size={18} className="ml-3 group-hover:translate-x-1 transition-transform" />
+                  AUTENTICAR NODO <ArrowRight size={18} className="ml-3" />
                 </Boton>
               </form>
 
-              <div className="mt-12 pt-8 text-center space-y-6">
+              <div className="mt-12 pt-8 border-t border-slate-100 text-center space-y-6">
                  <div className="flex justify-center gap-8 opacity-40 hover:opacity-100 transition-opacity duration-700">
                     <div className="flex flex-col items-center gap-2">
                        <Activity size={18} className="text-primary-500" />
