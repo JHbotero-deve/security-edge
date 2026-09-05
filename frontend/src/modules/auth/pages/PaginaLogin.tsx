@@ -86,7 +86,7 @@ export const PaginaLogin = () => {
               transition={{ delay: 0.5 }}
               className="text-7xl xl:text-8xl font-black text-white italic uppercase tracking-tighter leading-[0.85] text-gradient-nexus"
             >
-              Domina la <br /> <span className="text-primary-500 italic">Arquitectura</span> <br /> del Futuro.
+              Domina la <br /> <span className="text-primary-500 italic">Arquitectura</span> <br /> del Mañana.
             </motion.h1>
 
             <motion.p

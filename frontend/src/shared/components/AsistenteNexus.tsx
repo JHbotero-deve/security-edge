@@ -264,7 +264,7 @@ export const AsistenteNexus = () => {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); } }}
-                    placeholder="Describe tu infraestructura..."
+                    placeholder="Describe tu requerimiento..."
                     className="w-full bg-transparent border-none text-[11px] text-white placeholder-slate-600 focus:ring-0 resize-none px-4 py-2 min-h-[40px] max-h-[150px] custom-scrollbar"
                   />
                   <div className="flex items-center justify-between px-2 pb-1">
