@@ -89,7 +89,7 @@ export const AsistenteNexus = () => {
       hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
-    setMensajes([...mensajes, nuevoMensaje]);
+    setMensajes(prev => [...prev, nuevoMensaje]);
     setInput('');
     setPreviewImagen(null);
     setNombreArchivo(null);
