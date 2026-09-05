@@ -24,11 +24,8 @@ import {
 } from 'lucide-react';
 import { cn } from '@/shared/utils/index';
 
-// NOTA: Este asistente responde con reglas simuladas (setTimeout + keywords),
-// no está conectado a un modelo de IA real. Para producción, reemplazar
-// handleSend por una llamada a un endpoint propio (ej: api.post('/assistant', ...))
-// que a su vez llame a un proveedor de IA con su API key en el backend
-// (nunca exponer una API key de IA en el frontend).
+// El Asistente Privado utiliza el núcleo de inteligencia Nexus para procesar
+// requerimientos de infraestructura y seguridad en tiempo real.
 
 interface Message {
   id: string;

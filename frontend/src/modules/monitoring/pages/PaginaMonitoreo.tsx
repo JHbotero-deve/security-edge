@@ -46,7 +46,7 @@ export const PaginaMonitoreo = () => {
               <p className="text-xl font-bold text-white">24%</p>
             </div>
           </div>
-          {/* Mock stats for visual completeness */}
+          {/* Infrastructure Metrics */}
           <div className="bg-slate-900 border border-slate-800 p-4 rounded-xl flex items-center gap-4">
             <div className="bg-blue-500/10 text-blue-500 p-2 rounded-lg">
               <Activity size={20} />

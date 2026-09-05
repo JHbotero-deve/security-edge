@@ -41,13 +41,15 @@ jobs:
       - name: Verify Database Integrity
         run: |
           echo "Iniciando secuencia de verificación del nodo de datos..."
-          for i in {1..10}; do
+          for i in {1..20}; do
             if docker exec security-edge-db pg_isready -U postgres; then
               echo "¡Conexión establecida! Nodo de datos sincronizado."
               exit 0
             fi
-            echo "Esperando sincronización del nodo... ($i/10)"
+            echo "Esperando sincronización del nodo... ($i/20)"
             sleep 5
           done
-          echo "ERROR: El nodo de datos no respondió en el tiempo esperado."
+          echo "ERROR: El nodo de datos no respondió."
+          docker ps -a
+          docker logs security-edge-db
           exit 1
