@@ -260,7 +260,6 @@ export const PaginaUsuarios = () => {
         >
           <form className="space-y-6" onSubmit={(e) => {
             e.preventDefault();
-            console.log('Initializing security profile deployment...');
             setIsModalOpen(false);
           }}>
             <div className="grid grid-cols-2 gap-4">
